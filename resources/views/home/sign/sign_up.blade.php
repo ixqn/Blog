@@ -21,24 +21,50 @@
             <p>
                 <form action="/doSignUp" method="POST" class="form-horizontal" role="form">
                     {{ csrf_field() }}
+
+
                     <div class="form-group">
                         <label for="tel" class="col-sm-4 control-label">手机号</label>
                         <div class="col-sm-8">
-                            <input type="tel" class="form-control" id="tel" name="tel" value="{{ old('tel') }}" />
+                            <div class="input-group">
+                                <input type="tel" class="form-control" id="tel" aria-describedby="tel_addon" name="tel" value="{{ old('tel') }}" />
+                                <span class="input-group-addon" id="tel_addon">
+                                    <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                                </span>
+
+                            </div>
                         </div>
                     </div>
+
+
                     <div class="form-group">
                         <label for="password" class="col-sm-4 control-label">密码</label>
                         <div class="col-sm-8">
-                            <input type="password" class="form-control" id="password" name="password" />
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" aria-describedby="password_addon" name="password" />
+                                <span class="input-group-addon" id="password_addon">
+                                    <span class="glyphicon glyphicon-asterisk" aria-hidden="true" ></span>
+                                </span>
+                            </div>
                         </div>
                     </div>
+
+
+
+
                     <div class="form-group">
                         <label for="password_r" class="col-sm-4 control-label">确认密码</label>
                         <div class="col-sm-8">
-                            <input type="password" class="form-control" id="password_r" name="password_r" />
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password_r" name="password_r" aria-describedby="password_r_addon" />
+                                <span class="input-group-addon" id="password_r_addon">
+                                    <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                                </span>
+                            </div>
                         </div>
                     </div>
+
+
 
                     <div class="form-group">
                         <label for="code" class="col-sm-4 control-label">验证码</label>
@@ -46,7 +72,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" id="code" name="code" />
                                 <span class="input-group-btn">
-                                    <button class="btn btn-info disabled" type="button">点击获取手机验证码</button>
+                                    <button id="btn" class="btn btn-info disabled" type="button">点击获取手机验证码</button>
                                 </span>
                             </div>
                         </div>
@@ -85,5 +111,120 @@
 </div>
 <script src="jquery/jquery.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
+<script>
+
+    var ok = $('<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>');
+    var remove = $('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>');
+    var asterisk = $('<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>');
+
+    var tel;
+    var tel_flag = false;
+    var password;
+    var password_flag = false;
+    var password_r;
+    var password_r_flag = false;
+
+    $('#tel').on({
+        focus:function(){
+            tel_flag = false;
+            // password_flag = false;
+            // password_r_flag = false;
+            $('#tel_addon').html(asterisk);
+        },
+        blur:function(){
+            var telReg = /^\d{11}$/;
+            tel = $(this).val();
+            tel_flag = telReg.test(tel);
+            if( tel_flag ){
+                $('#tel_addon').html(ok);
+            } else {
+                $('#tel_addon').html(remove);
+            }
+
+
+            $.ajax({
+                url:"/tel",
+                type:"POST",
+                data:tel,
+                dataType:"json",
+                success:function(msg){
+                    alert('YES');
+                },
+                error:function(){
+
+                },
+                beforeSend:function(){
+                    
+                }
+
+
+            });
+        }
+
+    });
+
+
+    $('#password').on({
+        focus:function(){
+            password_flag = false;
+            password_r_flag = false;
+            $(this).val('');
+            $('#password_addon').html(asterisk);
+        },
+
+        blur:function(){
+            var reg = /^\w{2,8}$/;
+            password = $(this).val();
+            password_flag = reg.test(password);
+            if( password_flag ){
+                $('#password_addon').html(ok);
+            } else {
+                $('#password_addon').html(remove);
+            }
+        }
+    });
+
+    $('#password_r').on({
+        focus:function(){
+            password_r_flag = false;
+            $(this).val('');
+            $('#password_r_addon').html(asterisk);
+        },
+
+        blur:function(){
+            password_r = $(this).val();
+            if( password_r && (password_r == password) ){
+                $('#password_r_addon').html(ok);
+                password_r_flag = true;
+            } else {
+                $('#password_r_addon').html(remove);
+                password_r_flag = false;
+            }
+        }
+    });
+
+    $(document).mousemove(function(){
+        if( tel_flag && password_flag && password_r_flag ){
+            $('#btn').removeClass('disabled')
+            // console.log('aa');
+        } else {
+            $('#btn').addClass('disabled');
+            // console.log('bb');
+        }
+    });
+
+    // $('#btn').mousemove(function(){
+    //     if( tel_flag && password_flag && password_r_flag ){
+    //         $(this).removeClass('disabled')
+    //         console.log(111);
+    //     } else {
+    //         $(this).addClass('disabled');
+    //         console.log(222);
+    //     }
+    // })
+
+
+
+</script>
 </body>
 </html>

@@ -24,19 +24,34 @@
                     <div class="form-group">
                         <label for="tel" class="col-sm-4 control-label">手机号</label>
                         <div class="col-sm-8">
-                            <input type="tel" class="form-control" id="tel" name="tel" value="{{ old('tel') }}" />
+                            <div class="input-group">
+                                <input type="tel" class="form-control" id="tel" aria-describedby="tel-addon" name="tel" value="{{ old('tel') }}" />
+                                <span class="input-group-addon" id="tel-addon">
+                                    <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-sm-4 control-label">密码</label>
                         <div class="col-sm-8">
-                            <input type="password" class="form-control" id="password" name="password" />
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password" aria-describedby="password-addon" />
+                                <span class="input-group-addon" id="password-addon">
+                                    <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="password_r" class="col-sm-4 control-label">确认密码</label>
                         <div class="col-sm-8">
-                            <input type="password" class="form-control" id="password_r" name="password_r" />
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password_r" name="password_r" aria-describedby="password_r-addon" />
+                                <span class="input-group-addon" id="password_r-addon">
+                                    <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                                </span>
+                            </div>
                         </div>
                     </div>
 

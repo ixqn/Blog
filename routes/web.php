@@ -28,3 +28,9 @@ Route::post('/sms', 'home\signController@sms');
 // 通过手机找回密码
 Route::get('/mobile_reset', 'home\signController@mobile_reset');
 Route::get('/test', 'home\signController@test');
+
+
+
+Route::get('/mailVerify', 'home\sendMailController@mailVerify');
+
+
