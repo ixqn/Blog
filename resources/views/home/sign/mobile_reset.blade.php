@@ -15,7 +15,8 @@
             <ul class="nav nav-tabs">
                 <li><a href="{{url('/sign_in')}}">登录</a></li>
                 <li><a href="{{url('/sign_up')}}">注册</a></li>
-                <li class="active"><a href="{{url('/mobile_reset')}}">重置密码</a></li>
+                <li class="active"><a href="{{url('/mobile_reset')}}">用手机重置密码</a></li>
+                <li><a href="{{url('/email_reset')}}">用邮箱重置密码</a></li>
             </ul>
 
             <p>
@@ -65,7 +66,6 @@
                                 </span>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="form-group">

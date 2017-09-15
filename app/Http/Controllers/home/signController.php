@@ -6,7 +6,7 @@ use App\Model\Users_login;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Gregwar\Captcha\CaptchaBuilder;
-
+use Illuminate\Support\Facades\Response;
 
 class signController extends Controller
 {
@@ -178,11 +178,32 @@ class signController extends Controller
     {
         return view('home.sign.mobile_reset');
     }
-
-
-    public function test()
+    public function email_reset()
     {
-        return view('home.sign.test');
+        return view('home.sign.email_reset');
+    }
+    // 判断手机号是否已经注册过
+    public function existTel(Request $request)
+    {
+        // dd('sss');
+        $tel = $request->input('tel');
+        // dd($tel);
+
+
+        $user = Users_login::where('tel', '11')->get();
+        // $user = Users_login::where('tel', '12345678901')->first();
+        dd($user);
+        if($user)
+        {
+            echo '111';
+        }else {
+            echo '222';
+        }
+        // dd($user);
+        // return response()->json([
+        //     'existTel' => 'YS',
+        //     'state' => 'CA'
+        // ]);
     }
 
 

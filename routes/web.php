@@ -27,7 +27,10 @@ Route::post('/doSignUp', 'home\signController@doSignUp');
 Route::post('/sms', 'home\signController@sms');
 // 通过手机找回密码
 Route::get('/mobile_reset', 'home\signController@mobile_reset');
-Route::get('/test', 'home\signController@test');
+// 通过邮箱找回密码
+Route::get('/email_reset', 'home\signController@email_reset');
+Route::get('/tel', 'home\signController@existTel');
+Route::post('/tel', 'home\signController@existTel');
 
 
 

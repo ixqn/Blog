@@ -22,7 +22,7 @@ include_once 'Regions/EndpointConfig.php';
 
 
 //config sdk auto load path.
-Autoloader::addAutoloadPath("aliyun_php_sdk_dm");
+Autoloader::addAutoloadPath("aliyun-php-sdk-dm");
 //Autoloader::addAutoloadPath("aliyun-php-sdk-ecs");
 //Autoloader::addAutoloadPath("aliyun-php-sdk-batchcompute");
 //Autoloader::addAutoloadPath("aliyun-php-sdk-sts");

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
     <title>Document</title>
 </head>
@@ -15,7 +16,8 @@
             <ul class="nav nav-tabs">
                 <li><a href="{{url('/sign_in')}}">登录</a></li>
                 <li class="active"><a href="{{url('/sign_up')}}">注册</a></li>
-                <li><a href="{{url('/mobile_reset')}}">重置密码</a></li>
+                <li><a href="{{url('/mobile_reset')}}">用手机重置密码</a></li>
+                <li><a href="{{url('/email_reset')}}">用邮箱重置密码</a></li>
             </ul>
 
             <p>
@@ -113,6 +115,13 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script>
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
     var ok = $('<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>');
     var remove = $('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>');
     var asterisk = $('<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>');
@@ -142,13 +151,14 @@
             }
 
 
+            // 验证手机号是否已注册过
             $.ajax({
                 url:"/tel",
                 type:"POST",
-                data:tel,
+                data:{tel:tel},
                 dataType:"json",
                 success:function(msg){
-                    alert('YES');
+                    console.log('ok');
                 },
                 error:function(){
 
@@ -159,6 +169,15 @@
 
 
             });
+
+
+
+
+
+
+
+
+
         }
 
     });
