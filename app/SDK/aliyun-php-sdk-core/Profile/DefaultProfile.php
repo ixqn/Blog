@@ -17,6 +17,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+namespace Profile;
+use Auth\Credential;
+use Auth\ShaHmac1Signer;
 class DefaultProfile implements IClientProfile
 {
 	private static $profile;

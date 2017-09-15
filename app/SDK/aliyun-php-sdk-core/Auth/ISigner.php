@@ -17,6 +17,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+namespace Auth;
+
 interface ISigner
 {
 	public function  getSignatureMethod();

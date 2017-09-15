@@ -5,18 +5,18 @@ namespace App\Http\Controllers\home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
-include_once app_path().'/SDK/'.'aliyun_php_sdk_core/Config.php';
+// include_once 'aliyun-php-sdk-core/Config.php';
+include_once app_path().'/SDK/'.'aliyun-php-sdk-core/Config.php';
 use Dm\Request\V20151123 as Dm; 
-// use App\SDK\aliyun_php_sdk_core\Dm\Request\V20151123 as Dm; 
-
-
+// include_once app_path().'/SDK/'.'aliyun-php-sdk-core/Profile/DefaultProfile.php';
+// dd(__file__);
+use Profile\DefaultProfile;
+use \DefaultAcsClient;
 class sendMailController extends Controller
 {
     
     public function mailVerify(){
         $mail = config('aliyunmail');
-
         $iClientProfile = DefaultProfile::getProfile("cn-hangzhou", $mail['accessKeyId'], $mail['accessKeySecret']);        
         $client = new DefaultAcsClient($iClientProfile);    
         $request = new Dm\SingleSendMailRequest();
@@ -31,7 +31,7 @@ class sendMailController extends Controller
         // 目标地址
         $request->setToAddress("xqn@xqn.me");        
         $request->setSubject("邮件主题111");
-        $request->setHtmlBody("邮件正文222");        
+        $request->setHtmlBody("邮件正文222");
         try {
             $response = $client->getAcsResponse($request);
             print_r($response);

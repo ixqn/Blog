@@ -17,6 +17,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+namespace Auth;
+use Auth\ISigner;
 class ShaHmac1Signer implements ISigner
 {
 	public function signString($source, $accessSecret)

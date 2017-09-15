@@ -19,7 +19,7 @@
  */
 include_once 'Autoloader/Autoloader.php';
 include_once 'Regions/EndpointConfig.php';
-
+// app_path().'/SDK/'.'aliyun-php-sdk-core/'.
 
 //config sdk auto load path.
 Autoloader::addAutoloadPath("aliyun-php-sdk-dm");
