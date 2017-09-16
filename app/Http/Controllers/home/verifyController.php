@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Gregwar\Captcha\CaptchaBuilder;
-use App\Model\Users_login;
+use App\Http\Model\Users_login;
 
 class verifyController extends Controller
 {
@@ -32,48 +32,14 @@ class verifyController extends Controller
     }
 
 
-       // 发送短信
-    public function sms()
-    {
-
-        // 生成验证码,保存在session里
-        $this->getCode();
-
-        header('Content-Type: text/plain; charset=utf-8');
-
-        $demo = new smsController();
-
-        // echo "smsController::sendSms\n";
-        $response = $demo->sendSms(
-            "15816346090", // 短信接收者
-            Array(  // 短信模板中字段的值
-                "code"=>session('code'),
-            )
-            // "123"
-        );
-        // print_r($response);
-
-        // echo "smsController::queryDetails\n";
-        // $response = $demo->queryDetails(
-        //     "12345678901",  // phoneNumbers 电话号码
-        //     "20170718", // sendDate 发送时间
-        //     10, // pageSize 分页大小
-        //     1 // currentPage 当前页码
-        //     // "abcd" // bizId 短信发送流水号，选填
-        // );
-
-        var_dump($response);
-        // echo $response->Code;
-        // object(stdClass)#1425 (3) { ["Message"]=> string(30) "触发小时级流控Permits:5" ["RequestId"]=> string(36) "CF75772C-1F58-4CDE-8DA1-EE9718B21EB9" ["Code"]=> string(26) "isv.BUSINESS_LIMIT_CONTROL" }
-
-    }
-
 
     // 判断手机号是否已经注册过
     public function is_telReg(Request $request)
     {
 
+
         $tel = $request->input('tel');
+        // $tel = '15816346090';
         // 获取用户信息
         $user = Users_login::where('tel', $tel)->first();
         // dd($user);
@@ -111,6 +77,7 @@ class verifyController extends Controller
         // ]);
     }
 
+    // 查询验证码是否正确
     public function is_codeRight(Request $request)
     {
         $code = $request->input('code');
@@ -126,5 +93,46 @@ class verifyController extends Controller
     }
 
 
+    // 获取手机验证码 // 发送短信
+    public function send_tel_code(Request $request)
+    {
+
+        $tel = $request->input('tel');
+        // echo $code;
+        // 生成验证码,保存在session里
+        $this->getCode();
+
+        header('Content-Type: text/plain; charset=utf-8');
+
+        $demo = new smsController();
+
+        // echo "smsController::sendSms\n";
+        $response = $demo->sendSms(
+            // "15816346090", // 短信接收者
+            $tel,
+            Array(  // 短信模板中字段的值
+                "code"=>session('code'),
+            )
+            // "123"
+        );
+        // print_r($response);
+        
+        // stdClass Object ( [Message] => OK [RequestId] => 4C89B901-C934-4546-B18E-C66A693C5747 [BizId] => 592703905555910724^0 [Code] => OK )
+        $code_status = ($response->Code) ? true : false;
+        return response()->json($code_status);
+
+        // echo "smsController::queryDetails\n";
+        // $response = $demo->queryDetails(
+        //     "12345678901",  // phoneNumbers 电话号码
+        //     "20170718", // sendDate 发送时间
+        //     10, // pageSize 分页大小
+        //     1 // currentPage 当前页码
+        //     // "abcd" // bizId 短信发送流水号，选填
+        // );
+
+        // var_dump($response);
+        // echo $response->Code;
+        // object(stdClass)#1425 (3) { ["Message"]=> string(30) "触发小时级流控Permits:5" ["RequestId"]=> string(36) "CF75772C-1F58-4CDE-8DA1-EE9718B21EB9" ["Code"]=> string(26) "isv.BUSINESS_LIMIT_CONTROL" }
+    }
 
 }

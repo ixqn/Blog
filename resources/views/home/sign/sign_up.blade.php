@@ -74,7 +74,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" id="code" placeholder="请输入验证码" name="code" />
                                 <span class="input-group-btn">
-                                    <button id="get_code" class="btn btn-info disabled" type="button">点击获取手机验证码</button>
+                                    <button id="send_tel_code" class="btn btn-info disabled" type="button">点击发送手机验证码</button>
                                 </span>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8"">
-                            <button type="buttom" id="submit" class="btn btn-success btn-group-justified disabled">注册</button>
+                            <button type="button" id="submit" class="btn btn-success btn-group-justified disabled">注册</button>
                         </div>
                     </div>
                 </form>
@@ -139,7 +139,7 @@ var alert = $('#alert');
 var ok = $('<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>');
 var remove = $('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>');
 
-
+var tel; // 手机号码,发送验证码时要用到
 var tel_cur = false;    // 是否在当前输入框
 var tel_hasGo = false;  // 是否进入过输入框
 var tel_flag = false;   // 验证的结果
@@ -181,7 +181,7 @@ $('#tel').on({
 // tel的验证函数
 function tel_func(){
     var telReg = /^1[34578]\d{9}$/;
-    var tel = $('#tel').val();
+    tel = $('#tel').val();
     tel_flag = telReg.test(tel);
     if(tel_flag){
         $.ajax({
@@ -302,7 +302,7 @@ function errorMsg()
     alert.parent().hide();
     alert.html('');
 
-    var tele_rror = $('<li>号码有误或未注册的号码</li>');
+    var tele_rror = $('<li>号码有误或已注册</li>');
     var password_error = $('<li>密码不符合要求</li>');
     var password_r_Error = $('<li>密码不一致</li>');
     var code_error = $('<li>验证码有误</li>');
@@ -320,11 +320,11 @@ function errorMsg()
 
 
 
-
+// ----------------------------------------------------------------------------------------------------------
 
 $(document).on({
-    keyup:function(){ icon_addon();get_code_css();submit_css(); },
-    mousemove:function(){ icon_addon();get_code_css();submit_css(); }
+    keyup:function(){ icon_addon();send_tel_code_css();submit_css(); },
+    mousemove:function(){ icon_addon();send_tel_code_css();submit_css(); }
 });
 
 // 改变输入框后边的图标
@@ -351,11 +351,11 @@ function icon_addon(){
 
 
 // 获取手机验证码的按钮样式
-function get_code_css(){
+function send_tel_code_css(){
     if(tel_flag && password_flag && password_r_flag){
-        $('#get_code').removeClass('disabled').attr('type','submit');
+        $('#send_tel_code').removeClass('disabled').attr('type','submit');
     } else {
-        $('#get_code').addClass('disabled').attr('type','button');
+        $('#send_tel_code').addClass('disabled').attr('type','button');
     }
 }
 
@@ -370,9 +370,25 @@ function submit_css()
     }
 }
 
+// ----------------------------------------------------------------------------------------------------------
 
+// 手机验证码
 
-
+var send_tel_code_status = false; // 发送验证码状态
+$('#send_tel_code').on({
+    click:function(event){
+        event.preventDefault();
+        $.ajax({
+            url:"/send_tel_code",
+            type:"POST",
+            data:{tel,tel},
+            dataType:"json",
+            async:false,
+            success:function(code_status){ send_tel_code_status = code_status; }
+       
+        });
+    }
+});
 
 
 

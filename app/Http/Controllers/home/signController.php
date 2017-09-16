@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\home;
 
-use App\Model\Users_login;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Model\Users_login;
 
 class signController extends Controller
 {
@@ -79,7 +80,38 @@ class signController extends Controller
                          ->withInput();
         }
         
+        // 判断是否已存在
+        $user = Users_login::where('tel', $input['tel'])->get()->toArray();
+        if(!$user){
+            // 如果用户不存在,则返回
+            return back()->with('errors','用户不存在');
+        } 
+
+
+        $user = $user[0];
+        // 验证登录密码是否正确
+        if(!Hash::check($input['password'], $user['password'])) {
+            return back()->with('errors','密码有误');
+        }
+        // 登录成功
+
+        switch ($user['status']) {
+            case '0':
+                # code...
+                break;
+            case '1':
+                return back()->with('errors','此账号限制登录');
+                break;
+            case '2':
+                return back()->with('errors','此账号已被封');
+                break;
+        }
+        // 将用户登录信息保存
+        session(['user' => $user]);
+        return redirect('/');
     }
+
+
 
     // 处理注册
     public function doSignUp(Request $request)
@@ -113,21 +145,36 @@ class signController extends Controller
                          ->withInput();
         }
         // dd($input);
-        $res = Users_login::find($input['tel']);
+        // 判断是否已存在,如果是存在的用户则返回
+        $user = Users_login::where('tel', $input['tel'])->get();
+        if($user){
+           return back()->with('errors','添加失败');
+        }
         // dd($res);
-        $user = [
+
+        // 构建需要的数据
+        $data = [
             'tel' => $input['tel'],
-            'password' => $input['password'],
+            'password' => Hash::make($input['password']),
             'last_login' => time(),
-            'reg_time' => time(),
         ];
 
-        $res = Users_login::create($user);
+        $res = Users_login::create($data);
         if($res){
-            return redirect('/');
+            return redirect('/'); // 注册成功返回首页
         }else{
-            return back()->with('errors','添加失败');
+            return back()->with('errors','添加失败'); // 注册失败返回提示信息
         }
+
+    }
+
+
+
+    // signController的测试函数
+    public function test()
+    {
+
+       // echo session('user')['user_id'];
 
     }
 
