@@ -5,7 +5,7 @@ namespace App\Http\Controllers\home;
 use App\Model\Users_login;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Gregwar\Captcha\CaptchaBuilder;
+
 use Illuminate\Support\Facades\Response;
 
 class signController extends Controller
@@ -22,26 +22,29 @@ class signController extends Controller
         return view('home.sign.sign_up');
     }
 
-    // 单击返回更新的验证码图片
-    public function code()
+   // 登出
+    public function signOut(Request $request)
     {
-        header('Content-type: image/jpeg');
-        // 验证码
-        $builder = new CaptchaBuilder();
-        $builder->build();
-        // 将随机数保持到session里
-        session(['code' => $builder->getPhrase()]);
-        return $builder->output($quality = 80);
+        //销毁session
+        $request->session()->flush();
+        // 返回首页
+        return redirect('/');
     }
 
-    public function getCode()
+    // 通过手机重置密码页面
+    public function mobile_reset()
     {
-        $builder = new CaptchaBuilder();
-        $builder->build();
-        // 将随机数保持到session里
-        session(['code' => $builder->getPhrase()]);
+        return view('home.sign.mobile_reset');
+    }
+    
+    // 通过邮箱找回密码页面
+    public function email_reset()
+    {
+        return view('home.sign.email_reset');
     }
 
+
+    // 处理登录
     public function doSignIn(Request $request)
     {
         // echo 'doSignIn';
@@ -78,6 +81,7 @@ class signController extends Controller
         
     }
 
+    // 处理注册
     public function doSignUp(Request $request)
     {
         // echo 'doSignUp';
@@ -128,83 +132,6 @@ class signController extends Controller
     }
 
 
-    // 登出
-    public function signOut(Request $request)
-    {
-        //销毁session
-        $request->session()->flush();
-        // 返回首页
-        return redirect('/');
-    }
-
-
-    // 发送短信
-    public function sms()
-    {
-
-        // 生成验证码,保存在session里
-        $this->getCode();
-
-        header('Content-Type: text/plain; charset=utf-8');
-
-        $demo = new smsController();
-
-        // echo "smsController::sendSms\n";
-        $response = $demo->sendSms(
-            "15816346090", // 短信接收者
-            Array(  // 短信模板中字段的值
-                "code"=>session('code'),
-            )
-            // "123"
-        );
-        // print_r($response);
-
-        // echo "smsController::queryDetails\n";
-        // $response = $demo->queryDetails(
-        //     "12345678901",  // phoneNumbers 电话号码
-        //     "20170718", // sendDate 发送时间
-        //     10, // pageSize 分页大小
-        //     1 // currentPage 当前页码
-        //     // "abcd" // bizId 短信发送流水号，选填
-        // );
-
-        var_dump($response);
-        // echo $response->Code;
-        // object(stdClass)#1425 (3) { ["Message"]=> string(30) "触发小时级流控Permits:5" ["RequestId"]=> string(36) "CF75772C-1F58-4CDE-8DA1-EE9718B21EB9" ["Code"]=> string(26) "isv.BUSINESS_LIMIT_CONTROL" }
-
-    }
-
-    public function mobile_reset()
-    {
-        return view('home.sign.mobile_reset');
-    }
-    public function email_reset()
-    {
-        return view('home.sign.email_reset');
-    }
-    // 判断手机号是否已经注册过
-    public function existTel(Request $request)
-    {
-        // dd('sss');
-        $tel = $request->input('tel');
-        // dd($tel);
-
-
-        $user = Users_login::where('tel', '11')->get();
-        // $user = Users_login::where('tel', '12345678901')->first();
-        dd($user);
-        if($user)
-        {
-            echo '111';
-        }else {
-            echo '222';
-        }
-        // dd($user);
-        // return response()->json([
-        //     'existTel' => 'YS',
-        //     'state' => 'CA'
-        // ]);
-    }
 
 
 }

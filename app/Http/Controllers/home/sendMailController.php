@@ -5,17 +5,15 @@ namespace App\Http\Controllers\home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-// include_once 'aliyun-php-sdk-core/Config.php';
 include_once app_path().'/SDK/'.'aliyun-php-sdk-core/Config.php';
 use Dm\Request\V20151123 as Dm; 
-// include_once app_path().'/SDK/'.'aliyun-php-sdk-core/Profile/DefaultProfile.php';
-// dd(__file__);
 use Profile\DefaultProfile;
 use \DefaultAcsClient;
+
 class sendMailController extends Controller
 {
-    
-    public function mailVerify(){
+    public function __construct()
+    {
         $mail = config('aliyunmail');
         $iClientProfile = DefaultProfile::getProfile("cn-hangzhou", $mail['accessKeyId'], $mail['accessKeySecret']);        
         $client = new DefaultAcsClient($iClientProfile);    
@@ -28,23 +26,50 @@ class sendMailController extends Controller
         // 控制台创建的模板
         $request->setTagName("mailVerifyTemplate");
         $request->setReplyToAddress("true");
-        // 目标地址
-        $request->setToAddress("xqn@xqn.me");        
-        $request->setSubject("邮件主题111");
-        $request->setHtmlBody("邮件正文222");
-        try {
-            $response = $client->getAcsResponse($request);
-            print_r($response);
-        }
-        catch (ClientException  $e) {
-            print_r($e->getErrorCode());   
-            print_r($e->getErrorMessage());   
-        }
-        catch (ServerException  $e) {        
-            print_r($e->getErrorCode());   
-            print_r($e->getErrorMessage());
-        }
 
+    }
+    
+    // 邮箱验证
+    public function mailVerify($setToAddress, $setSubject, $setHtmlBody)
+    {
+
+        // 目标地址
+        // 欢迎来到【作业部落】，请验证您的邮箱
+        $request->setToAddress($setToAddress);
+        $request->setSubject($setSubject);
+        $request->setHtmlBody($setHtmlBody);
+
+        $response = $client->getAcsResponse($request);
+        return $response;
+
+
+
+
+        // try {
+        //     $response = $client->getAcsResponse($request);
+        //     print_r($response);
+        // }
+        // catch (ClientException  $e) {
+        //     print_r($e->getErrorCode());   
+        //     print_r($e->getErrorMessage());   
+        // }
+        // catch (ServerException  $e) {        
+        //     print_r($e->getErrorCode());   
+        //     print_r($e->getErrorMessage());
+        // }
+
+    }
+
+    // 通过邮箱找回密码
+    public function email_reset()
+    {
+        // 目标地址
+        $request->setToAddress($setToAddress);
+        $request->setSubject($setSubject);
+        $request->setHtmlBody($setHtmlBody);
+
+        $response = $client->getAcsResponse($request);
+        return $response;
     }
     
 
