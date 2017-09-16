@@ -146,9 +146,9 @@ class signController extends Controller
         }
         // dd($input);
         // 判断是否已存在,如果是存在的用户则返回
-        $user = Users_login::where('tel', $input['tel'])->get();
+        $user = Users_login::where('tel', $input['tel'])->get()->toArray();
         if($user){
-           return back()->with('errors','添加失败');
+           return back()->with('errors','账号已存在,去登录吧');
         }
         // dd($res);
 
