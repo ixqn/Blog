@@ -80,7 +80,8 @@ class smsController extends Controller
      * @param string|null $outId [optional] 选填, 发送短信流水号 (e.g. 1234)
      * @return stdClass
      */
-    public function sendSms($phoneNumbers, $templateParam = null, $outId = null) {
+    // 注册时,发送验证码
+    public function sendRegCode($phoneNumbers, $templateParam = null, $outId = null) {
 
         // 初始化SendSmsRequest实例用于设置发送短信的参数
         $request = new SendSmsRequest();
@@ -92,7 +93,7 @@ class smsController extends Controller
         $request->setSignName($this->sms['signName']);
 
         // 必填，设置模板CODE
-        $request->setTemplateCode($this->sms['templateCode']);
+        $request->setTemplateCode($this->sms['templateCode']['sendRegCode']);
 
         // 可选，设置模板参数
         if($templateParam) {
@@ -113,6 +114,46 @@ class smsController extends Controller
         return $acsResponse;
 
     }
+
+
+    // 重置密码时发送验证码
+    public function sendResetPasswordCode($phoneNumbers, $templateParam = null, $outId = null) {
+
+        // 初始化SendSmsRequest实例用于设置发送短信的参数
+        $request = new SendSmsRequest();
+
+        // 必填，设置雉短信接收号码
+        $request->setPhoneNumbers($phoneNumbers);
+
+        // 必填，设置签名名称
+        $request->setSignName($this->sms['signName']);
+
+        // 必填，设置模板CODE
+        $request->setTemplateCode($this->sms['templateCode']['sendResetPasswordCode']);
+
+        // 可选，设置模板参数
+        if($templateParam) {
+            $request->setTemplateParam(json_encode($templateParam));
+        }
+
+        // 可选，设置流水号
+        if($outId) {
+            $request->setOutId($outId);
+        }
+
+        // 发起访问请求
+        $acsResponse = $this->acsClient->getAcsResponse($request);
+
+        // 打印请求结果
+        // var_dump($acsResponse);
+
+        return $acsResponse;
+
+    }
+
+
+
+
 
     /**
      * 查询短信发送情况范例

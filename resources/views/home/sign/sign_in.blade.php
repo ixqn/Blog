@@ -30,21 +30,12 @@
                                 <input type="tel" class="form-control" id="tel" placeholder="请输入11位手机号码" aria-describedby="tel_addon" name="tel" value="{{ old('tel') }}" />
                                 <span class="input-group-addon" id="tel_addon">
                                     <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                                    <!-- <span class="glyphicon glyphicon-asterisk"></span> -->
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="password" class="col-sm-4 control-label">密码</label>
-                        <div class="col-sm-8">
-                            <div class="input-group">
-                                <input type="password" class="form-control" id="password" placeholder="请输入密码" aria-describedby="password_addon" name="password" value="{{ old('password') }}" />
-                                <span class="input-group-addon" id="password_addon">
-                                    <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+
 
                     <div class="form-group">
                         <label for="code" class="col-sm-4 control-label">验证码</label>
@@ -57,6 +48,22 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="form-group">
+                        <label for="password" class="col-sm-4 control-label">密码</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" placeholder="请输入密码" aria-describedby="password_addon" name="password" value="{{ old('password') }}" />
+                                <span class="input-group-addon" id="password_addon">
+                                    <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                                    <!-- <span class="glyphicon glyphicon-asterisk" ></span> -->
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
 
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
@@ -144,12 +151,13 @@ $('#tel').on({
         tel_hasGo = true;
         tel_flag = false;
     },
-    keyup:function(){ tel_func(); },
-    change:function(){ tel_func(); },
+    // keyup:function(){ tel_func(); },
+    // change:function(){ tel_func(); },
     blur:function(){
         tel_cur = false;
         tel_func();
         errorMsg();
+        tel_addon();
     },
 });
 
@@ -170,7 +178,14 @@ function tel_func(){
     }
 }
 
-
+// 设置 tel_addon 的图标
+function tel_addon(){
+    if(tel_flag){
+        $('#tel_addon').empty().append(ok);
+    } else {
+        $('#tel_addon').empty().append(remove);
+    }
+}
 
 // ----------------------------------------------------------------------------------------------------------
 
@@ -183,12 +198,13 @@ $('#password').on({
 
     },
 
-    keyup:function(){ password_func();errorMsg(); },
-    change:function(){ password_func();errorMsg(); },
+    keyup:function(){ password_func(); },
+    // change:function(){ password_func(); },
     blur:function(){
         password_cur = false;
         password_func();
         errorMsg();
+        password_addon();
     }
 
 });
@@ -201,6 +217,14 @@ function password_func()
     password_flag = reg.test(password);
 }
 
+// 设置 password_addon 的图标
+function password_addon(){
+    if(password_flag){
+        $('#password_addon').empty('').append(ok);
+    } else {
+        $('#password_addon').empty('').append(remove);
+    }
+}
 
 
 // ----------------------------------------------------------------------------------------------------------
@@ -213,8 +237,8 @@ $('#code').on({
         code_flag = false;
     },
 
-    keyup:function(){ code_func();errorMsg(); },
-    change:function(){ code_func();errorMsg(); },
+    keyup:function(){ code_func(); },
+    change:function(){ code_func(); },
     blur:function(){
         code_cur = false;
         code_func();
@@ -240,18 +264,39 @@ function code_func(){
 // ----------------------------------------------------------------------------------------------------------
 
 
+
+var tele_error = $('<li>此手机号码未注册</li>');
+var password_error = $('<li>密码不符合要求</li>');
+var code_error = $('<li>验证码有误</li>');
+
 function errorMsg()
 {
     alert.parent().hide();
-    alert.html('');
+    alert.empty();
+    if(tel_hasGo){
+        if(!tel_cur){
+            if(!tel_flag){
+                alert.append(tele_error);
+            }
+        }
+    }
 
-    var tele_rror = $('<li>号码有误或未注册的号码</li>');
-    var password_error = $('<li>密码不符合要求</li>');
-    var code_error = $('<li>验证码有误</li>');
+    if(password_hasGo){
+        if(!password_cur){
+            if(!password_flag){
+                alert.append(password_error);
+            }
+        }
+    }
 
-    if(tel_hasGo && !tel_cur && !tel_flag){alert.append(tele_rror);}
-    if(password_hasGo && !password_cur && !password_flag){alert.append(password_error);}
-    if(code_hasGo && !code_cur && !code_flag){alert.append(code_error);}
+
+    if(code_hasGo){
+        if(!code_cur){
+            if(!code_flag){
+                alert.append(code_error);
+            }
+        }
+    }
 
     if(alert.children().length){alert.parent().show();}
     
@@ -260,33 +305,17 @@ function errorMsg()
 
 
 
-
-
 // ----------------------------------------------------------------------------------------------------------
 $(document).on({
-    keyup:function(){ icon_addon();submit_css(); },
-    mousemove:function(){ icon_addon();submit_css(); }
+    keyup:function(){ submit_css(); },
+    mousemove:function(){ submit_css(); }
 });
-
-// 改变输入框后边的图标
-function icon_addon(){
-    if(tel_flag){
-            $('#tel_addon').html(ok);
-        } else {
-            $('#tel_addon').html(remove);
-        }
-        
-    if(password_flag){
-        $('#password_addon').html(ok);
-    } else {
-        $('#password_addon').html(remove);
-    }
-}
 
 // 提交按钮的样式
 function submit_css()
 {
-    if(tel_flag && password_flag && code_flag){
+    var status = tel_flag && password_flag && code_flag;
+    if(status){
         $('#submit').removeClass('disabled').attr('type','submit');
     } else {
         $('#submit').addClass('disabled').attr('type','button');

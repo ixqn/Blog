@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Model\Users_login;
+use App\Http\Model\Users_info;
 
 class signController extends Controller
 {
@@ -152,6 +153,11 @@ class signController extends Controller
         }
         // dd($res);
 
+        if(session('tel') != $input['tel']){
+            return back()->with('errors','不要攻击我');
+        }
+
+
         // 构建需要的数据
         $data = [
             'tel' => $input['tel'],
@@ -159,12 +165,30 @@ class signController extends Controller
             'last_login' => time(),
         ];
 
-        $res = Users_login::create($data);
-        if($res){
-            return redirect('/'); // 注册成功返回首页
-        }else{
+
+
+        // $data = [
+        //     'tel' => '1119111',
+        //     'password' => '111111',
+        //     'last_login' => time(),
+        // ];
+
+        $Users_login = Users_login::create($data); // 成功后,会返回对象
+        // dd($res->id);
+
+        if($Users_login){
+            $Users_info = Users_info::create(['user_id' => $Users_login->id]);
+            if($Users_info){
+                return redirect('/'); // 注册成功返回首页
+            } else {
+                return back()->with('errors','添加失败'); // 注册失败返回提示信息
+            }
+        } else {
             return back()->with('errors','添加失败'); // 注册失败返回提示信息
         }
+
+
+
 
     }
 

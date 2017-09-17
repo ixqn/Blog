@@ -29,8 +29,8 @@ class sendMailController extends Controller
 
     }
     
-    // 邮箱验证
-    public function mailVerify($setToAddress, $setSubject, $setHtmlBody)
+    // 验证邮箱地址
+    public function emailVerify($setToAddress, $setSubject, $setHtmlBody)
     {
 
         // 目标地址
@@ -61,7 +61,7 @@ class sendMailController extends Controller
     }
 
     // 通过邮箱找回密码
-    public function email_reset()
+    public function emailReset()
     {
         // 目标地址
         $request->setToAddress($setToAddress);

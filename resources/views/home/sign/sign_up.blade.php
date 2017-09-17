@@ -39,6 +39,20 @@
                     </div>
 
 
+
+                    <div class="form-group">
+                        <label for="code" class="col-sm-4 control-label">验证码</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" disabled="disabled" id="code" placeholder="请输入验证码" name="code" />
+                                <span class="input-group-btn">
+                                    <button id="send_tel_code" class="btn btn-info" type="button">发送验证码</button>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
                     <div class="form-group">
                         <label for="password" class="col-sm-4 control-label">密码</label>
                         <div class="col-sm-8">
@@ -68,18 +82,7 @@
 
 
 
-                    <div class="form-group">
-                        <label for="code" class="col-sm-4 control-label">验证码</label>
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="code" placeholder="请输入验证码" name="code" />
-                                <span class="input-group-btn">
-                                    <button id="send_tel_code" class="btn btn-info disabled" type="button">点击发送手机验证码</button>
-                                </span>
-                            </div>
-                        </div>
 
-                    </div>
 
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8"">
@@ -159,6 +162,7 @@ var code_cur = false;
 var code_hasGo = false;
 var code_flag = false;
 
+var canSendCode = false; // 是否可发手机验证码
 
 
 // ----------------------------------------------------------------------------------------------------------
@@ -169,16 +173,17 @@ $('#tel').on({
         tel_hasGo = true;
         tel_flag = false;
     },
-    keyup:function(){ tel_func(); },
-    change:function(){ tel_func(); },
+    // keyup:function(){ tel_func(); },
+    // change:function(){ tel_func(); },
     blur:function(){
         tel_cur = false;
         tel_func();
         errorMsg();
+        tel_addon();
     },
 });
 
-// tel的验证函数
+// 判断手机号是否已经注册
 function tel_func(){
     var telReg = /^1[34578]\d{9}$/;
     tel = $('#tel').val();
@@ -199,6 +204,148 @@ function tel_func(){
 // ----------------------------------------------------------------------------------------------------------
 
 
+var times=60;
+var timer=null;
+var canClick = true;
+var send_tel_code_status = false; // 发送验证码状态
+// var hits = 0; // 点击次数
+var hadClick = false
+
+$('#send_tel_code').on({
+    click:function(event){
+        event.preventDefault();
+        
+        if(tel_flag){
+            hadClick = true;
+            if(canClick){
+                send_tel_code();
+                timeCount();
+            }
+        }
+    }
+});
+
+
+
+function send_tel_code(){
+    if(!send_tel_code_status){
+        $.ajax({
+            url:"/sendRegCode", // 注册时,发送的验证码
+            type:"POST",
+            data:{"tel":tel},
+            dataType:"json",
+            async:false,
+            success:function(data){ 
+                send_tel_code_status = data['status'];
+                msg = data['msg'];
+            }
+
+        });
+    }
+
+}
+
+
+
+function timeCount(){
+    canClick = false;
+    timer=setInterval(function(){
+        times--;
+        if(times<=0){
+            $('#send_tel_code').html('发送验证码');
+            clearInterval(timer);
+            times=60;
+            canClick = true;
+            $('#send_tel_code').removeClass('disabled');
+        }else{
+            $('#send_tel_code').html(times+'秒后重试');
+            $('#send_tel_code').addClass('disabled');
+        }
+        // console.log(times);
+    },1000);
+}
+
+// 获取手机验证码的按钮样式
+// function send_tel_code_css(){
+
+//     var status = tel_flag && password_flag && password_r_flag;
+//     if(status){
+//         canSendCode = true;
+//         $('#send_tel_code').removeClass('disabled');
+//     } else {
+//         canSendCode = false;
+//         $('#send_tel_code').addClass('disabled');
+//     }
+// }
+
+
+
+// window.onload=function(){
+//    var send=document.getElementById('send_tel_code');
+//        times=60;
+//        timer=null;
+//    send_tel_code.onclick=function(){
+
+//      // 计时开始 
+//         timer=setInterval(function(){
+//             times--;
+//             if(times<=0){
+//                 send_tel_code.value='发送验证码';
+//                 clearInterval(timer);
+//                 times=60;
+//                 send_tel_code.disabled=false;    //是否可点击
+//             }else{
+//                 send_tel_code.value=times+'秒后重试';
+//                 send_tel_code.disabled=true;
+//             }
+//             console.log(times);
+//         },1000);
+//    } 
+// }
+
+
+
+// ----------------------------------------------------------------------------------------------------------
+
+
+
+$('#code').on({
+
+    focus:function(){
+        code_cur = true;
+        code_hasGo = true;
+        code_flag = false;
+    },
+
+    keyup:function(){ code_func();},
+    change:function(){ code_func();},
+    blur:function(){
+        code_cur = false;
+        code_func();
+        errorMsg();
+    }
+
+});
+
+
+// 判断验证吗是否正确
+function code_func(){
+    var code = $('#code').val();
+    $.ajax({
+        url:"/is_codeRight",
+        type:"POST",
+        data:{code:code},
+        dataType:"json",
+        async:false,
+        success:function(is_codeRight){ code_flag = is_codeRight; }
+    });
+}
+
+
+
+// ----------------------------------------------------------------------------------------------------------
+
+
 $('#password').on({
     focus:function(){
         password_cur = true;
@@ -208,12 +355,13 @@ $('#password').on({
 
     },
 
-    keyup:function(){ password_func();errorMsg(); },
-    change:function(){ password_func();errorMsg(); },
+    keyup:function(){ password_func(); },
+    change:function(){ password_func(); },
     blur:function(){
         password_cur = false;
         password_func();
         errorMsg();
+        password_addon();
     }
 
 });
@@ -241,12 +389,13 @@ $('#password_r').on({
 
     },
 
-    keyup:function(){ password_r_func();errorMsg(); },
-    change:function(){ password_r_func();errorMsg(); },
+    keyup:function(){ password_r_func(); },
+    change:function(){ password_r_func(); },
     blur:function(){
         password_r_cur = false;
         password_r_func();
         errorMsg();
+        password_r_addon();
     }
 
 });
@@ -263,85 +412,77 @@ function password_r_func()
 
 // ----------------------------------------------------------------------------------------------------------
 
-$('#code').on({
 
-    focus:function(){
-        code_cur = true;
-        code_hasGo = true;
-        code_flag = false;
-    },
+// ----------------------------------------------------------------------------------------------------------
 
-    keyup:function(){ code_func();errorMsg(); },
-    change:function(){ code_func();errorMsg(); },
-    blur:function(){
-        code_cur = false;
-        code_func();
-        errorMsg();
-    }
-
-});
-
-
-
-function code_func(){
-    var code = $('#code').val();
-    $.ajax({
-        url:"/is_codeRight",
-        type:"POST",
-        data:{code:code},
-        dataType:"json",
-        async:false,
-        success:function(is_codeRight){ code_flag = is_codeRight; }
-    });
-}
-
-
+var tele_error = $('<li>号码有误或已注册</li>');
+var password_error = $('<li>密码不符合要求</li>');
+var password_r_Error = $('<li>密码不一致</li>');
+var code_error = $('<li>验证码有误</li>');
 
 function errorMsg()
 {
     alert.parent().hide();
-    alert.html('');
+    alert.empty();
+    if(tel_hasGo){
+        if(!tel_cur){
+            if(!tel_flag){
+                alert.append(tele_error);
+            }
+        }
+    }
 
-    var tele_rror = $('<li>号码有误或已注册</li>');
-    var password_error = $('<li>密码不符合要求</li>');
-    var password_r_Error = $('<li>密码不一致</li>');
-    var code_error = $('<li>验证码有误</li>');
+    if(password_hasGo){
+        if(!password_cur){
+            if(!password_flag){
+                alert.append(password_error);
+            }
+        }
+    }
 
-    if(tel_hasGo && !tel_cur && !tel_flag){alert.append(tele_rror);}
-    if(password_hasGo && !password_cur && !password_flag){alert.append(password_error);}
-    if(password_r_hasGo && !password_r_cur && !password_r_flag){alert.append(password_r_Error);}
-    if(code_hasGo && !code_cur && !code_flag){alert.append(code_error);}
+    if(password_r_hasGo){
+        if(!password_r_cur){
+            if(!password_r_flag){
+                alert.append(code_error);
+            }
+        }
+    }
+
+    if(code_hasGo){
+        if(!code_cur){
+            if(!code_flag){
+                alert.append(code_error);
+            }
+        }
+    }
 
     if(alert.children().length){alert.parent().show();}
     
 }
 
-
-
-
-
 // ----------------------------------------------------------------------------------------------------------
-
-$(document).on({
-    keyup:function(){ icon_addon();send_tel_code_css();submit_css(); },
-    mousemove:function(){ icon_addon();send_tel_code_css();submit_css(); }
-});
-
 // 改变输入框后边的图标
-function icon_addon(){
+// 设置tel-addon的图标
+function tel_addon(){
     if(tel_flag){
         $('#tel_addon').html(ok);
     } else {
         $('#tel_addon').html(remove);
     }
+}
 
+// 设置password_addon的图标
+function password_addon(){
     if(password_flag){
         $('#password_addon').html(ok);
     } else {
         $('#password_addon').html(remove);
     }
+}
 
 
+// 设置password_r_addon的图标
+function password_r_addon(){
     if(password_r_flag){
         $('#password_r_addon').html(ok);
     } else {
@@ -350,12 +491,17 @@ function icon_addon(){
 }
 
 
-// 获取手机验证码的按钮样式
-function send_tel_code_css(){
-    if(tel_flag && password_flag && password_r_flag){
-        $('#send_tel_code').removeClass('disabled').attr('type','submit');
-    } else {
-        $('#send_tel_code').addClass('disabled').attr('type','button');
+// ----------------------------------------------------------------------------------------------------------
+
+$(document).on({
+    keyup:function(){ code_css();submit_css(); },
+    mousemove:function(){ code_css();submit_css(); }
+});
+
+// 验证码输入框样式
+function code_css(){
+    if(hadClick){
+        $('#code').removeAttr('disabled')
     }
 }
 
@@ -363,32 +509,24 @@ function send_tel_code_css(){
 // 提交按钮的样式
 function submit_css()
 {
-    if(tel_flag && password_flag && password_r_flag && code_flag){
+    var status = tel_flag && code_flag && password_flag && password_r_flag
+    if(status){
         $('#submit').removeClass('disabled').attr('type','submit');
     } else {
         $('#submit').addClass('disabled').attr('type','button');
     }
 }
 
+
 // ----------------------------------------------------------------------------------------------------------
 
-// 手机验证码
 
-var send_tel_code_status = false; // 发送验证码状态
-$('#send_tel_code').on({
-    click:function(event){
-        event.preventDefault();
-        $.ajax({
-            url:"/send_tel_code",
-            type:"POST",
-            data:{tel,tel},
-            dataType:"json",
-            async:false,
-            success:function(code_status){ send_tel_code_status = code_status; }
-       
-        });
-    }
-});
+
+
+
+
+// ----------------------------------------------------------------------------------------------------------
+
 
 
 

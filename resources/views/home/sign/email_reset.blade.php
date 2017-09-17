@@ -24,7 +24,7 @@
                 <form action="/doSignUp" method="POST" class="form-horizontal" role="form">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="tel" class="col-sm-4 control-label">邮箱地址</label>
+                        <label for="email" class="col-sm-4 control-label">邮箱地址</label>
                         <div class="col-sm-8">
                             <div class="input-group">
                                 <input type="email" class="form-control" id="email" placeholder="请输入邮箱地址" aria-describedby="email-addon" name="email" value="{{ old('tel') }}" />
@@ -70,6 +70,12 @@
                 @endif
             </p>
 
+            <p>
+                <div class="alert alert-danger" style="display: none;">
+                    <ul id="alert"></ul>
+                </div>
+            </p>
+
         </div>
         <div class="col-md-4">
         </div>
@@ -79,39 +85,7 @@
 </div>
 <script src="jquery/jquery.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
-<script>
-   $(document).mousemove(function(){
-        if(tel_flag){
-             $('#password').removeAttr('disabled');
-        } else {
-            $('#password').val('').attr('disabled','disabled');
-            $('#password_R').val('').attr('disabled','disabled');
-            $('#code').val('').attr('disabled','disabled');
-            $('#btn').addClass('disabled');
-            $('#submit').addClass('disabled');
-        }
 
-        if(password_flag){
-            $('#password_r').removeAttr('disabled');
-        } else {
-            $('#password_r').val('').attr('disabled','disabled');
-        }
-
-        if(password_r_flag){
-            $('#code').removeAttr('disabled');
-            $('#btn').removeClass('disabled');
-            $('#submit').removeClass('disabled');
-        } else {
-            $('#code').val('').attr('disabled','disabled');
-            $('#btn').addClass('disabled');
-            $('#submit').addClass('disabled');
-
-        }
-
-    });
-
-
-</script>
 <script>
 
 $(function(){
@@ -132,7 +106,7 @@ var ok = $('<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>');
 var remove = $('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>');
 
 
-var email_cur = false;    // 是否在当前输入框
+var email_cur = false; // 是否在当前输入框
 var email_hasGo = false;  // 是否进入过输入框
 var email_flag = false;   // 验证的结果
 
@@ -151,21 +125,22 @@ $('#email').on({
         email_hasGo = true;
         email_flag = false;
     },
-    keyup:function(){ email_func(); },
-    change:function(){ email_func(); },
+    // keyup:function(){ email_func(); },
+    // change:function(){ email_func(); },
     blur:function(){
-        tel_cur = false;
+        email_cur = false;
         email_func();
-        errorMsg();
+        errorMsg(); 
+       
     },
 });
 
 // email的验证函数
 function email_func(){
-    var emailReg = /^[a-zA-Z0-9][a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+$/;
-    var email = $('#tel').val();
+    var emailReg = /^[a-zA-Z0-9\-_\.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/;
+    var email = $('#email').val();
     email_flag = emailReg.test(email);
-    console.log(email_flag);
+    // console.log(email,email_flag);
     if(email_flag){
         $.ajax({
             url:"/is_emailActive",
@@ -173,9 +148,16 @@ function email_func(){
             data:{email:email},
             dataType:"json",
             async:false,
-            success:function(is_emailActive){ email_flag = is_emailActive; } // 必须是激活过的邮箱才可重置密码
+            // 必须是激活过的邮箱才可重置密码
+            success:function(data){ 
+                email_flag = data['status'];
+                email_error = $('<li>'+data['msg']+'</li>');
+
+            } 
+           
         });
     }
+    
 }
 
 
@@ -192,79 +174,82 @@ $('#code').on({
         code_flag = false;
     },
 
-    keyup:function(){ code_func();errorMsg(); },
-    change:function(){ code_func();errorMsg(); },
+    // keyup:function(){ code_func(); },
+    // change:function(){ code_func(); },
     blur:function(){
         code_cur = false;
         code_func();
-        errorMsg();
+        errorMsg(); 
     }
 
 });
 
 
-
+// 判断验证吗是否正确
 function code_func(){
     var code = $('#code').val();
     $.ajax({
         url:"/is_codeRight",
         type:"POST",
-        data:{code:code},
+        data:{"code":code},
         dataType:"json",
         async:false,
-        success:function(is_codeRight){ code_flag = is_codeRight; }
+        success:function(is_codeRight){
+            code_flag = is_codeRight;
+
+        }
+
     });
 }
 
+// ----------------------------------------------------------------------------------------------------------
 
+var email_error = $('<li>邮箱有误</li>');
+var code_error = $('<li>验证码有误</li>');
 
 function errorMsg()
 {
     alert.parent().hide();
-    alert.html('');
+    alert.empty();
 
-    var email_rror = $('<li>邮箱有误</li>');
-    if(tel_hasGo && !tel_cur && !tel_flag){alert.append(email_rror);}
+    if(email_hasGo){
+        if(!email_cur){
+            if(!email_flag){
+                alert.append(email_error);
+            }
+        }
+    }
+
+
+    if(code_hasGo){
+        if(!code_cur){
+            if(!code_flag){
+                alert.append(code_error);
+            }
+        }
+    }
+
+
     if(alert.children().length){alert.parent().show();}
     
 }
 
 
-
-
-
-
-
+// ----------------------------------------------------------------------------------------------------------
 $(document).on({
-    keyup:function(){ icon_addon();get_code_css();submit_css(); },
-    mousemove:function(){ icon_addon();get_code_css();submit_css(); }
+
+    keyup:function(){ submit_css(); },
+    mousemove:function(){ submit_css(); }
 });
-
-// 改变输入框后边的图标
-function icon_addon(){
-    if(tel_flag){
-        $('#tel_addon').html(ok);
-    } else {
-        $('#tel_addon').html(remove);
-    }
-
-
-}
-
-
-
 // 提交按钮的样式
 function submit_css()
 {
-    if(tel_flag && password_flag && password_r_flag && code_flag){
+    if(email_flag && code_flag){
         $('#submit').removeClass('disabled').attr('type','submit');
     } else {
         $('#submit').addClass('disabled').attr('type','button');
     }
 }
-
-
-
 
 
 </script>

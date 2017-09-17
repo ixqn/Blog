@@ -11,6 +11,12 @@ return [
     'region' => "cn-hangzhou",
     // 服务结点
     'endPointName' => "cn-hangzhou",
+    // 模板签名
     'signName' => '竹文',
-    'templateCode' => 'SMS_95370051',
+    // 模板CODE
+    // 'templateCode' => 'SMS_95370051', // 测试,已废弃
+    'templateCode' => [
+        'sendRegCode' => 'SMS_96860003', // smsRegTemplate 注册时发送验证码
+        'sendResetPasswordCode' => 'SMS_96865002',  // smsResetPasswordTemplate通过手机重置密码时发送验证码
+    ],
 ];
