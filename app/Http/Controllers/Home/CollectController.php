@@ -33,15 +33,15 @@ class ConllectController extends Controller
         $conl['user_id'] = $user_id;
 //        dd($conl);
 
-        $res = \DB::table('article_conllect')->where('article_id', $conl['article_id'])->first();
+        $res = \DB::table('article_collect')->where('article_id', $conl['article_id'])->first();
 
         if($res)
         {
             die('这片文章你已经收藏过了,再去看看其他的把');
         }else{
-            $str = \DB::table('article_conllect')->insert($conl);
+            $str = \DB::table('article_collect')->insert($conl);
         if ($str) {
-                return redirect('/home/conllect')->with(['info' => '添加收藏成功']);
+                return redirect('/home/collect')->with(['info' => '添加收藏成功']);
             } else {
                 return back()->with(['info' => '添加收藏失败']);
             }
@@ -50,13 +50,13 @@ class ConllectController extends Controller
 
 
 
-        //conllect显示在页面
+        //collect显示在页面
         public
-        function conllect(Request $request)
+        function collect(Request $request)
         {
 
-            $str = \DB::table('article_conllect')->get();
-            return view('home.conllect', ['str' => $str]);
+            $str = \DB::table('article_collect')->get();
+            return view('home.collect', ['str' => $str]);
 
 
 //        dd($str);
@@ -67,9 +67,9 @@ class ConllectController extends Controller
         public
         function delete($id)
         {
-            $res = \DB::table('article_conllect')->where('article_id', $id)->delete();
+            $res = \DB::table('article_collect')->where('article_id', $id)->delete();
             if ($res) {
-                return redirect('/home/conllect')->with(['info' => '删除成功']);
+                return redirect('/home/collect')->with(['info' => '删除成功']);
             } else {
                 return back()->with(['info' => '删除失败']);
             }

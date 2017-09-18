@@ -1,4 +1,4 @@
-@extends('Home.layout')
+@extends('home.layout')
 
 @section('content')
 
@@ -157,19 +157,33 @@
 
 @section('js')
 
-    <script>
-        layui.use(['carousel'], function(){
-            var carousel = layui.carousel,
-                $ = layui.jquery;
+<script>
+    layui.use(['util','carousel'], function(){
+        var carousel = layui.carousel,
+            util = layui.util,
+            $ = layui.jquery;
 
-            //图片轮播
-            carousel.render({
-                elem: '#Carousel'
-                ,width: '99%'
-                ,interval: 5000
-            });
-
+        //图片轮播
+        carousel.render({
+            elem: '#Carousel'
+            ,width: '99%'
+            ,interval: 5000
         });
-    </script>
+
+        //固定块
+        util.fixbar({
+            css: {right: 50, bottom: 100}
+            ,bgcolor: '#393D49'
+            ,click: function(type){
+                if(type === 'bar1'){
+                    layer.msg('icon是可以随便换的')
+                } else if(type === 'bar2') {
+                    layer.msg('两个bar都可以设定是否开启')
+                }
+            }
+        });
+
+    });
+</script>
 
 @stop

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ config('app.name') }} - {{ $title }}</title>
-  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/Home/logo_ico_16X16.ico') }}" media="screen">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/home/logo_ico_16X16.ico') }}" media="screen">
   <link rel="stylesheet" href="{{ asset('layui/css/layui.css') }}">
   <style>
     #back {
@@ -162,8 +162,8 @@
             <div class="layui-form-item">
                 <select id="category_id" name="category_id" lay-filter="fenlei">
                     <option value="">请选择分类</option>
-                    @foreach($category as $item)
-                    <option id="f{{ $item->id }}" value="{{ $item->id }}">{{ $item->calname }}</option>
+                    @foreach($cates as $item)
+                    <option id="f{{ $item->cate_id }}" value="{{ $item->cate_id }}">{{ $item->cate_name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -238,7 +238,7 @@
                 },
                 beforeSend:function()
                 {
-                    var img = $("<img src='{{ asset('/images/Home/loading.gif') }}'>");
+                    var img = $("<img src='{{ asset('/images/home/loading.gif') }}'>");
                     $("#time").append(img);
                 },
                 success:function(data)
@@ -359,7 +359,7 @@
                 },
                 beforeSend:function()
                 {
-                    var img = $("<img src='{{ asset('/images/Home/loading.gif') }}'>");
+                    var img = $("<img src='{{ asset('/images/home/loading.gif') }}'>");
                     $("#time").append(img);
                 },
                 success:function(data)

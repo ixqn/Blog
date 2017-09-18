@@ -13,12 +13,10 @@
 
 
 
-
+// 主页.
 Route::get('/', function () {
     return view('welcome');
 });
-
-
 
 
 
@@ -106,13 +104,11 @@ Route::post('admin/inf/discom/{id}','Admin\InfController@discom');
 //    return view('home/content');
 //});
 
-//文章内容
-Route::get('home/content/{id}' , 'Home\ContentController@content');
 
 //文章收藏
-Route::get('home/conllect' , 'Home\ConllectController@conllect');
-Route::get('home/conllect/insert/{id}' , 'Home\ConllectController@insert');
-Route::get('home/conllect/delete/{id}' , 'Home\ConllectController@delete');
+Route::get('home/collect' , 'Home\ConllectController@collect');
+Route::get('home/collect/insert/{id}' , 'Home\ConllectController@insert');
+Route::get('home/collect/delete/{id}' , 'Home\ConllectController@delete');
 //Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
 
 
