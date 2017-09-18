@@ -67,7 +67,9 @@
                             <tr>
                                 <td>{{$v->admin_id}}</td>
                                 <td>{{$v->nickname}}</td>
-                                <td>{{$v->sex}}</td>
+                                <td>{{$v->nickname}}</td>
+
+                                {{--<td>{{$v->sex}}</td>--}}
                                 <td>
                                     <img src="/admin/uploads/{{$v->picture}}" width="30px" />
                                 </td>
@@ -114,8 +116,5 @@
             },function(){});
 
         }
-    </script>
-    <script type="text/javascript">
-        $('#alertError').fadeOut(2000);
     </script>
 @endsection

@@ -77,15 +77,16 @@
                                         <td>{{$v->nickname}}</td>
                                         <td>{{$v->sex}}</td>
                                         <td>
-                                            <img src="/admin/uploads/{{$v->picture}}" width="30px" />
+                                            <img src="/admin/uploads/{{$v->pic}}" width="30px" />
                                         </td>
                                         <td>{{$v->birthday}}</td>
                                         <td>{{$v->email}}</td>
-                                        <td>{{$v->update_time}}</td>
-                                        <td>{{$v->reg_time}}</td>
+                                        <td>{{$v->created_at}}</td>
+                                        <td>{{$v->updated_at}}</td>
                                         <td>
-                                            <a href="{{url('admin/users/edit')}}">修改</a>
-                                            <a>删除</a>
+                                            <a href="{{url('admin/users/'.$v->user_id.'/edit ')}}">
+                                                修改
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -116,27 +117,7 @@
 
 @endsection
 @section('js')
-    <script>
-        function delAdmin(id)
-        {
-            layer.confirm('是否确定删除?',{
-                btn:['确定','取消']
-            },function() {
-                $.post('{{url('admin/users/')}}/' + id, {
-                    '_token': '{{csrf_token()}}',
-                    '_method': 'delete'
-                }, function (data) {
-                    if (data.state == 0) {
-                        layer.msg(data.msg, {icon: 6});
-                        location.href = location.href;
-                    } else {
-                        layer.msg(data.msg, {icon: 5});
-                    }
-                });
-            },function(){});
 
-        }
-    </script>
     <script type="text/javascript">
         $('#alertError').fadeOut(2000);
     </script>

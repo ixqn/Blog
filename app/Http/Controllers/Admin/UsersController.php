@@ -44,8 +44,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        dd($input);
+
     }
 
     /**
@@ -67,9 +66,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
         $users = Users::find($id);
-        return view('admin/users/edit',compact('admin'));
+        return view('admin/users/edit',compact('users'));
     }
 
     /**
@@ -100,10 +98,11 @@ class UsersController extends Controller
         }
 
         $users = Users::find($id);
+
         $users->nickname = $input['nickname'];
         $re = $users->save();
         if($re){
-            return redirect('admin/admin')->with('errors','修改成功');
+            return redirect('admin/users')->with('errors','修改成功');
         }else{
             return back()->with('errors','修改失败');
         }
@@ -117,21 +116,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $users = Users::find($id);
-        $re = $users->delete();
-        if($re){
-            $data = [
-                'state'=>0,
-                'msg'=>'删除成功'
-            ];
-        }else{
-            $data = [
-                'state'=>1,
-                'msg'=>'删除失败 '
-            ];
-        }
-        return $data;
+
     }
 }
 
