@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Http\Model\Cate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Article;
@@ -12,19 +13,15 @@ class ArticleController extends Controller
     public function writer()
     {
         // 获取分类数据.
-        $category = \DB::table('article_category') -> select('*', \DB::raw("concat(path,',',id) AS sort_path")) -> orderBy('sort_path')-> get();
 
-        foreach ($category as $key => $value) {
-            $num = substr_count($value->path, ',');
-            $category[$key]->calname = str_repeat('|----', $num).$value->calname;
-        }
+        $cates = (new Cate)->tree();
 
         // 获取文章.
         $data = Article::orderby('article_at', 'desc')->paginate(5);
 
         // 输出页面.
         $title = '写文章';
-        return view('Home.article.writer', compact('category','title','data'));
+        return view('Home.article.writer', compact('cates','title','data'));
     }
 
     // 执行保存.

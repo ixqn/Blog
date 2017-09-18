@@ -104,7 +104,7 @@ class CategoryController extends Controller
                 // 文件名称.
                 $filename = time().mt_rand(1000000, 9999999).'.'.$ext;
                 // 移动.
-                $request -> file('cate_pic') -> move('./uploads', $filename);
+                $request -> file('cate_pic') -> move('./uploads/category', $filename);
                 // 修改 pic 数据.
                 $input['cate_pic'] = $filename;
             }
@@ -177,7 +177,7 @@ class CategoryController extends Controller
                 // 文件名称.
                 $filename = time().mt_rand(1000000, 9999999).'.'.$ext;
                 // 移动.
-                $request -> file('cate_pic') -> move('./uploads', $filename);
+                $request -> file('cate_pic') -> move('./uploads/category', $filename);
                 // 修改 pic 数据.
                 $cate->cate_pic = $input['cate_pic'] = $filename;
             }

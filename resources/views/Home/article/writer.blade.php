@@ -162,8 +162,8 @@
             <div class="layui-form-item">
                 <select id="category_id" name="category_id" lay-filter="fenlei">
                     <option value="">请选择分类</option>
-                    @foreach($category as $item)
-                    <option id="f{{ $item->id }}" value="{{ $item->id }}">{{ $item->calname }}</option>
+                    @foreach($cates as $item)
+                    <option id="f{{ $item->id }}" value="{{ $item->id }}">{{ $item->article_name }}</option>
                     @endforeach
                 </select>
             </div>
