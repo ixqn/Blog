@@ -21,6 +21,7 @@
 
     <link rel="stylesheet" media="all" href="{{ asset('home/css/web-e7e403d2843dd1edd8db.css') }}" />
     <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-7642b94e17df29096c13.css') }}" />
+    <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-0a03cade4dfc10c5a79b.css') }}" />
     <style>
         .layui-carousel {
             left: 15px;
@@ -44,7 +45,7 @@
         <!--<a class="btn log-in" href="/sign_in">登录</a>-->
 
         <!-- 登录显示写文章 -->
-        <a class="btn write-btn" target="_blank" href="/writer#/">
+        <a class="btn write-btn" target="_blank" href="{{url('/writer#/')}}">
             <i class="iconfont ic-write"></i>写文章
         </a>
         <!-- 如果用户登录，显示下拉菜单 -->
@@ -241,8 +242,8 @@
 
         //固定块
         util.fixbar({
-            bar1: true
-            ,bar2: true
+            bar1: '&#xe600;'
+            ,bar2: '&#xe641;'
             ,css: {right: 50, bottom: 100}
             ,bgcolor: '#393D49'
             ,click: function(type){
