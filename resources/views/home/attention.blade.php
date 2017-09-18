@@ -145,8 +145,7 @@
                 <div class="name">
                     @foreach($data as $item)
                         <td>{{ $item->id }}</td>
-                        <a href="{{ url('/home/attention') }}/{{ $item->attension_user_id }}">
-                            <td>{{ $item->nickname }}</br></td></a>
+                        <td id="attention">{{ $item->nickname }}</br></td>
                         <td>{{ $item->email }}</td></br>
                         <a href="{{ url('/home/attention/delete') }}/{{ $item->attension_user_id }}">取消关注</a></br></br>
                     @endforeach
@@ -192,6 +191,15 @@
 
 <script src="about:blank"></script>
 <script>/* Code removed by ScrapBook */</script>
+
+<script>
+       $id = getElementById('attention');
+         $('.id').on('click' , function(){
+            alert('123');
+         });
+
+
+</script>
 
 
 

@@ -34,6 +34,7 @@ class AttentionController extends Controller
             $str = \DB::table('users_attention')->where('attension_user_id', $dat['attension_user_id'])->first();
             if ($str) {
                 die('这个作者你已经关注过了，快去我的关注页面查看把');
+
             } else {
 
             $res = \DB::table('users_attention')->insert($dat);
