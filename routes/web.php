@@ -14,17 +14,23 @@
 Route::get('/', function () {
     return view('welcome');
 });
-//后台登录
+//                       后台管理系统
+//登录->验证码->逻辑处理->首页->管理员->添加管理员->管理员列表->修改密码->验证密码->退出登录->修改
 Route::get('admin/login','Admin\LoginController@login');
-//验证码
 Route::get('admin/captcha','Admin\LoginController@captcha');
-//登录验证路由
 Route::post('admin/dologin','Admin\LoginController@doLogin');
 //中间件
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'login'],function(){
-//后台首页
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'Login'],function(){
     Route::get('index','IndexController@index');
+    Route::get('amend','IndexController@amend');
+    Route::post('doamend','IndexController@doAmend');
+    Route::get('logout','IndexController@logout');
+    //资源
+    Route::resource('admin','AdminController');
+
+
+
+
 });
 
-//密码
-Route::get('crypt','Admin\LoginController@crypt');
+

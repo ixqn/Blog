@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 
@@ -26,28 +25,31 @@
 
         <div class="page-container">
             <h1>超级管理员登录中心</h1>
+
+            @if (count($errors) > 0)
+                <div id="alertError" class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">错误!!</button>
+                    <ul>
+                        @if(is_object($errors))
+                            @foreach ($errors->all() as $error)
+                                <li style="color: red">{{ $error }}</li>
+                            @endforeach
+                        @else
+                            <li  style="color: red">{{ $errors }}</li>
+                        @endif
+                    </ul>
+                </div><span></span>
+            @endif
+
             <form action="{{url('admin/dologin')}}" method="post">
                 {{csrf_field()}}
-                <input type="text" name="nickname" class="nickname" placeholder="nickname" value="{{old('nickname')}}">
-                <input type="password" name="password" class="password" placeholder="Password">
+                <input type="text" name="nickname" class="nickname" placeholder="请输入你的用户名!" value="{{old('nickname')}}">
+                <input type="password" name="password" class="password" placeholder="请输入你的密码!">
                 <span>
-                    <input type="captcha" style="width: 160px;"  name="captcha" class="captcha" placeholder="captcha">
+                    <input type="captcha" style="width: 160px;"  name="captcha" class="captcha" placeholder="请输入验证码!">
                     <img src="{{url('admin/captcha')}}" onclick="this.src='{{url('admin/captcha')}}?'+Math.random()"alt="">
                 </span>
 
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <ul>
-                                @if(is_object($errors))
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                @else
-                                    <li>{{ $errors }}</li>
-                                @endif
-                            </ul>
-                        </div><span></span>
-                    @endif
                 <button type="submit">登录</button>
             <div class="connect">
 
@@ -55,11 +57,16 @@
         </div>
         <div align="center"></div>
 
+
+
         <!-- Javascript -->
         <script src="{{asset('admin/assets/js/jquery-1.8.2.min.js')}}"></script>
         <script src="{{asset('admin/assets/js/supersized.3.2.7.min.js')}}"></script>
         <script src="{{asset('admin/assets/js/supersized-init.js')}}"></script>
         <script src="{{asset('admin/assets/js/scripts.js')}}"></script>
+        <script type="text/javascript">
+                $('#alertError').fadeOut(3000);
+            </script>
 
     </body>
 
