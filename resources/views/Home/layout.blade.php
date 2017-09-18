@@ -245,7 +245,7 @@
             bar1: '&#xe600;'
             ,bar2: '&#xe641;'
             ,css: {right: 50, bottom: 100}
-            ,bgcolor: '#393D49'
+            ,bgcolor: '#9F9F9F'
             ,click: function(type){
                 if(type === 'bar1'){
                     layer.msg('icon是可以随便换的')
