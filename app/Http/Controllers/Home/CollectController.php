@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ConllectController extends Controller
+class CollectController extends Controller
 {
     //插入  inset数据
     public function insert(Request $request, $article_id)
