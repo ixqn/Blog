@@ -59,46 +59,6 @@ Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
 
 
 
-
-
-
-
-// zhangyu
-//文章列表
-Route::get('admin/article','Admin\ArticleController@index');
-//文章内容单页
-Route::get('admin/article/cont/{id}','Admin\ArticleController@cont');
-//状态显示文章(删除)
-Route::post('admin/article/show/{id}','Admin\ArticleController@show');
-
-
-//分类管理模块
-Route::resource('admin/category','Admin\CategoryController');
-//分类排序字段
-Route::post('admin/category/changeorder','Admin\CategoryController@changeOrder');
-
-//举报文章
-Route::get('admin/inf/article','Admin\InfController@index');
-//举报文章处理
-Route::post('admin/inf/dis/{id}','Admin\InfController@dis');
-
-//举报评论
-Route::get('admin/inf/comment','Admin\InfController@show');
-Route::post('admin/inf/discom/{id}','Admin\InfController@discom');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // hy
 
 //前台
@@ -147,6 +107,28 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'Login'],func
     //资源
     Route::resource('admin','AdminController');
     Route::resource('users','UsersController');
+
+    //zhangyu
+    Route::get('article','ArticleController@index');
+//文章内容单页
+    Route::get('article/cont/{id}','ArticleController@cont');
+//状态显示文章(删除)
+    Route::post('article/show/{id}','ArticleController@show');
+
+
+//分类管理模块
+    Route::resource('category','CategoryController');
+//分类排序字段
+    Route::post('category/changeorder','CategoryController@changeOrder');
+
+//举报文章
+    Route::get('inf/article','InfController@index');
+//举报文章处理
+    Route::post('inf/dis/{id}','InfController@dis');
+
+//举报评论
+    Route::get('inf/comment','InfController@show');
+    Route::post('inf/discom/{id}','InfController@discom');
 
 });
 
