@@ -12,6 +12,7 @@
 */
 
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,6 +20,7 @@ Route::get('/', function () {
 
 
 
+// xqn
 Route::get('/sign_in', 'home\signController@signIn');
 Route::get('/sign_up', 'home\signController@signUp');
 // 通过手机找回密码
@@ -59,7 +61,7 @@ Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
 
 
 
-
+// zhangyu
 //文章列表
 Route::get('admin/article','Admin\ArticleController@index');
 //文章内容单页
@@ -73,15 +75,10 @@ Route::resource('admin/category','Admin\CategoryController');
 //分类排序字段
 Route::post('admin/category/changeorder','Admin\CategoryController@changeOrder');
 
-
-
 //举报文章
 Route::get('admin/inf/article','Admin\InfController@index');
 //举报文章处理
 Route::post('admin/inf/dis/{id}','Admin\InfController@dis');
-
-
-
 
 //举报评论
 Route::get('admin/inf/comment','Admin\InfController@show');
@@ -98,5 +95,33 @@ Route::post('admin/inf/discom/{id}','Admin\InfController@discom');
 
 
 
+
+
+// hy
+
+//前台
+//Route::get('/home/content' , function(){
+//    return view('home/content');
+//});
+
+//文章内容
+Route::get('home/content/{id}' , 'Home\ContentController@content');
+
+//文章收藏
+Route::get('home/conllect' , 'Home\ConllectController@conllect');
+Route::get('home/conllect/insert/{id}' , 'Home\ConllectController@insert');
+Route::get('home/conllect/delete/{id}' , 'Home\ConllectController@delete');
+//Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
+
+
+//关注
+Route::get('home/attention' , 'Home\AttentionController@attention');
+Route::get('home/attention/insert/{id}' , 'Home\AttentionController@insert');
+Route::get('home/attention/delete/{id}' , 'Home\AttentionController@delete');
+Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
+
+//站内信息管理
+Route::get('home/messages' , 'Home\MessagesController@messages');
+//Route::get('home/messages', 'Home\MessagesController@delete');
 
 
