@@ -17,7 +17,13 @@
 
 //文章列表
 Route::get('admin/article','Admin\ArticleController@index');
+//文章内容单页
 Route::get('admin/article/cont/{id}','Admin\ArticleController@cont');
+//显示文章
+Route::post('admin/article/show/{id}','Admin\ArticleController@show');
+//删除文章
+
+
 
 
 //分类管理模块

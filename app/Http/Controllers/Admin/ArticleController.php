@@ -33,4 +33,27 @@ class ArticleController extends Controller
     }
 
 
+    //显示文章
+    public function show($id)
+    {
+        $data = \DB::table('article_users')->where('article_id',$id)->get();
+        foreach($data as $item)
+        {
+            if($item->article_status == 1)
+            {
+
+                $re = $data->update(['article_status'=>1]);
+
+            }elseif($item->article_status == 2)
+            {
+
+                $re = $data->update(['article_status'=>2]);
+
+            }
+
+        }
+
+    }
+
+
 }

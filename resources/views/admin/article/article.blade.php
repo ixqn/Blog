@@ -48,12 +48,12 @@
         <table id="example2" class="table table-bordered table-hover">
             <thead>
             <tr>
-                <th>ID</th>
-                <th style="width:300px">文章名称 (可点击查看文章内容)</th>
-                <th style="width:100px">分类名称</th>
-                <th style="width:100px">文章作者</th>
-                <th style="width:150px">添加时间</th>
-                <th>操作</th>
+                <th style="width:50px;text-align:center">ID</th>
+                <th style="width:300px;text-align:center">文章名称 (可点击查看文章内容)</th>
+                <th style="width:100px;text-align:center">分类名称</th>
+                <th style="width:100px;text-align:center">文章作者</th>
+                <th style="width:150px;text-align:center">添加时间</th>
+                <th style="width:200px;text-align:center">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -61,13 +61,23 @@
             @foreach($users as $item)
 
                 <tr>
-                    <td>{{ $item->article_id }}</td>
+                    <td style="text-align:center">{{ $item->article_id }}</td>
                     <td><a href="{{url('admin/article/cont')}}/{{ $item->article_id }}">{{ $item->article_name }}</a></td>
                     <td>{{ $item->cate_name }}</td>
                     <td>{{ $item->article_author }}</td>
                     <td>{{ $item->article_at }}</td>
 
-                    {{--<td> <a href="javascript:;" onclick="()">删除</a></td>--}}
+                    <td style="text-align:center">
+                        <a href="javascript:;" onclick="show({{ $item->article_id }})">
+                            @if( $item->article_status == 1)
+                                隐藏删除
+                            @elseif( $item->article_status == 2)
+                                显示(已被删除,跪求显示)
+                            @endif
+
+
+                        </a>
+                    </td>
                 </tr>
 
 
@@ -91,7 +101,36 @@
     <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+    <script>
+        function show(id)
+        {
+            //询问框
+            layer.confirm('是否确定修改?', {
+                btn: ['确定', '取消']
+            },function(){
+                $.post('{{url('admin/article/show')}}/'+id,{'_token':'{{csrf_token()}}'},function(data){
+//                    if(data.state == 0){
+//                        layer.msg(data.msg, {icon: 6});
+//                        location.href = location.href;
+//                    }else{
+//                        layer.msg(data.msg, {icon: 5});
+//                        location.href = location.href;
+//                    }
 
+
+                })
+
+
+            },function(){
+
+
+            });
+
+
+        }
+
+
+    </script>
 
 
 
