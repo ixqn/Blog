@@ -16,7 +16,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }} - {{ $title }}</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/Home/logo_ico_16X16.ico') }}" media="screen">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/home/logo_ico_16X16.ico') }}" media="screen">
     <link rel="stylesheet" href="{{ asset('layui/css/layui.css') }}">
 
     <link rel="stylesheet" media="all" href="{{ asset('home/css/web-e7e403d2843dd1edd8db.css') }}" />

@@ -106,10 +106,13 @@ Route::post('admin/inf/discom/{id}','Admin\InfController@discom');
 
 
 //文章收藏
+
 Route::get('Home/collect' , 'Home\CollectController@collect');
 Route::get('Home/collect/insert/{id}' , 'Home\CollectController@insert');
 Route::get('Home/collect/delete/{id}' , 'Home\CollectController@delete');
 //Route::get('Home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
+
+
 
 
 //关注
