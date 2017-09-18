@@ -17,9 +17,9 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-//        $input = $request->input('keywords')?$request->input('keywords'):'';
-//        $users = Users::orderBy('admin_id','asc')->where('nickname','like','%'.$input.'%')->paginate(5);   ,compact('admin','input')
-        return view('admin/users/details');
+        $input = $request->input('keywords')?$request->input('keywords'):'';
+        $users = Users::orderBy('user_id','asc')->where('nickname','like','%'.$input.'%')->paginate(5);
+        return view('admin/users/details' ,compact('users','input'));
 
     }
 
@@ -32,7 +32,7 @@ class UsersController extends Controller
     {
         //添加管理员
 
-        return view('admin/users/create');
+//        return view('admin/users/create');
 
     }
 
@@ -44,47 +44,8 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
-        //表单验证
-        $this->validate($request,[
-            'nickname' => 'required|min:5|max:18',
-            'password' => 'required|min:6|max:18',
-            'Cm_password' => 'same:password',
-            'picture' => 'image',
-        ],[
-            'nickname.required' => '用户名不能为空',
-            'nickname.min' => '用户名不能小于5位',
-            'nickname.max' => '用户名不能大于18位',
-            'password.required' => '密码不能为空',
-            'Cm_password.same' => '两次密码必须一直',
-            'picture.image' => '请上传一张图片',
-        ]);
-        //接收数据
-        $data = $request->except('_token','Cm_password');
-        //加密密码
-        $data['password'] = encrypt($data['password']);
-        //上传照片
-        if($request->hasFile('picture'))
-        {
-            if($request->file('picture')->isValid())
-            {
-                //移动文件 随机文件名称 移动
-                $ext = $request->file('picture')->getClientOriginalExtension();
-                $filename = time().mt_rand(1000000,9999999).'.'.$ext;
-                $request->file('picture')->move('admin/uploads',$filename);
-                $data['picture'] = $filename;
-            }
-        }
-        $time = date('Y-m-d H:i:s', time());
-        $data['last_login_at'] = $time;
-
-        $re = Users::create($data);
-        if($re){
-            return redirect('admin/users') -> with('errors','添加成功');
-        }else{
-            return back() -> with('errors','添加失败');
-        }
+        $input = $request->all();
+        dd($input);
     }
 
     /**

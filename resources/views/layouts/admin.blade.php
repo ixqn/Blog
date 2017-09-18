@@ -374,8 +374,8 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('admin/users/create')}}"><i class="fa fa-circle-o"></i>用户添加</a></li>
                         <li><a href="{{url('admin/users')}}"><i class="fa fa-circle-o"></i>用户列表</a></li>
+
                     </ul>
                 </li>
                 <li>
