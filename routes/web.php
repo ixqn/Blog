@@ -19,9 +19,9 @@
 Route::get('admin/article','Admin\ArticleController@index');
 //文章内容单页
 Route::get('admin/article/cont/{id}','Admin\ArticleController@cont');
-//显示文章
+//状态显示文章(删除)
 Route::post('admin/article/show/{id}','Admin\ArticleController@show');
-//删除文章
+
 
 
 
