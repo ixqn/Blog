@@ -107,22 +107,21 @@ Route::post('admin/inf/discom/{id}','Admin\InfController@discom');
 
 //文章收藏
 
-Route::get('Home/collect' , 'Home\CollectController@collect');
-Route::get('Home/collect/insert/{id}' , 'Home\CollectController@insert');
-Route::get('Home/collect/delete/{id}' , 'Home\CollectController@delete');
-//Route::get('Home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
 
-
+Route::get('home/collect' , 'Home\CollectController@collect');
+Route::get('home/collect/insert/{id}' , 'Home\CollectController@insert');
+Route::get('home/collect/delete/{id}' , 'Home\CollectController@delete');
+//Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
 
 
 //关注
-Route::get('Home/attention' , 'Home\AttentionController@attention');
-Route::get('Home/attention/insert/{id}' , 'Home\AttentionController@insert');
-Route::get('Home/attention/delete/{id}' , 'Home\AttentionController@delete');
-Route::get('Home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
+Route::get('home/attention' , 'Home\AttentionController@attention');
+Route::get('home/attention/insert/{id}' , 'Home\AttentionController@insert');
+Route::get('home/attention/delete/{id}' , 'Home\AttentionController@delete');
+Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
 
 //站内信息管理
-Route::get('Home/messages' , 'Home\MessagesController@messages');
+Route::get('home/messages' , 'Home\MessagesController@messages');
 //Route::get('Home/messages', 'Home\MessagesController@delete');
 
 
@@ -162,17 +161,17 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'Login'],func
 // 文章添加.
 Route::get('/writer', 'Home\ArticleController@writer');
 // 文件上传.
-Route::post('/Home/upload', 'Home\UploadController@upload');
+Route::post('/home/upload', 'Home\UploadController@upload');
 // 执行添加.
-Route::post('/Home/article/dowriter', 'Home\ArticleController@dowriter');
+Route::post('/home/article/dowriter', 'Home\ArticleController@dowriter');
 // 文章删除.
-Route::post('/Home/article/delete/{id}', 'Home\ArticleController@delete');
+Route::post('/home/article/delete/{id}', 'Home\ArticleController@delete');
 // 编辑更新.
-Route::post('/Home/article/doedit/{id}', 'Home\ArticleController@doedit');
+Route::post('/home/article/doedit/{id}', 'Home\ArticleController@doedit');
 // 文章发布.
-Route::post('/Home/article/print/{id}', 'Home\ArticleController@print');
+Route::post('/home/article/print/{id}', 'Home\ArticleController@print');
 // 取消发布.
-Route::post('/Home/article/noprint/{id}', 'Home\ArticleController@noprint');
+Route::post('/home/article/noprint/{id}', 'Home\ArticleController@noprint');
 
 // 文章详情.
 Route::get('/p/{id}', 'Home\ArtlistController@index');
