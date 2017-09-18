@@ -450,7 +450,7 @@ Colorpicker.prototype = {
       this.color[this.currentSlider.callTop].call(this.color, top / this.currentSlider.maxTop);
     }
     // Change format dynamically
-    // Only occurs if user choose the dynamic format by
+    // Only occurs if users choose the dynamic format by
     // setting option format to false
     if (
       this.options.format === false &&
@@ -506,7 +506,7 @@ Colorpicker.prototype = {
     } else {
       this.color = this.createColor(this.input.val());
       // Change format dynamically
-      // Only occurs if user choose the dynamic format by
+      // Only occurs if users choose the dynamic format by
       // setting option format to false
       if (this.color.origFormat && this.options.format === false) {
         this.format = this.color.origFormat;

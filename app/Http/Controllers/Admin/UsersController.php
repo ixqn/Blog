@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Admin;
+use App\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class AdminController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,9 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        $input = $request->input('keywords')?$request->input('keywords'):'';
-        $admin = Admin::orderBy('admin_id','asc')->where('nickname','like','%'.$input.'%')->paginate(5);
-        return view('admin/admin/details',compact('admin','input') );
+//        $input = $request->input('keywords')?$request->input('keywords'):'';
+//        $users = Users::orderBy('admin_id','asc')->where('nickname','like','%'.$input.'%')->paginate(5);   ,compact('admin','input')
+        return view('admin/users/details');
 
     }
 
@@ -29,8 +30,9 @@ class AdminController extends Controller
      */
     public function create()
     {
-            //添加管理员
-            return view('admin/admin/create');
+        //添加管理员
+
+        return view('admin/users/create');
 
     }
 
@@ -77,9 +79,9 @@ class AdminController extends Controller
         $time = date('Y-m-d H:i:s', time());
         $data['last_login_at'] = $time;
 
-        $re = Admin::create($data);
+        $re = Users::create($data);
         if($re){
-            return redirect('admin/admin') -> with('errors','添加成功');
+            return redirect('admin/users') -> with('errors','添加成功');
         }else{
             return back() -> with('errors','添加失败');
         }
@@ -105,8 +107,8 @@ class AdminController extends Controller
     public function edit($id)
     {
         //
-        $admin = Admin::find($id);
-        return view('admin/admin/edit',compact('admin'));
+        $users = Users::find($id);
+        return view('admin/users/edit',compact('admin'));
     }
 
     /**
@@ -136,9 +138,9 @@ class AdminController extends Controller
                 ->withInput();
         }
 
-        $admin = Admin::find($id);
-        $admin->nickname = $input['nickname'];
-        $re = $admin->save();
+        $users = Users::find($id);
+        $users->nickname = $input['nickname'];
+        $re = $users->save();
         if($re){
             return redirect('admin/admin')->with('errors','修改成功');
         }else{
@@ -155,13 +157,13 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
-        $admin = Admin::find($id);
-        $re = $admin->delete();
+        $users = Users::find($id);
+        $re = $users->delete();
         if($re){
-           $data = [
-               'state'=>0,
-               'msg'=>'删除成功'
-           ];
+            $data = [
+                'state'=>0,
+                'msg'=>'删除成功'
+            ];
         }else{
             $data = [
                 'state'=>1,

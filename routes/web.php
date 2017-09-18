@@ -27,9 +27,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'Login'],func
     Route::get('logout','IndexController@logout');
     //资源
     Route::resource('admin','AdminController');
-
-
-
+    Route::resource('users','UsersController');
 
 });
 
