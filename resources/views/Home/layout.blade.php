@@ -208,9 +208,8 @@
 <script src="{{ asset('layui/layui.all.js') }}"></script>
 
 <script>
-    layui.use(['util','layer'], function(){
-        var util = layui.util,
-            layer = layui.layer
+    layui.use(['layer'], function(){
+        var layer = layui.layer,
             $ = layui.jquery;
 
         // 导航栏鼠标移入移除事件.
@@ -237,21 +236,6 @@
             }else{
                 $('#menu').attr({'aria-expanded':false,'class':'navbar-collapse collapse'});
                 flag = 1;
-            }
-        });
-
-        //固定块
-        util.fixbar({
-            bar1: '&#xe600;'
-            ,bar2: '&#xe641;'
-            ,css: {right: 50, bottom: 100}
-            ,bgcolor: '#393D49'
-            ,click: function(type){
-                if(type === 'bar1'){
-                    layer.msg('icon是可以随便换的')
-                } else if(type === 'bar2') {
-                    layer.msg('两个bar都可以设定是否开启')
-                }
             }
         });
     });

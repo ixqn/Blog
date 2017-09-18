@@ -144,6 +144,27 @@
 
 @section('js')
 
-
+<script>
+    layui.use(['util','layer'], function(){
+        var util = layui.util,
+            layer = layui.layer,
+            $ = layui.jquery;
+    
+        //固定块
+        util.fixbar({
+            bar1: '&#xe600;'
+            ,bar2: '&#xe641;'
+            ,css: {right: 50, bottom: 100}
+            ,bgcolor: '#393D49'
+            ,click: function(type){
+                if(type === 'bar1'){
+                    layer.msg('icon是可以随便换的')
+                } else if(type === 'bar2') {
+                    layer.msg('两个bar都可以设定是否开启')
+                }
+            }
+        });
+    });
+</script>
 
 @stop
