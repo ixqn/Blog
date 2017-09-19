@@ -66,10 +66,10 @@
                                 <label for="exampleInputEmail1">性别</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="sex" id="optionsRadios1" value="m"  @if(old('sex') == '男') checked="checked" @endif >男
+                                        <input type="radio" name="sex" id="optionsRadios1" value="男"  @if(old('sex') == '男') checked="checked" @endif >男
                                     </label>
                                     <label>
-                                        <input type="radio" name="sex" id="optionsRadios2" value="w"  @if(old('sex') == '女') checked="checked" @endif >女
+                                        <input type="radio" name="sex" id="optionsRadios2" value="女"  @if(old('sex') == '女') checked="checked" @endif >女
                                     </label>
                                 </div>
                             </div>

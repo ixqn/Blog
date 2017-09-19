@@ -17,7 +17,7 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         $input = $request->input('keywords')?$request->input('keywords'):'';
-        $admin = Admin::orderBy('admin_id','asc')->where('nickname','like','%'.$input.'%')->paginate(1);
+        $admin = Admin::orderBy('admin_id','asc')->where('nickname','like','%'.$input.'%')->paginate(5);
         return view('admin/admin/details',compact('admin','input') );
 
     }

@@ -80,10 +80,13 @@
                                         <td>{{$v->nickname}}</td>
                                         <td>{{$v->sex}}</td>
                                         <td>
-                                            <img src="/admin/uploads/{{$v->pic}}" width="30px" />
+                                            <img src="{{'/uploads/articles/20170910/171147.jpg'}}" width="30px" />
                                         </td>
                                         <td>{{$v->birthday}}</td>
-                                        <td>{{$v->email}}</td>
+                                        <td>
+                                            {{$v->email}}
+                                            {{$v->email_active}}
+                                        </td>
                                         <td>{{$v->created_at}}</td>
                                         <td>{{$v->updated_at}}</td>
                                         <td>

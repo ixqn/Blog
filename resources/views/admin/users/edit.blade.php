@@ -44,7 +44,7 @@
                             </div>
                         @endif
 
-                        <form role="form" action="{{url('admin/users/'.$users->users_id)}}" method="post" enctype="multipart/form-data">
+                        <form role="form" action="{{url('admin/users/'.$users->user_id)}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="put">
                             <div class="box-body">
@@ -54,33 +54,27 @@
                                 </div>
                             </div>
 
-                            {{--<div class="box-body">--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="exampleInputEmail1">密码</label>--}}
-                                    {{--<input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">性别</label>
+                                    <input type="text" name="sex" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">
+                                </div>
+                            </div>
 
-                            {{--<div class="box-body">--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="exampleInputEmail1">邮箱</label>--}}
-                                    {{--<input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">邮箱</label>
+                                    <input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">
+                                </div>
+                            </div>
 
-                            {{--<div class="box-body">--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="exampleInputEmail1">用户名</label>--}}
-                                    {{--<input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">头像</label>
+                                    <input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">
+                                </div>
+                            </div>
 
-                            {{--<div class="box-body">--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="exampleInputEmail1">用户名</label>--}}
-                                    {{--<input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
                             <!-- /.box-body -->
 
                             <div class="box-footer">

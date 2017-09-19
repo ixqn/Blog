@@ -68,7 +68,7 @@
                             <tr>
                                 <td>{{$v->admin_id}}</td>
                                 <td>{{$v->nickname}}</td>
-                                <td>{{$v->nickname}}</td>
+                                <td>{{$v->sex}}</td>
 
                                 {{--<td>{{$v->sex}}</td>--}}
                                 <td>

@@ -18,7 +18,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $input = $request->input('keywords')?$request->input('keywords'):'';
-        $users = Users::orderBy('user_id','asc')->where('nickname','like','%'.$input.'%')->paginate(1);
+        $users = Users::orderBy('user_id','asc')->where('nickname','like','%'.$input.'%')->paginate(5);
         return view('admin/users/details' ,compact('users','input'));
 
     }
