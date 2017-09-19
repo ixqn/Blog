@@ -186,10 +186,6 @@ class signController extends Controller
         } else {
             return back()->with('errors','添加失败'); // 注册失败返回提示信息
         }
-
-
-
-
     }
 
 
