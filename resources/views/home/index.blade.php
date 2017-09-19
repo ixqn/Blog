@@ -70,7 +70,7 @@
                                     {{  $v->article_str }}
                                 </p>
                                 <div class="meta">
-                                    <a class="collection-tag" target="_blank" href="/c/20f7f4031550">社会热点</a>
+                                    <a class="collection-tag" target="_blank" href="{{url('c')}}/{{$v->category_id}}">社会热点</a>
                                     <a target="_blank" href="{{url('p')}}/{{$v->article_id}}">
                                         <i class="iconfont ic-list-read"></i> 1003
                                     </a>        <a target="_blank" href="{{url('p')}}/{{$v->article_id}}#comments">
