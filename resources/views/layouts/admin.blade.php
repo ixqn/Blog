@@ -43,6 +43,7 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{asset('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -355,7 +356,7 @@
                 <li class="active treeview">
                     <a href="#">
                         <i class="fa fa-dashboard"></i>
-                        <span>超级管理员模块</span>
+                        <span>超级管理员</span>
                         <span class="pull-right-container">
                           <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -368,7 +369,7 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-files-o"></i>
-                        <span>前台用户管理模块</span>
+                        <span>前台用户管理</span>
                         <span class="pull-right-container">
                             <span class="label label-primary pull-right"></span>
                         </span>
@@ -377,8 +378,62 @@
                         <li><a href="{{url('admin/users')}}"><i class="fa fa-circle-o"></i>用户列表</a></li>
 
                     </ul>
+<<<<<<< HEAD
                 </li>
 
+=======
+
+                <li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>文章管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/article') }}"><i class="fa fa-anchor"></i>文章列表</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>分类管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/category/create') }}"><i class="fa fa-anchor"></i> 分类添加</a></li>
+                        <li><a href="{{ url('/admin/category') }}"><i class="fa fa-asterisk"></i> 分类列表</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>举报管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/inf/article') }}"><i class="fa fa-anchor"></i>举报文章</a></li>
+                        <li><a href="{{ url('/admin/inf/comment') }}"><i class="fa fa-asterisk"></i>举报评论</a></li>
+
+                    </ul>
+                </li>
+                    <a href="pages/widgets.html">
+                        <i class="fa fa-th"></i> <span>Widgets</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green">new</small>
+            </span>
+                    </a>
+                </li>
+>>>>>>> master
                 <li class="treeview">
                     <a href="#">
                                     <i class="fa fa-pie-chart"></i>
@@ -641,14 +696,14 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('admin/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- DataTables -->
-<script src="{{asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
-<!-- Select2 -->
-<script src="{{asset('admin/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
-<!-- InputMask -->
-<script src="{{asset('admin/plugins/input-mask/jquery.inputmask.js')}}"></script>
-<script src="{{asset('admin/plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
-<script src="{{asset('admin/plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
+{{--<script src="{{asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>--}}
+{{--<script src="{{asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>--}}
+{{--<!-- Select2 -->--}}
+{{--<script src="{{asset('admin/bower_components/select2/dist/js/select2.full.min.js')}}"></script>--}}
+{{--<!-- InputMask -->--}}
+{{--<script src="{{asset('admin/plugins/input-mask/jquery.inputmask.js')}}"></script>--}}
+{{--<script src="{{asset('admin/plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>--}}
+{{--<script src="{{asset('admin/plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>--}}
 <!-- Morris.js charts -->
 <script src="{{asset('admin/bower_components/raphael/raphael.min.js')}}"></script>
 <script src="{{asset('admin/bower_components/morris.js/morris.min.js')}}"></script>
@@ -669,11 +724,11 @@
 <!-- Slimscroll -->
 <script src="{{asset('admin/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 <!-- bootstrap datepicker -->
-<script src="{{asset('admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+{{--<script src="{{asset('admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>--}}
 <!-- bootstrap color picker -->
-<script src="{{asset('admin/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')}}"></script>
+{{--<script src="{{asset('admin/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')}}"></script>--}}
 <!-- bootstrap time picker -->
-<script src="{{asset('admin/plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>
+{{--<script src="{{asset('admin/plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>--}}
 <!-- SlimScroll -->
 <script src="{{asset('admin/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 <!-- iCheck 1.0.1 -->

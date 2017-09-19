@@ -1,4 +1,9 @@
 @extends('layouts/admin')
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
@@ -40,6 +45,28 @@
 
 
 
+        <button type="submit" class="btn btn-default"><a href="{{ url('admin/article') }}">全部</a></button>
+        <form action="{{ url('/admin/article') }}" method="get">
+            <div class="row">
+
+
+                <div class="col-md-offset-8 col-md-4">
+                    <div class="input-group input-group">
+                        <input name="keywords" type="text" class="form-control" value="
+						@if(!empty($request['keywords']))
+                        {{ $request['keywords'] }}
+                        @endif
+                                ">
+                        <span class="input-group-btn">
+		                      <button type="submit" class="btn btn-info btn-flat">搜索!</button>
+		                    </span>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </form>
 
 
 
@@ -69,7 +96,7 @@
                     <td style="text-align:center">
                         <a href="javascript:;" onclick="show({{ $item->article_id }})">
                             @if( $item->article_status == 1)
-                                隐藏删除
+                                隐藏删除(已显示,跪求删除)
                             @elseif( $item->article_status == 2)
                                 显示(已被删除,跪求显示)
                             @endif
@@ -85,7 +112,7 @@
 
             </tbody>
         </table>
-
+        {!! $users->links() !!}
 
     </div>
     <!-- /.box-body -->
@@ -103,27 +130,23 @@
     <script>
         function show(id)
         {
-            //询问框
-            layer.confirm('是否确定修改?', {
-                btn: ['确定', '取消']
-            },function(){
-                $.post('{{url('admin/article/show')}}/'+id,{'_token':'{{csrf_token()}}'},function(data){
-//                    if(data.state == 0){
-//                        layer.msg(data.msg, {icon: 6});
-//                        location.href = location.href;
-//                    }else{
-//                        layer.msg(data.msg, {icon: 5});
-//                        location.href = location.href;
-//                    }
 
+                $.post('{{url('admin/article/show')}}/'+id,{'_token':'{{csrf_token()}}'},function(data){
+                    if(data.state == 0){
+                        location.href = location.href;
+                        layer.msg(data.msg,{icon:5});
+
+                    }else{
+                        location.href = location.href;
+                        layer.msg(data.msg,{icon:6});
+
+
+                    }
 
                 })
 
 
-            },function(){
 
-
-            });
 
 
         }
