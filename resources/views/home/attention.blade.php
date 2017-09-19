@@ -136,7 +136,7 @@
 </nav>
 
 
-<div class="container subscription"
+<div class="container subscription">
 <div class="row"><div class="aside">
         <a data-toggle="dropdown" class="change-type">全部关注123<i class="iconfont ic-filter"></i></a>
         <ul class="dropdown-menu arrow-top"><li><a>全部关注</a></ul>
@@ -145,9 +145,10 @@
                 <div class="name">
                     @foreach($data as $item)
                         <td>{{ $item->id }}</td>
-                        <td id="attention">{{ $item->nickname }}</br></td>
+                        <td><a href="javascript;" id="attention">{{ $item->nickname }}</a></br></td>
                         <td>{{ $item->email }}</td></br>
                         <a href="{{ url('/home/attention/delete') }}/{{ $item->attension_user_id }}">取消关注</a></br></br>
+
                     @endforeach
                 </div> <!----></a></li><li class=""></li></ul> <!----> <!----></div> <div class="col-xs-16 col-xs-offset-8 main"><div><ul class="note-list">
 
@@ -192,14 +193,6 @@
 <script src="about:blank"></script>
 <script>/* Code removed by ScrapBook */</script>
 
-<script>
-       $id = getElementById('attention');
-         $('.id').on('click' , function(){
-            alert('123');
-         });
-
-
-</script>
 
 
 
