@@ -62,7 +62,7 @@
                     <td class="name">{{ $item->cate_names }}</td>
                     <td>{{ $item->cate_title }}</td>
                     <td>{{ $item->cate_view }}</td>
-                    <td><img src="/uploads/{{ $item->cate_pic }}" width="30px"></td>
+                    <td><img src="/uploads/category/{{ $item->cate_pic }}" width="30px"></td>
 
                     <td><a href="{{ url('/admin/category') }}/{{ $item->cate_id }}/edit">编辑</a> <a href="javascript:;" onclick="delCate({{ $item->cate_id }})">删除</a></td>
                 </tr>

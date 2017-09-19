@@ -7,13 +7,13 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                分类列表
-                <small>分类管理</small>
+                文章列表
+                <small>文章管理</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
-                <li><a href="#">分类管理</a></li>
-                <li class="active">分类列表</li>
+                <li><a href="#">文章管理</a></li>
+                <li class="active">文章列表</li>
             </ol>
         </section>
 

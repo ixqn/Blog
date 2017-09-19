@@ -13,10 +13,12 @@
             border:1px solid transparency;
             position:relative;
             background:url('{{ url('/uploads/bg/1.jpg') }}');
+            opacity:0.5;
             margin:0px;
             padding: 0px;
         }
         .box{
+            color:black;
             width:800px;
             height:800px;
             border:1px solid transparency;

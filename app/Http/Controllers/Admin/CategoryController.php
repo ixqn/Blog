@@ -43,6 +43,21 @@ class CategoryController extends Controller
     {
         //
         $cates = (new Cate)->tree();
+
+//        $cates = Cate::get();
+//
+//            $subs = [];
+//            foreach($arr as $v){
+//                if($v['article_pid'] == $id){
+//                    $subs[] = $v;
+//                }
+//
+//            }
+
+
+
+
+
         return view('admin.category.index',['title'=>'分类列表'],compact('cates'));
     }
 
@@ -205,13 +220,25 @@ class CategoryController extends Controller
         //分类删除
         //找到要删除的那条数据
         $cate  =  Cate::find($id);
+//        $pid = $cate->cate_pid;
+        //查询数据库中所有数据pid等于传过来的id
+        $re = Cate::where('cate_pid',$id)->get()->toArray();
+//        dd($re);
+        //判断,查到不能删,查不到可删
+        if($re){
 
+            $data = [
+                'state'=>1,
+                'msg'=>'有子分类不能删除'
+            ];
+            return $data;
+        }
 
-        $re = $cate->delete();
+            $res = $cate->delete();
 //        删除
 
 
-            if($re){
+            if($res){
                 $data = [
                     'state'=>0,
                     'msg'=>'删除成功'
