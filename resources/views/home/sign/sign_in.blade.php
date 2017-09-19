@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/bootstrap/css/bootstrap.min.css') }}">
     <title>Document</title>
 </head>
 <body>
@@ -103,8 +103,9 @@
     </div>
 
 </div>
-<script src="jquery/jquery.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="{{ asset('/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}"></script>
+
 <script>
 
 
