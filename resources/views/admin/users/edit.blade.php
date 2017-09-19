@@ -53,6 +53,34 @@
                                     <input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">
                                 </div>
                             </div>
+
+                            {{--<div class="box-body">--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="exampleInputEmail1">密码</label>--}}
+                                    {{--<input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+
+                            {{--<div class="box-body">--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="exampleInputEmail1">邮箱</label>--}}
+                                    {{--<input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+
+                            {{--<div class="box-body">--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="exampleInputEmail1">用户名</label>--}}
+                                    {{--<input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+
+                            {{--<div class="box-body">--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label for="exampleInputEmail1">用户名</label>--}}
+                                    {{--<input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                             <!-- /.box-body -->
 
                             <div class="box-footer">

@@ -82,9 +82,9 @@ Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
 
 
 //文章收藏
-Route::get('home/collect' , 'Home\ConllectController@collect');
-Route::get('home/collect/insert/{id}' , 'Home\ConllectController@insert');
-Route::get('home/collect/delete/{id}' , 'Home\ConllectController@delete');
+Route::get('home/collect' , 'Home\CollectController@collect');
+Route::get('home/collect/insert/{id}' , 'Home\CollectController@insert');
+Route::get('home/collect/delete/{id}' , 'Home\CollectController@delete');
 //Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
 
 

@@ -18,7 +18,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $input = $request->input('keywords')?$request->input('keywords'):'';
-        $users = Users::orderBy('user_id','asc')->where('nickname','like','%'.$input.'%')->paginate(5);
+        $users = Users::orderBy('user_id','asc')->where('nickname','like','%'.$input.'%')->paginate(1);
         return view('admin/users/details' ,compact('users','input'));
 
     }
@@ -79,7 +79,9 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $input = $request->except('_token','_method');
+
         $rule = [
             'nickname' => 'required|min:5|max:18',
         ];
@@ -92,13 +94,12 @@ class UsersController extends Controller
         $validator = Validator::make($input,$rule,$msg);
 
         if ($validator->fails()) {
-            return redirect('admin/admin')
+            return redirect('admin/users')
                 ->withErrors($validator)
                 ->withInput();
         }
 
         $users = Users::find($id);
-
         $users->nickname = $input['nickname'];
         $re = $users->save();
         if($re){

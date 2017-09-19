@@ -42,13 +42,16 @@
                         </div>
 
 
+
                         <form action="{{url('admin/users')}}" method="get">
                             <div class="row">
-                                <div class="col-md-offset-8 col-md-4">
+                                <div class="col-md-offset-7 col-md-5">
                                     <div class="input-group input-group-sm">
                                         <input name="keywords" type="text" value="{{$input}}" class="form-control">
+
                                     <span class="input-group-btn">
                                       <button type="submit" class="btn btn-info btn-flat">搜索</button>
+                                      <button type="submit" class="btn btn-info btn-flat" onclick="history.go(-1)"><a href="{{url('admin/users')}}">返回</a></button>
                                     </span>
                                     </div>
                                 </div>
@@ -91,27 +94,16 @@
                                     </tr>
                                 @endforeach
                                 </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>姓名</th>
-                                    <th>性别</th>
-                                    <th>头像</th>
-                                    <th>生日</th>
-                                    <th>邮箱</th>
-                                    <th>最后修改时间</th>
-                                    <th>注册时间</th>
-                                    <th>操作</th>
-                                </tr>
-                                </tfoot>
+
                             </table>
+                            <div>
+                                {!! $users->appends(['keywords'=>$input])->links() !!}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
-                {!! $users->appends(['keywords'=>$input])->render() !!}
-            </div>
+
         </section>
     </div>
 
