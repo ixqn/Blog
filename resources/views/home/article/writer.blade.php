@@ -163,7 +163,7 @@
                 <select id="category_id" name="category_id" lay-filter="fenlei">
                     <option value="">请选择分类</option>
                     @foreach($cates as $item)
-                    <option id="f{{ $item->cate_id }}" value="{{ $item->cate_id }}">{{ $item->cate_name }}</option>
+                    <option id="f{{ $item->cate_id }}" value="{{ $item->cate_id }}">{{ $item->cate_names }}</option>
                     @endforeach
                 </select>
             </div>
