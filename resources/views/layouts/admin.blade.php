@@ -376,22 +376,15 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('admin/users')}}"><i class="fa fa-circle-o"></i>用户列表</a></li>
-
                     </ul>
-<<<<<<< HEAD
                 </li>
-
-=======
-
-                <li>
-
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-pie-chart"></i>
                         <span>文章管理</span>
                         <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{ url('/admin/article') }}"><i class="fa fa-anchor"></i>文章列表</a></li>
@@ -402,8 +395,8 @@
                         <i class="fa fa-pie-chart"></i>
                         <span>分类管理</span>
                         <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{ url('/admin/category/create') }}"><i class="fa fa-anchor"></i> 分类添加</a></li>
@@ -417,8 +410,8 @@
                         <i class="fa fa-pie-chart"></i>
                         <span>举报管理</span>
                         <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{ url('/admin/inf/article') }}"><i class="fa fa-anchor"></i>举报文章</a></li>
@@ -426,14 +419,15 @@
 
                     </ul>
                 </li>
+                <li>
                     <a href="pages/widgets.html">
                         <i class="fa fa-th"></i> <span>Widgets</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
+                        <span class="pull-right-container">
+                          <small class="label pull-right bg-green">new</small>
+                        </span>
                     </a>
                 </li>
->>>>>>> master
+
                 <li class="treeview">
                     <a href="#">
                                     <i class="fa fa-pie-chart"></i>

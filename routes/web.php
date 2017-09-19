@@ -46,37 +46,9 @@ Route::post('/is_codeRight', 'Home\verifyController@is_codeRight');
 // signController的测试路由
 // Route::get('/test', 'Home\signController@test');
 // 验证邮箱是否存在或激活
-<<<<<<< HEAD
+
 // Route::get('/is_emailActive', 'home\verifyController@is_emailActive');
 Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
-// Route::get('/is_emailActive', 'Home\verifyController@is_emailActive');
-Route::post('/is_emailActive', 'Home\verifyController@is_emailActive');
->>>>>>> master
-
-
-
-
-
-
-
-
 
 // hy
 
@@ -87,11 +59,7 @@ Route::post('/is_emailActive', 'Home\verifyController@is_emailActive');
 
 
 //文章收藏
-<<<<<<< HEAD
-=======
 
-
->>>>>>> master
 Route::get('home/collect' , 'Home\CollectController@collect');
 Route::get('home/collect/insert/{id}' , 'Home\CollectController@insert');
 Route::get('home/collect/delete/{id}' , 'Home\CollectController@delete');
@@ -130,9 +98,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'Login'],func
     Route::resource('admin','AdminController');
     Route::resource('users','UsersController');
 
-<<<<<<< HEAD
-
-
 // zhangyu
 //文章列表
     Route::get('article','ArticleController@index');
@@ -141,15 +106,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'Login'],func
 //显示文章
     Route::post('article/show/{id}','ArticleController@show');
 //删除文章
-=======
-    //zhangyu
-    Route::get('article','ArticleController@index');
-//文章内容单页
-    Route::get('article/cont/{id}','ArticleController@cont');
-//状态显示文章(删除)
-    Route::post('article/show/{id}','ArticleController@show');
-
->>>>>>> master
 
 //分类管理模块
     Route::resource('category','CategoryController');
@@ -165,10 +121,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'Login'],func
     Route::get('inf/comment','InfController@show');
     Route::post('inf/discom/{id}','InfController@discom');
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 });
 
 
