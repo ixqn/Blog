@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Article;
 use App\Http\Model\Cate;
+use App\Http\Model\Users_login;
 
 class ArticleController extends Controller
 {
@@ -20,7 +21,7 @@ class ArticleController extends Controller
 
         // 输出页面.
         $title = '写文章';
-        return view('Home.article.writer', compact('cates','title','data'));
+        return view('home.article.writer', compact('cates','title','data'));
     }
 
     // 执行保存.
@@ -40,6 +41,9 @@ class ArticleController extends Controller
 
         // 获取提交数据.
         $data = $request->all();
+
+        $data['user_id'] = session('user')['user_id'];
+        $data['article_author'] = Users_login::find($data['user_id'])->userInfo->nickname;
 
         // 执行添加.
         $res = Article::create($data);
@@ -104,25 +108,33 @@ class ArticleController extends Controller
     public function print($id)
     {
         $find = Article::find($id);
-        if($find -> article_status == 1){
-            $res = $find -> update(['article_status' => '2']);
-            if($res){
-                $data = [
-                    'state'=>0,
-                    'msg'=>'发布成功,快去个人中心看看吧'
-                ];
+        // 判断是否为公开.
+        if($find ->article_open == 2 ){
+            $data = [
+                'state'=>4,
+                'msg'=>'文章未公开,不能发布,请修改是否公开.'
+            ];
+        }else{
+            if($find -> article_status == 1){
+                $res = $find -> update(['article_status' => '2']);
+                if($res){
+                    $data = [
+                        'state'=>0,
+                        'msg'=>'发布成功,快去个人中心看看吧'
+                    ];
+                }else{
+                    $data = [
+                        'state'=>1,
+                        'msg'=>'发布异常'
+                    ];
+                }
             }else{
                 $data = [
-                    'state'=>1,
-                    'msg'=>'发布异常'
+                    'state'=>3,
+                    'msg'=>'文章已经发布过了,快去个人中心看看吧'
                 ];
-            }
-        }else{
-            $data = [
-                'state'=>3,
-                'msg'=>'文章已经发布过了,快去个人中心看看吧'
-            ];
-        };
+            };
+        }
         return $data;
     }
 

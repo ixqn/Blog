@@ -226,8 +226,6 @@
                 type:'POST',
                 data:{
                     category_id:category_id,
-                    user_id:1,
-                    article_author:'李四',
                     article_name:article_name,
                     article_cont:article_cont,
                     article_open:article_open

@@ -12,7 +12,7 @@ class UploadController extends Controller
     // 文件上传.
     public function upload(Request $request)
     {
-        $d ='uploads\\articles\\'.date('Ymd');
+        $d ='uploads/articles/'.date('Ymd');
         if (!is_dir($d))
         {
             mkdir($d); // 如果不存在则创建
@@ -35,7 +35,7 @@ class UploadController extends Controller
                 'code' => 0,
                 'msg' => '上传成功！',
                 'data' => array(
-                    'src'=>$src,
+                    'src'=>asset($src),
                     'title'=>$info
                 )
             );
