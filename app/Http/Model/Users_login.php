@@ -8,6 +8,6 @@ class Users_login extends Model
 {
     // 用户登录表
     protected $table = 'users_login';
-    // public $primaryKey = 'id';
+    public $primaryKey = 'user_id';
     protected $fillable = ['tel', 'password','status', 'last_login'];
 }
