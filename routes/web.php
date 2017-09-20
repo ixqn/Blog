@@ -43,7 +43,7 @@ Route::post('/resetPasswordByEmail', 'Home\resetPasswordController@resetPassword
 Route::get('/password/{key}/{value}','Home\resetPasswordController@doRestpasswordByEmailView');
 Route::post('/doRestpasswordByEmail','Home\resetPasswordController@doRestpasswordByEmail');
 // 测试
-Route::get('/test','Home\resetPasswordController@test');
+// Route::get('/test','Home\resetPasswordController@test');
 
 
 // 测试
@@ -63,6 +63,16 @@ Route::post('/is_codeRight', 'Home\verifyController@is_codeRight');
 // signController的测试路由
 // Route::get('/test', 'Home\signController@test');
 // 验证邮箱是否存在或激活
+
+// Route::get('/is_emailActive', 'Home\verifyController@is_emailActive');
+Route::post('/is_emailActive', 'Home\verifyController@is_emailActive');
+
+
+
+// 个人资料
+Route::get('/settings/profile', 'Home\userSettingController@index');
+
+
 
 // Route::get('/is_emailActive', 'home\verifyController@is_emailActive');
 Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
