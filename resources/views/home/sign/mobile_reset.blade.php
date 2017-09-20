@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('/bootstrap/css/bootstrap.min.css') }}">
     <title>Document</title>
 </head>
 <body>
@@ -15,13 +15,13 @@
 
             <ul class="nav nav-tabs">
                 <li><a href="{{url('/sign_in')}}">登录</a></li>
-                <li class="active"><a href="{{url('/sign_up')}}">注册</a></li>
-                <li><a href="{{url('/mobile_reset')}}">用手机重置密码</a></li>
+                <li><a href="{{url('/sign_up')}}">注册</a></li>
+                <li class="active"><a href="{{url('/mobile_reset')}}">用手机重置密码</a></li>
                 <li><a href="{{url('/email_reset')}}">用邮箱重置密码</a></li>
             </ul>
 
             <p>
-                <form action="/doSignUp" method="POST" class="form-horizontal" role="form">
+                <form action="/resetPasswordByTel" method="POST" class="form-horizontal" role="form">
                     {{ csrf_field() }}
 
 
@@ -120,8 +120,9 @@
     </div>
 
 </div>
-<script src="jquery/jquery.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="{{ asset('/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}"></script>
+
 <script>
 
 
@@ -195,7 +196,7 @@ function tel_func(){
             data:{tel:tel},
             dataType:"json",
             async:false,
-            success:function(is_telReg){ tel_flag = !is_telReg; } // 未注册的手机号才可以注册
+            success:function(is_telReg){ tel_flag = is_telReg; } // 只有注册过的手机号才可找回密码
         });
     }
 }
@@ -211,6 +212,8 @@ var send_tel_code_status = false; // 发送验证码状态
 // var hits = 0; // 点击次数
 var hadClick = false
 
+
+
 $('#send_tel_code').on({
     click:function(event){
         event.preventDefault();
@@ -218,7 +221,7 @@ $('#send_tel_code').on({
         if(tel_flag){
             hadClick = true;
             if(canClick){
-                // send_tel_code();
+                send_tel_code(); // 发送手机验证码
                 timeCount();
             }
         }
@@ -226,11 +229,11 @@ $('#send_tel_code').on({
 });
 
 
-
+// 发送手机验证码
 function send_tel_code(){
     if(!send_tel_code_status){
         $.ajax({
-            url:"/sendRegCode", // 注册时,发送的验证码
+            url:"/sendResetPasswordCode", // 找回密码时,发送的验证码
             type:"POST",
             data:{"tel":tel},
             dataType:"json",
@@ -280,32 +283,9 @@ function timeCount(){
 
 
 
-// window.onload=function(){
-//    var send=document.getElementById('send_tel_code');
-//        times=60;
-//        timer=null;
-//    send_tel_code.onclick=function(){
-
-//      // 计时开始 
-//         timer=setInterval(function(){
-//             times--;
-//             if(times<=0){
-//                 send_tel_code.value='发送验证码';
-//                 clearInterval(timer);
-//                 times=60;
-//                 send_tel_code.disabled=false;    //是否可点击
-//             }else{
-//                 send_tel_code.value=times+'秒后重试';
-//                 send_tel_code.disabled=true;
-//             }
-//             console.log(times);
-//         },1000);
-//    } 
-// }
 
 
-
-// ----------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------
 
 
 
@@ -328,7 +308,7 @@ $('#code').on({
 });
 
 
-// 判断验证吗是否正确
+// 判断验证码是否正确
 function code_func(){
     var code = $('#code').val();
     $.ajax({
@@ -417,7 +397,7 @@ function password_r_func()
 
 var tele_error = $('<li>号码有误或已注册</li>');
 var password_error = $('<li>密码不符合要求</li>');
-var password_r_Error = $('<li>密码不一致</li>');
+var password_r_error = $('<li>密码不一致</li>');
 var code_error = $('<li>验证码有误</li>');
 
 function errorMsg()
@@ -443,7 +423,7 @@ function errorMsg()
     if(password_r_hasGo){
         if(!password_r_cur){
             if(!password_r_flag){
-                alert.append(code_error);
+                alert.append(password_r_error);
             }
         }
     }
@@ -509,7 +489,7 @@ function code_css(){
 // 提交按钮的样式
 function submit_css()
 {
-    var status
+    var status = tel_flag && code_flag && password_flag && password_r_flag
     if(status){
         $('#submit').removeClass('disabled').attr('type','submit');
     } else {

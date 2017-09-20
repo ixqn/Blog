@@ -28,7 +28,9 @@ class signController extends Controller
     public function signOut(Request $request)
     {
         //销毁session
+        $request->session()->forget('user');
         $request->session()->flush();
+
         // 返回首页
         return redirect('/');
     }
@@ -186,10 +188,6 @@ class signController extends Controller
         } else {
             return back()->with('errors','添加失败'); // 注册失败返回提示信息
         }
-
-
-
-
     }
 
 

@@ -21,14 +21,30 @@ Route::get('/', function () {
 
 
 // xqn
+// 注册页面
 Route::get('/sign_in', 'Home\signController@signIn');
+// 登录页面
 Route::get('/sign_up', 'Home\signController@signUp');
 // 通过手机找回密码
 Route::get('/mobile_reset', 'Home\signController@mobile_reset');
 // 通过邮箱找回密码
 Route::get('/email_reset', 'Home\signController@email_reset');
+
 Route::post('/doSignIn', 'Home\signController@doSignIn');
 Route::post('/doSignUp', 'Home\signController@doSignUp');
+
+Route::post('/resetPasswordByTel', 'Home\resetPasswordController@resetPasswordByTel');
+Route::post('/resetPasswordByEmail', 'Home\resetPasswordController@resetPasswordByEmail');
+Route::get('/test', 'Home\resetPasswordController@test');
+// 
+
+// 点击邮件链接修改密码的页码
+Route::get('/password/{key}/{value}','Home\resetPasswordController@doRestpasswordByEmailView');
+Route::post('/doRestpasswordByEmail','Home\resetPasswordController@doRestpasswordByEmail');
+// 测试
+Route::get('/test','Home\resetPasswordController@test');
+
+
 // 测试
 // Route::get('/doSignUp', 'Home\signController@doSignUp');
 // 获取图片验证码
@@ -38,7 +54,7 @@ Route::post('/sendRegCode', 'Home\verifyController@sendRegCode');
 // 重置密码,发送手机验证码
 Route::post('/sendResetPasswordCode', 'Home\verifyController@sendResetPasswordCode');
 // 验证手机是否已经注册过
-Route::get('/is_telReg', 'Home\verifyController@is_telReg');
+// Route::get('/is_telReg', 'Home\verifyController@is_telReg');
 // Route::get('/test', 'Home\verifyController@test');
 Route::post('/is_telReg', 'Home\verifyController@is_telReg');
 // 查询验证码(图片和手机验证码)是否正确

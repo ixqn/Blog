@@ -38,30 +38,31 @@ class IndexController extends Controller
     // 显示主页
     public function index()
     {
-        // 文章列表.
-        $articles = Article::orderby('article_at', 'desc')->paginate(5);
-
+        // 文章列表,判断是否发布.
+        $articles = Article::orderby('article_at', 'desc')->where('article_status', '2')->paginate(5);
         // 获取第一张图片作为封面.
         $ptn = "/.*<img[^>]*src[=\s\"\']+([^\"\']*)[\"\'].*/";
         foreach($articles as $k => $v) {
-            foreach($v as $m => $n){
                 $cont = $v['article_cont'];
-                if(strstr($cont, 'uploads\articles')){
+            foreach($v as $m => $n){
+                if(strstr($cont, 'uploads/articles')){
                     $articles[$k]['article_img'] = preg_replace ( $ptn, "$1", $cont );
                 }else{
                     $articles[$k]['article_img'] = 'images/home/nopic.png';
                 }
             }
-            // 转换时间
+            // 转换时间.
             $articles[$k]['date'] = $this->formatTime(strtotime($v['article_at']));
-            // 设置默认封面.
+            // 去除html标签.
             $articles[$k]['article_cont'] = strip_tags($v['article_cont']);
             // 截取前50字符.
             $articles[$k]['article_str'] = mb_substr($v['article_cont'], 0, 100, 'utf-8').'...';
+            // 获取分类名称.
+            $articles[$k]['article_cate'] = Article::find($v['article_id'])->Cate->cate_name;
         }
 
         $title = '简单你的创作';
-        return view('Home.index',compact('title', 'articles'));
+        return view('home.index',compact('title', 'articles'));
     }
 
 }
