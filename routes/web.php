@@ -13,10 +13,11 @@
 
 
 
-//// 主页.
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+// 主页.
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 
 
 
@@ -25,6 +26,7 @@
 Route::get('/sign_in', 'Home\signController@signIn');
 // 登录页面
 Route::get('/sign_up', 'Home\signController@signUp');
+Route::get('/sign_out', 'Home\signController@signOut');
 // 通过手机找回密码
 Route::get('/mobile_reset', 'Home\signController@mobile_reset');
 // 通过邮箱找回密码
@@ -35,7 +37,7 @@ Route::post('/doSignUp', 'Home\signController@doSignUp');
 
 Route::post('/resetPasswordByTel', 'Home\resetPasswordController@resetPasswordByTel');
 Route::post('/resetPasswordByEmail', 'Home\resetPasswordController@resetPasswordByEmail');
-Route::get('/test', 'Home\resetPasswordController@test');
+
 // 
 
 // 点击邮件链接修改密码的页码
