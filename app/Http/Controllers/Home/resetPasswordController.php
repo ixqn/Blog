@@ -208,10 +208,12 @@ class resetPasswordController extends Controller
         // dd($user->password);
         $flag = $user->save();
         // dd($user->password);
+        
         if($flag){
+            Redis::del($key); // 删除对应的键值对
             return view('home.sign.okResetPassword')->with('errors','修改成功,去首页登录看看吧');
         } else {
-            return view('home.sign.noResetPassword')->with('errors','链接已经失效,请重新操作');
+            return view('home.sign.noResetPassword')->with('errors','修改失败,请重新操作');
         }
         
 
@@ -220,7 +222,16 @@ class resetPasswordController extends Controller
 
     public function test()
     {
-
+        $key = 'xqn@xqn.me';
+        $value = Hash::make($key);
+        $value = str_replace('/', '', $value); // 为了路由正确替换掉斜杠
+        Redis::setex($key, '3600', $value); // 3600秒(1小时)有效
+        $value = Redis::get($key);
+        echo $value;
+        echo '<br>';
+        $num = Redis::del($key);
+        echo $num;
+        // return $value;
     }
 
 }
