@@ -43,7 +43,7 @@ Route::post('/resetPasswordByEmail', 'Home\resetPasswordController@resetPassword
 Route::get('/password/{key}/{value}','Home\resetPasswordController@doRestpasswordByEmailView');
 Route::post('/doRestpasswordByEmail','Home\resetPasswordController@doRestpasswordByEmail');
 // 测试
-Route::get('/test','Home\resetPasswordController@test');
+// Route::get('/test','Home\resetPasswordController@test');
 
 
 // 测试
@@ -68,6 +68,8 @@ Route::post('/is_emailActive', 'Home\verifyController@is_emailActive');
 
 
 
+// 个人资料
+Route::get('/settings/profile', 'Home\userSettingController@index');
 
 
 
