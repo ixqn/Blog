@@ -90,8 +90,7 @@ class UsersController extends Controller
         $user->status = $input['status'];
         $res =$user->save();
         if($res){
-            dd(123);
-            //return redirect('admin/users')->with('errors','修改成功');
+            return redirect('admin/users')->with('errors','修改成功');
         }else{
             return back()->with('errors','修改失败');
         }
