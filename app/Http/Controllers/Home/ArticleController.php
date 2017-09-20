@@ -14,6 +14,15 @@ class ArticleController extends Controller
         $cates = (new Cate)->tree();
         // 获取文章.
         $data = Article::orderby('article_at', 'desc')->paginate(5);
+
+
+        foreach($data as $k => $v){
+            // 计算字数.
+            $cont = strip_tags($v['article_cont']);
+            $data[$k]['length'] = mb_strlen($cont,'utf-8');
+        }
+
+
         // 输出页面.
         $title = '写文章';
         return view('home.article.writer', compact('cates','title','data'));
