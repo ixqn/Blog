@@ -144,6 +144,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'Login'],func
     Route::get('inf/comment','InfController@show');
     Route::post('inf/discom/{id}','InfController@discom');
 
+
+
 });
 
 
