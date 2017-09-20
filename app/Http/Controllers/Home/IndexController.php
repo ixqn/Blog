@@ -51,6 +51,8 @@ class IndexController extends Controller
                     $articles[$k]['article_img'] = 'images/home/nopic.png';
                 }
             }
+            // 用户头像.
+            $articles[$k]['pic'] = Article::find($v['article_id'])->userInfo['pic'];
             // 转换时间.
             $articles[$k]['date'] = $this->formatTime(strtotime($v['article_at']));
             // 去除html标签.
@@ -58,9 +60,8 @@ class IndexController extends Controller
             // 截取前50字符.
             $articles[$k]['article_str'] = mb_substr($v['article_cont'], 0, 100, 'utf-8').'...';
             // 获取分类名称.
-            $articles[$k]['article_cate'] = Article::find($v['article_id'])->Cate->cate_name;
+            $articles[$k]['article_cate'] = Article::find($v['article_id'])->Cate['cate_name'];
         }
-
         $title = '简单你的创作';
         return view('home.index',compact('title', 'articles'));
     }

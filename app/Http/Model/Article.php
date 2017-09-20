@@ -37,7 +37,7 @@ class Article extends Model
     }
 
     // 关联用户信息表.
-    public function UserInfo()
+    public function userInfo()
     {
         return $this->belongsTo('App\Http\Model\Users_info', 'user_id', 'user_id');
     }

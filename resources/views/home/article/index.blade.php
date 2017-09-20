@@ -10,7 +10,7 @@
                 <!-- 作者区域 -->
                 <div class="author">
                     <a class="avatar" href="{{url('u')}}/{{$article['user_id']}}">
-                        <img src="//upload.jianshu.io/users/upload_avatars/3459828/b8f6b400-bc84-4f58-816f-769329e1f1a7.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="96">
+                        <img src="{{ asset($article['user']['pic']) }}" alt="96">
                     </a>          <div class="info">
                         {{--<span class="tag">签约作者</span>--}}
                         <span class="name"><a href="{{url('u')}}/{{$article['user_id']}}">{{ $article['article_author'] }}</a></span>
@@ -53,13 +53,13 @@
             <!-- 文章底部作者信息 -->
             <div class="follow-detail">
                 <div class="info">
-                    <a class="avatar" href="/u/21a7a893f4b7">
-                        <img src="//upload.jianshu.io/users/upload_avatars/3459828/b8f6b400-bc84-4f58-816f-769329e1f1a7.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="96">
+                    <a class="avatar" href="{{url('u')}}/{{$article['user_id']}}">
+                        <img src="{{ asset($article['user']['pic']) }}" alt="96">
                     </a>          <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
-                    <a class="title" href="/u/21a7a893f4b7">有备而来的路人甲</a>
-                    <i class="iconfont ic-man"></i>
-                    <p>写了 216508 字，被 42301 人关注</p></div>
-                <div class="signature">用户描述</div>
+                    <a class="title" href="{{url('u')}}/{{$article['user_id']}}">{{ $article['article_author'] }}</a>
+                    <i class="iconfont @if ($article['user']['sex'] == 'm') ic-man @elseif($article['user']['sex'] == 'w') ic-woman @else @endif "></i>
+                    <p>写了 {{ $article['number'] }} 篇文章，被 42301 人关注</p></div>
+                <div class="signature">{{ $article['user']['desc'] }}</div>
             </div>
 
             <div class="meta-bottom">

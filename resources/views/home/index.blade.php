@@ -59,7 +59,7 @@
                             <div class="content">
                                 <div class="author">
                                     <a class="avatar" target="_blank" href="{{url('u')}}/{{$v->user_id}}">
-                                        <img src="//upload.jianshu.io/users/upload_avatars/2929044/aa13193f2600.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64" alt="64">
+                                        <img src="{{ asset($v->pic) }}" alt="64">
                                     </a>      <div class="name">
                                         <a class="blue-link" target="_blank" href="{{url('u')}}/{{$v->user_id}}">{{ $v->article_author }}</a>
                                         <span class="time" data-shared-at="{{ $v->article_at }}">{{ $v->date }}</span>
