@@ -16,6 +16,9 @@ class LoginController extends Controller
     public function login()
     {
         return view('admin/login');
+
+//        $a = encrypt('111111');
+//        echo $a;
     }
     //验证码
     public function captcha()
