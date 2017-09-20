@@ -51,13 +51,13 @@
                                 <label for="exampleInputEmail1">状态</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="status" id="optionsRadios1" value="0"  @if(old('status') == '正常') checked="checked" @endif >正常
+                                        <input type="radio" name="status" id="optionsRadios1" value="0"  @if($users->status == '0') checked="checked" @endif >正常
                                     </label>
                                     <label>
-                                        <input type="radio" name="status" id="optionsRadios2" value="1"  @if(old('status') == '限制登录') checked="checked" @endif >限制登录
+                                        <input type="radio" name="status" id="optionsRadios2" value="1" @if($users->status == '1') checked="checked" @endif >限制登录
                                     </label>
                                     <label>
-                                        <input type="radio" name="status" id="optionsRadios2" value="2"  @if(old('status') == '帐号被封,不可登录') checked="checked" @endif >帐号被封,不可登录
+                                        <input type="radio" name="status" id="optionsRadios2" value="2" @if($users->status == '2') checked="checked" @endif >帐号被封,不可登录
                                     </label>
                                 </div>
                             </div>

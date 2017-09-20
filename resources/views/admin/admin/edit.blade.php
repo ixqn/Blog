@@ -57,10 +57,10 @@
                                 <label for="exampleInputEmail1">状态</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="status" id="optionsRadios1" value="超级管理员"  >超级管理员
+                                        <input type="radio" name="status" id="optionsRadios1" @if($admin->status == '超级管理员') checked="checked" @endif value="超级管理员"  >超级管理员
                                     </label>
                                     <label>
-                                        <input type="radio" name="status" id="optionsRadios2" value="普通管理员"   >普通管理员
+                                        <input type="radio" name="status" id="optionsRadios2"  @if($admin->status == '普通管理员') checked="checked" @endif value="普通管理员"   >普通管理员
                                     </label>
                                 </div>
                             </div>

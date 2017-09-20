@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Model\Users_info;
 
+
 class UsersController extends Controller
 {
     /**
@@ -69,7 +70,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $users = Users::find($id);
+
+        $users = Users_login::find($id);
+//       dd($users);
         return view('admin/users/edit',compact('users'));
     }
 
@@ -86,8 +89,9 @@ class UsersController extends Controller
         $input = $request->except('_token','_method');
 
         $user = Users_login::where('user_id',$id)->first();
-//        dd($user);
+
         $user->status = $input['status'];
+
         $res =$user->save();
         if($res){
             return redirect('admin/users')->with('errors','修改成功');

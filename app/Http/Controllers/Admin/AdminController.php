@@ -106,6 +106,7 @@ class AdminController extends Controller
     {
         //
         $admin = Admin::find($id);
+//        dd($admin);
         return view('admin/admin/edit',compact('admin'));
     }
 
@@ -139,8 +140,11 @@ class AdminController extends Controller
         }
 
         $admin = Admin::find($id);
+
         $admin->nickname = $input['nickname'];
         $admin->status = $input['status'];
+
+
         $re = $admin->save();
         if($re){
             return redirect('admin/admin')->with('errors','修改成功');
