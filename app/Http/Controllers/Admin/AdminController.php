@@ -120,6 +120,7 @@ class AdminController extends Controller
     {
 
         $input = $request->except('_token','_method');
+
         $rule = [
             'nickname' => 'required|min:5|max:18',
         ];
@@ -139,6 +140,7 @@ class AdminController extends Controller
 
         $admin = Admin::find($id);
         $admin->nickname = $input['nickname'];
+        $admin->status = $input['status'];
         $re = $admin->save();
         if($re){
             return redirect('admin/admin')->with('errors','修改成功');

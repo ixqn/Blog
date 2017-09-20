@@ -22,7 +22,7 @@
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">请输入要修改用户信息</h3>
+                            <h3 class="box-title">修改用户状态信息</h3>
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
@@ -48,32 +48,20 @@
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="put">
                             <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">用户名</label>
-                                    <input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">
+                                <label for="exampleInputEmail1">状态</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="status" id="optionsRadios1" value="0"  @if(old('status') == '正常') checked="checked" @endif >正常
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="status" id="optionsRadios2" value="1"  @if(old('status') == '限制登录') checked="checked" @endif >限制登录
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="status" id="optionsRadios2" value="2"  @if(old('status') == '帐号被封,不可登录') checked="checked" @endif >帐号被封,不可登录
+                                    </label>
                                 </div>
                             </div>
 
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">性别</label>
-                                    <input type="text" name="sex" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">
-                                </div>
-                            </div>
-
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">邮箱</label>
-                                    <input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">
-                                </div>
-                            </div>
-
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">头像</label>
-                                    <input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$users->nickname}}">
-                                </div>
-                            </div>
 
                             <!-- /.box-body -->
 

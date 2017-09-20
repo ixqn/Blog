@@ -80,7 +80,7 @@
                                         <td>{{$v->nickname}}</td>
                                         <td>{{$v->sex}}</td>
                                         <td>
-                                            <img src="{{'/uploads/articles/20170910/171147.jpg'}}" width="30px" />
+                                            <img src="/uploads/users/{{$v->pic}}" width="30px" />
                                         </td>
                                         <td>{{$v->birthday}}</td>
                                         <td>

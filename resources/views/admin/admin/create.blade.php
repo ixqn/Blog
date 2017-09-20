@@ -63,6 +63,18 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="exampleInputEmail1">状态</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="status" id="optionsRadios1" value="超级管理员"  @if(old('status') == '超级管理员') checked="checked" @endif >超级管理员
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="status" id="optionsRadios2" value="普通管理员"  @if(old('status') == '普通管理员') checked="checked" @endif >普通管理员
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">性别</label>
                                 <div class="radio">
                                     <label>

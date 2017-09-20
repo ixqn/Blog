@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Admin;
+use App\Http\Model\Users_login;
 use App\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Model\Users_info;
 
 class UsersController extends Controller
 {
@@ -82,31 +85,17 @@ class UsersController extends Controller
 
         $input = $request->except('_token','_method');
 
-        $rule = [
-            'nickname' => 'required|min:5|max:18',
-        ];
-        $msg = [
-            'nickname.required' => '请输入您的用户名',
-            'nickname.min' => '用户名不能小于5位',
-            'nickname.max' => '用户名不能大于18位',
-        ];
-
-        $validator = Validator::make($input,$rule,$msg);
-
-        if ($validator->fails()) {
-            return redirect('admin/users')
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $users = Users::find($id);
-        $users->nickname = $input['nickname'];
-        $re = $users->save();
-        if($re){
-            return redirect('admin/users')->with('errors','修改成功');
+        $user = Users_login::where('user_id',$id)->first();
+//        dd($user);
+        $user->status = $input['status'];
+        $res =$user->save();
+        if($res){
+            dd(123);
+            //return redirect('admin/users')->with('errors','修改成功');
         }else{
             return back()->with('errors','修改失败');
         }
+
     }
 
     /**

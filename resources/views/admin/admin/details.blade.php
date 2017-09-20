@@ -59,6 +59,7 @@
                         <tr>
                             <th>ID</th>
                             <th>姓名</th>
+                            <th>状态</th>
                             <th>性别</th>
                             <th>头像</th>
                             <th>最后登录时间</th>
@@ -68,6 +69,7 @@
                             <tr>
                                 <td>{{$v->admin_id}}</td>
                                 <td>{{$v->nickname}}</td>
+                                <td>{{$v->status}}</td>
                                 <td>{{$v->sex}}</td>
 
                                 {{--<td>{{$v->sex}}</td>--}}
