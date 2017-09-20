@@ -183,11 +183,35 @@
     </div>
 </nav>
 
+<div class="container subscription">
+    <div class="row"><div class="aside">
+            <a data-toggle="dropdown" class="change-type">全部关注123<i class="iconfont ic-filter"></i></a>
+            <ul class="dropdown-menu arrow-top"><li><a>全部关注</a></ul>
+            <a href="#/recommendation" class="add-people"><i class="iconfont ic-addpeople"></i><span>添加关注</span></a>
+            <ul class="js-subscription-list">
+                <li class=""><div class="avatar-collection"></div>
+                    <div class="name">
+                        @foreach($data as $k=>$v)
+                            <td>{{ $v->id }}</td>
+                            {{--<td><a href="javascript:;" onclick="wzh({{ $v->attension_user_id }})">{{ $v->nickname }}</a></br></td>--}}
+                            <td><a href="{{ url('/home/attention/index') }}/{{ $v->attension_user_id }}">{{ $v->nickname }}</a></br></td>
+
+                            <td>{{ $v->email }}</td></br>
+                            <a href="javascript:;" onclick="delHome({{$v->attension_user_id}})">取消关注</a></br></br>
+
+                        @endforeach
+                    </div> <!---->
+                </li>
+                <li class=""></li>
+            </ul> <!----> <!---->
+        </div>
+        <div class="col-xs-16 col-xs-offset-8 main"><div><ul class="note-list">
+
 @yield('content')
 
 
 <!--返回顶部代码-->
-
+    <!----> <a class="load-more">阅读更多</a></ul> <!----></div></div></div></div>
 <footer class="container">
     <div class="row">
         <div class="col-xs-17 main">
@@ -207,12 +231,14 @@
 
 <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('layui/layui.all.js') }}"></script>
+<link rel="stylesheet" media="all" href="{{ asset('./css/web-1520e0147b6838647211.css') }}">
+<link rel="stylesheet" media="all" href="{{ asset('./css/entry-b8b6c8d0b3aed7579000.css') }}">
 
 <script>
     layui.use(['util','layer'], function(){
         var util = layui.util,
             layer = layui.layer
-            $ = layui.jquery;
+        $ = layui.jquery;
 
         // 导航栏鼠标移入移除事件.
         // 消息.
@@ -256,6 +282,30 @@
             }
         });
     });
+
+    //取消关注
+    function delHome(attension_user_id)
+    {
+        layer.confirm('是否确定取消关注?',{
+            btn:['对对,我就是要取消','不行,谁告诉你我要取消的了?']
+        },function() {
+            $.post('{{url('/home/attention/delete/')}}/' + attension_user_id, {
+                '_token': '{{csrf_token()}}'
+            }, function (data) {
+                if (data.state == 0) {
+                    layer.msg(data.msg, {icon: 6});
+                    location.href = location.href;
+                } else {
+                    layer.msg(data.msg, {icon: 5});
+                }
+            });
+        },function(){});
+
+    }
+
+
+
+
 </script>
 
 @yield('js')

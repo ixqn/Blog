@@ -63,6 +63,9 @@ Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
 
 
 
+
+
+
 // zhangyu
 //文章列表
 Route::get('admin/article','Admin\ArticleController@index');
@@ -107,22 +110,35 @@ Route::post('admin/inf/discom/{id}','Admin\InfController@discom');
 //});
 
 //文章内容
-Route::get('home/content/{id}' , 'Home\ContentController@content');
+//Route::get('home/content/{id}' , 'Home\ContentController@content');
 
 //文章收藏
-Route::get('home/conllect' , 'Home\ConllectController@conllect');
-Route::get('home/conllect/insert/{id}' , 'Home\ConllectController@insert');
-Route::get('home/conllect/delete/{id}' , 'Home\ConllectController@delete');
+//文章收藏页面
+Route::get('home/collect' , 'Home\collectController@collect');
+//将收藏的文章插入数据库
+Route::get('home/collect/insert/{id}' , 'Home\collectController@insert');
+//取消文章收藏
+Route::get('home/collect/delete/{id}' , 'Home\collectController@delete');
 //Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
 
 
 //关注
+
+//显示关注页面
 Route::get('home/attention' , 'Home\AttentionController@attention');
+//将关注的用户插入数据库
 Route::get('home/attention/insert/{id}' , 'Home\AttentionController@insert');
-Route::get('home/attention/delete/{id}' , 'Home\AttentionController@delete');
+//取消关注用户
+Route::post('home/attention/delete/{id}' , 'Home\AttentionController@delete');
+//查看被关注用户的主页
 Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
+//浏览被关注用户的文章
+Route::post('home/attention/index/{id}' , 'Home\AttentionController@index');
+//Route::get('home/attention/index' , 'Home\AttentionController@index');
+
 
 //站内信息管理
+//显示简信页面
 Route::get('home/messages' , 'Home\MessagesController@messages');
 //Route::get('home/messages', 'Home\MessagesController@delete');
 
@@ -140,13 +156,13 @@ Route::get('admin/captcha','Admin\LoginController@captcha');
 Route::post('admin/dologin','Admin\LoginController@doLogin');
 //中间件
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'Login'],function(){
-    Route::get('index','IndexController@index');
-    Route::get('amend','IndexController@amend');
-    Route::post('doamend','IndexController@doAmend');
-    Route::get('logout','IndexController@logout');
-    //资源
-    Route::resource('admin','AdminController');
-    Route::resource('users','UsersController');
+Route::get('index','IndexController@index');
+Route::get('amend','IndexController@amend');
+Route::post('doamend','IndexController@doAmend');
+Route::get('logout','IndexController@logout');
+//资源
+Route::resource('admin','AdminController');
+Route::resource('users','UsersController');
 
 });
 

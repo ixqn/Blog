@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -27,10 +28,9 @@ class AttentionController extends Controller
             $dat['birthday'] = $birthday;
             $dat['email'] = $email;
 
-//            dd($dat);
-            //        将提取出来的额数据插入数据
 
-            //判断是否重复关注
+
+            //添加关注
             $str = \DB::table('users_attention')->where('attension_user_id', $dat['attension_user_id'])->first();
             if ($str) {
                 die('这个作者你已经关注过了，快去我的关注页面查看把');
@@ -48,46 +48,55 @@ class AttentionController extends Controller
         }
 
 //attention 显示我的关注在页面上
-        public function attention(Request $request)
-        {
-              $data = \DB::table('users_attention')->where('user_id' , 1)->get();
-
-//              $db['user_id'] = $data->attension_user_id;
-//              dd($db);
-            foreach($data as $k=>$v)
+             public function attention(Request $request)
             {
+              $data = \DB::table('users_attention')->where('user_id' , 15)->get();
 
-              $db[$k] =  ($v->attension_user_id);
+//                 $res = 16;
+//                 $wz = \DB::table('article_users')->where('user_id' , $res)->get();
 
+
+
+
+              return view('home.layout1' , ['data'=>$data , 'title'=>'关注用户']);
             }
-//            foreach($db as $k=>$v)
-//            {
-//                dd($v->attension_user_id);
-//
-//            }
 
-            $wz = \DB::table('article_users')->where('user_id' ,  1)->get();
-
-
-//            dd($db);
-
-
-              return view('home.attention' , ['data'=>$data , 'wz'=>$wz]);
-        }
-
-
-
-        public function delete($id)
+ //取消关注
+        public function delete($attension_user_id)
         {
-            $res = \DB::table('users_attention')->where('attension_user_id' , $id)->delete();
-    //        dd($res);
-
-            if($res)
-            {
-                return redirect('/home/attention')->with(['info'=>'删除成功']);
-            }else
-            {
-                return back()->with(['info' => '删除失败']);
+            $res = \DB::table('users_attention')->where('attension_user_id' , $attension_user_id)->delete();
+            if($res){
+                $data = [
+                    'msg'=>'取消关注成功'
+                ];
+            }else{
+                $data = [
+                    'msg'=>'取消关注失败 '
+                ];
             }
+            return $data;
         }
+//   //显示我的关注的人的文章
+       public function index()
+       {
+//           if($src)
+//           {
+//               $attension_user_id = $id;
+
+//               $src = \DB::table('article_users')->where('user_id' , $attension_user_id)->get();
+//           }else{
+               $wz = \DB::table('article_users')->where('user_id' , 16)->get();
+//               dd($wz);
+//           }
+
+//           dd($src);
+//           return $src;
+           return view('home.attention' , ['wz'=>$wz , 'title'=>'关注文章']);
+       }
+
+
+
 }
+
+
+

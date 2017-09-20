@@ -83,7 +83,7 @@
                 <div class="info">
                     <a class="avatar" href="/u/21a7a893f4b7">
                         <img src="//upload.jianshu.io/users/upload_avatars/3459828/b8f6b400-bc84-4f58-816f-769329e1f1a7.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="96">
-                    </a>          <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
+                    </a>          <a class="btn btn-success follow" href="{{ url('/home/attention') }}"><ass="iconfont ic-follow"></i><span>关注</span></a>
                     <a class="title" href="/u/21a7a893f4b7">有备而来的路人甲</a>
                     <i class="iconfont ic-man"></i>
                     <span class="tag">签约作者</span>
