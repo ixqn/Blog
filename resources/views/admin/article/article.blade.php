@@ -39,27 +39,31 @@
         @endif
 
 
-
-        <button type="submit" class="btn btn-default"><a href="{{ url('admin/article') }}">全部</a></button>
         <form action="{{ url('/admin/article') }}" method="get">
             <div class="row">
 
 
-                <div class="col-md-offset-8 col-md-4">
+
+                <div class=" col-md-offset-7  col-md-4">
                     <div class="input-group input-group">
                         <input name="keywords" type="text" class="form-control" value="
 						@if(!empty($request['keywords']))
                         {{ $request['keywords'] }}
                         @endif
                                 ">
+
                         <span class="input-group-btn">
 		                      <button type="submit" class="btn btn-info btn-flat">搜索!</button>
 		                    </span>
+
                     </div>
 
 
                 </div>
+                <div class="col-md-1">
 
+                    <button type="submit" class="btn btn-default"><a href="{{ url('admin/article') }}">全部</a></button>
+                </div>
             </div>
         </form>
 
@@ -134,16 +138,8 @@
                     }else{
                         location.href = location.href;
                         layer.msg(data.msg,{icon:6});
-
-
                     }
-
                 })
-
-
-
-
-
         }
 
 
