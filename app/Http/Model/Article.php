@@ -28,6 +28,18 @@ class Article extends Model
      *
      * @var array
      */
-    protected $fillable = ['category_id', 'user_id', 'article_author', 'article_name', 'article_cont' ,'article_status', 'article_open', 'article_at', 'article_up'];
+    protected $fillable = ['category_id', 'user_id', 'article_author', 'article_name', 'article_cont' ,'article_status', 'article_open', 'article_at', 'article_up', 'article_view'];
+
+    // 关联分类表.
+    public function Cate()
+    {
+        return $this->belongsTo('App\Http\Model\Cate', 'category_id', 'cate_id');
+    }
+
+    // 关联用户信息表.
+    public function UserInfo()
+    {
+        return $this->belongsTo('App\Http\Model\Users_info', 'user_id', 'user_id');
+    }
 
 }

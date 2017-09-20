@@ -171,17 +171,19 @@ class resetPasswordController extends Controller
         return view('home.sign.resetPasswordByEmail', compact('key','value'));
     }
 
+
+
     public function doRestpasswordByEmail(Request $request)
     {
        // 判断是否存在$key
         if(!Redis::exists($key)){
             // 不存在,返回错误页面
-            return view('home.sign.urlError')->with('errors','链接已经失效,请重新操作');
+            return view('home.sign.noResetPassword')->with('errors','链接已经失效,请重新操作');
         }
         // 判断对应的value是否相等
         if(Redis::get($key) != $value){
             // 不相等,返回错误页面
-            return view('home.sign.urlError')->with('errors','链接有误');
+            return view('home.sign.noResetPassword')->with('errors','链接有误');
         }
 
         $input = $request->only(['password','password_r']);
@@ -201,27 +203,24 @@ class resetPasswordController extends Controller
         // 验证规则
         $this->validate($request, $rule, $msg);
 
-        // Users_login::
+        $user = Users_info::where('email','=',$key)->first()->userLogin;
+        $user->password = Hash::make($input['password']);
+        // dd($user->password);
+        $flag = $user->save();
+        // dd($user->password);
+        if($flag){
+            return view('home.sign.okResetPassword')->with('errors','修改成功,去首页登录看看吧');
+        } else {
+            return view('home.sign.noResetPassword')->with('errors','链接已经失效,请重新操作');
+        }
+        
 
     }
 
+
     public function test()
     {
-        $key = 'xqn@xqn.me';
-        $value = Hash::make($key);
-        echo $value,'<br>';
-        $value = str_replace('/', '', $value); // 为了路由正确替换掉斜杠
-        echo $value,'<br>';
-        Redis::setex($key, '3600', $value); // 3600秒(1小时)有效 
-        $flag = Redis::exists($key);
-        echo $flag,'<br>';
-        $value = Redis::get($key);
-        echo $value;
-        die;
 
-       
-        
-        return $value;
     }
 
 }

@@ -36,16 +36,17 @@
         <!-- 左上方 Logo -->
         <a class="logo" href="/"><img src="{{ asset('images/home/logo_home.png') }}" alt="Logo" /></a>
 
+        @if(!session('user'))
         <!-- 右上角 -->
         <!-- 未登录显示登录/注册/写文章 -->
-        <!--<a class="btn write-btn" target="_blank" href="/writer#/">-->
-        <!--<i class="iconfont ic-write"></i>写文章-->
-        <!--</a>-->
-        <!--<a class="btn sign-up" href="/sign_up">注册</a>-->
-        <!--<a class="btn log-in" href="/sign_in">登录</a>-->
-
+        <a class="btn write-btn" target="_blank" href="{{url('/writer/')}}">
+            <i class="iconfont ic-write"></i>写文章
+        </a>
+        <a class="btn sign-up" href="/sign_up">注册</a>
+        <a class="btn log-in" href="/sign_in">登录</a>
+        @else
         <!-- 登录显示写文章 -->
-        <a class="btn write-btn" target="_blank" href="{{url('/writer#/')}}">
+        <a class="btn write-btn" target="_blank" href="{{url('/writer/')}}">
             <i class="iconfont ic-write"></i>写文章
         </a>
         <!-- 如果用户登录，显示下拉菜单 -->
@@ -88,12 +89,13 @@
                     </a>
                 </li>
                 <li>
-                    <a rel="nofollow" data-method="delete" href="/sign_out">
+                    <a rel="nofollow" data-method="delete" href="{{ url('/sign_out') }}">
                         <i class="iconfont ic-navigation-signout"></i><span>退出</span>
                     </a>
                 </li>
             </ul>
         </div>
+        @endif
         <div class="container">
             <div class="navbar-header">
                 <button id="caidan" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu" aria-expanded="true">
@@ -104,12 +106,14 @@
             </div>
             <div class="collapse navbar-collapse" id="menu" aria-expanded="false" style="230px">
                 <ul class="nav navbar-nav">
+                    @if(!session('user'))
                     <!--未登录显示 首页 -->
-                    <!--<li class="active">-->
-                    <!--<a href="/">-->
-                    <!--<span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>-->
-                    <!--</a>-->
-                    <!--</li>-->
+                    <li class="active">
+                        <a href="/">
+                            <span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+                        </a>
+                    </li>
+                    @else
                     <!--登录显示 发现 关注 消息-->
                     <li class="active">
                         <a href="/">
@@ -171,6 +175,7 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
                     <li class="search">
                         <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
                             <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索" class="search-input" />

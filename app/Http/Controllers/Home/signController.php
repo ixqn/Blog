@@ -28,7 +28,9 @@ class signController extends Controller
     public function signOut(Request $request)
     {
         //销毁session
+        $request->session()->forget('user');
         $request->session()->flush();
+
         // 返回首页
         return redirect('/');
     }

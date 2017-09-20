@@ -70,12 +70,12 @@
                                     {{  $v->article_str }}
                                 </p>
                                 <div class="meta">
-                                    <a class="collection-tag" target="_blank" href="{{url('c')}}/{{$v->category_id}}">社会热点</a>
+                                    <a class="collection-tag" target="_blank" href="{{url('c')}}/{{$v->category_id}}">{{ $v->article_cate }}</a>
                                     <a target="_blank" href="{{url('p')}}/{{$v->article_id}}">
-                                        <i class="iconfont ic-list-read"></i> 1003
+                                        <i class="iconfont ic-list-read"></i> {{$v->article_view}}
                                     </a>        <a target="_blank" href="{{url('p')}}/{{$v->article_id}}#comments">
                                         <i class="iconfont ic-list-comments"></i> 21
-                                    </a>      <span><i class="iconfont ic-list-like"></i> 29</span>
+                                    </a>
                                 </div>
                             </div>
                         </li>
