@@ -19,10 +19,10 @@ class userSettingController extends Controller
         // dd($user['user_id']);
         $user_info = Users_info::where('user_id',$user['user_id'])->first();
         // dd($user_info->sex);
-        if($user_info->sex == 'x'){
-            echo 'ddd';
-        }
-        die;
+        // if($user_info->sex == 'x'){
+        //     echo 'ddd';
+        // }
+        // die;
         // dd($info->email);
         return view('home.user.profile', compact('user_info'));
     }

@@ -110,6 +110,7 @@ class signController extends Controller
                 break;
         }
         // 将用户登录信息保存
+        $user = Users_info::where('user_id', $user['user_id'])->get()->toArray();
         session(['user' => $user]);
         return redirect('/');
     }

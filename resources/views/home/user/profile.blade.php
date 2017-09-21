@@ -40,20 +40,20 @@
                             </tr>
                             <tr>
                                 <td>昵称</td> 
-                                <td><input type="text" placeholder="{{$user_info->sex}}"></td>
+                                <td><input type="text" placeholder="{{$user_info->nickname}}"></td>
                             </tr>
                             <tr>
                                 <td>性别</td> 
                                 <td>
-                                    <input type="radio" name="sex" @if($user_info->sex == 'w') echo 'checked'; @endif value="w">女
-                                    <input type="radio" name="sex" @if($user_info->sex == 'm') echo 'checked'; @endif value="m">男
-                                    <input type="radio" name="sex" @if($user_info->sex == 'x') echo 'checked'; @endif value="x">未知
+                                    <input type="radio" name="sex" @if($user_info->sex == 'w') checked @endif value="w">女
+                                    <input type="radio" name="sex" @if($user_info->sex == 'm') checked @endif value="m">男
+                                    <input type="radio" name="sex" @if($user_info->sex == 'x') checked @endif value="x">未知
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>生日</td> 
-                                <td><input type="text" placeholder="{{$user_info->birthday}}"></td>
+                                <td><input type="datetime" placeholder="{{$user_info->birthday}}"></td>
                             </tr>
 
                             <tr>
