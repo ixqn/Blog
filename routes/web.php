@@ -174,6 +174,9 @@ Route::post('/home/article/noprint/{id}', 'Home\ArticleController@noprint');
 // 文章详情.
 Route::get('/p/{id}', 'Home\ArtlistController@index');
 
+// 评论功能.
+Route::post('/comment/new/{id}', 'Home\CommentController@new');
+
 
 
 

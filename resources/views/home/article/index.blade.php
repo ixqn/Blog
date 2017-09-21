@@ -84,87 +84,101 @@
         " data-original-title="" title="">更多分享</a>
                 </div>
             </div>
-            <div id="comment-list" class="comment-list">
-                <div>
-                    <form class="new-comment">
-                        <a class="avatar">
-                            <img src="//upload.jianshu.io/users/upload_avatars/7685793/72f15e83-7f50-45ab-af3a-d031fb4e8934.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114">
-                        </a>
-                        <textarea placeholder="写下你的评论..."></textarea>
-                    </form>
-                </div>
-                <div id="normal-comment-list" class="normal-comment-list">
+            <div>
+                <div id="comment-list" class="comment-list">
+                    {{--判断是否登录--}}
+                    @if(!session('user'))
                     <div>
+                        <form class="new-comment">
+                            <a class="avatar">
+                                <img src="{{ asset('/home/images/avatar_default-78d4d1f68984cd6d4379508dd94b4210.png') }}">
+                            </a>
+                            <div class="sign-container">
+                                <a href="{{ url('/sign_in') }}" class="btn btn-sign">登录</a>
+                                <span>后发表评论</span>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="normal-comment-list" class="normal-comment-list">
                         <div>
-                            <div class="top">
-                                <span>2条评论</span>
-                            </div>
-                        </div>
-                        <div id="comment-15281044" class="comment">
-                            <div><div class="author">
-                                    <a href="/u/a3ea268aeb60" target="_blank" class="avatar">
-                                        <img src="//upload.jianshu.io/users/upload_avatars/4976516/6bd1501b-6cf2-42d8-b1d0-d77086f22f3d.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114">
-                                    </a>
-                                    <div class="info">
-                                        <a href="/u/a3ea268aeb60" target="_blank" class="name">东风冷雪</a>
-                                        <div class="meta">
-                                            <span>2楼 · 2017.09.18 14:29</span>
-                                        </div>
-                                    </div>
+                            <div>
+                                <div class="top">
+                                    <span>评论</span>
+                                    <a class="close-btn" style="display: none;">关闭评论</a>
                                 </div>
-                                <div class="comment-wrap">
-                                    <p>你是不是数据有误🙄？<br>还是竹文写文的为了吸人眼球，或者太年轻，差评的有<br>琅琊榜，人民的名义，大秦帝国，活着。<br>。。。 <br>写文的都是喷子嘛</p>
-                                    <div class="tool-group">
-                                        <a class="">
-                                            <i class="iconfont ic-comment"></i>
-                                            <span>回复</span>
-                                        </a>
-                                        <a class="report">
-                                            <span>举报</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sub-comment-list">
-                                <div id="comment-15281312" class="sub-comment">
-                                    <p>
-                                        <a href="/u/6d0fa98e3d84" target="_blank">hirainchen</a>：
-                                        <span>
-                                            <a href="/users/a3ea268aeb60" class="maleskine-author" target="_blank" data-user-slug="a3ea268aeb60">
-                                                @东风冷雪
-                                            </a>
-                                            有几种原因，一个是提取的评论句子是负面剧情内容，二是模型预测错误（因为训练数据不够），三是如你说的，有作者标新立异。
-                                        </span>
-                                    </p>
-                                    <div class="sub-tool-group"><span>2017.09.18 14:38</span>
-                                        <a class="">
-                                            <i class="iconfont ic-comment">
-
-                                            </i>
-                                            <span>回复</span>
-                                        </a>
-                                        <a class="report">
-                                            <span>举报</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="sub-comment more-comment">
-                                    <a class="add-comment-btn"
-                                    <i class="iconfont ic-subcomment"></i>
-                                    <span>添加新评论</span></a>
+                                <div class="no-comment"></div>
+                                <div class="text">
+                                        智慧如你，不想<a href="{{ url('/sign_in') }}">发表一点想法</a>咩~
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
+                    @else
+                    <div>
+                        <form id="newxinxi" class="new-comment">
+                            <a class="avatar">
+                                <img src="//upload.jianshu.io/users/upload_avatars/7685793/72f15e83-7f50-45ab-af3a-d031fb4e8934.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114">
+                            </a>
+                            <textarea name="comment" placeholder="写下你的评论...(最多255字.)"></textarea>
+                            <div class="write-function-block">
+                                <div class="hint">Ctrl+Return 发表</div>
+                                <a  class="btn btn-send" onclick="send({{ $article['article_id'] }})">发送</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="normal-comment-list" class="normal-comment-list">
+                        <div>
+                            <div>
+                                <div class="top">
+                                    <span>评论</span>
+                                    <a class="close-btn">关闭评论</a>
+                                </div>
+                                <div class="no-comment"></div>
+                                <div class="text">
+                                        智慧如你，不想<a>发表一点想法</a>咩~
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    <div>
 
+                    </div>
                 </div>
             </div>
 
-        </div>
-
     </div>
+            {{--评论模版--}}
+            <div id="comment" class="comment" style="display: none;">
+                <div>
+                    <div class="author">
+                        <a href="/u/d6fc8a033b98" target="_blank" class="avatar">
+                            <img src="//upload.jianshu.io/users/upload_avatars/7685793/72f15e83-7f50-45ab-af3a-d031fb4e8934.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114">
+                        </a>
+                        <div class="info">
+                            <a href="/u/d6fc8a033b98" target="_blank" class="name">UnaH</a>
+                            <div class="meta">
+                                <span>2楼 · 2017.09.20 11:05</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-wrap">
+                        <p>我来</p>
+                        <div class="tool-group">
+                            <a class="">
+                                <i class="iconfont ic-comment"></i>
+                                <span>回复</span>
+                            </a>
+                            <a class="comment-delete">
+                                <span>删除</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub-comment-list hide">
+
+                </div>
+            </div>
 
 @stop
 
@@ -175,7 +189,12 @@
         var util = layui.util,
             layer = layui.layer,
             $ = layui.jquery;
-    
+        // ajax 请求头.
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         //固定块
         util.fixbar({
             bar1: '&#xe600;'
@@ -190,9 +209,83 @@
                 }
             }
         });
-
         // 取消导航选中状态.
         $('.nav .active').attr('class', '');
+        // 评论.
+        window.send = function(id)
+        {
+            var comm_cont = $('[name="comment"]').val();
+            if(comm_cont.length<=0){
+                layer.open({
+                    title: '提示',
+                    icon: 5,
+                    content: '评论还是空的呢.',
+                });
+                return false;
+            }
+            if(comm_cont.length>255){
+                layer.open({
+                    title: '提示',
+                    icon: 5,
+                    content: '评论不能大于255个字符.',
+                });
+                return false;
+            }
+            $.ajax({
+                type:"POST",
+                url:'{{url('/comment/new/')}}/'+id,
+                data:{
+                    comm_cont:comm_cont
+                },
+                success:function(data)
+                {
+                    var comment = $('#comment').clone();
+                    // 模版ID.
+                    comment.attr('id', 'comment'+data.comm_id);
+                    // 回帖用户链接,头像.
+                    comment.find('.avatar').attr('href', "{{url('u')}}/"+data.user_id);
+                    comment.find('.avatar img').attr('src', "{{asset('/')}}"+data.user.pic);
+                    // 回帖用户链接,用户名.
+                    comment.find('.info .name').attr('href', "{{url('u')}}/"+data.user_id);
+                    comment.find('.info .name').html(data.user.nickname);
+                    // 楼层,时间.
+                    comment.find('.meta span').html(data.floor+'楼 · '+ data.comm_at);
+                    // 内容.
+                    comment.find('.comment-wrap p').html(data.comm_cont);
+                    $('.no-comment').remove();
+                    $('.text').remove();
+                    // 显示.
+                    comment.show();
+                    // 输出元素到页面.
+                    $('.top').parent().after(comment);
+                    // 清空输入框.
+//                    $('textarea[name="comment"]').empty();
+                },
+                error: function(errors)
+                {
+                    if($(errors.responseJSON).attr('errors')){
+                        var msg = '';
+                        $.each($(errors.responseJSON).attr('errors'), function(i, n){
+                            $.each(n ,function(ii, nn){
+                                msg += nn + '<br>';
+                            });
+                        });
+                        layer.open({
+                            title: '提示',
+                            icon: 0,
+                            content: msg
+                        });
+                    }else{
+                        layer.open({
+                            title: '提示',
+                            icon: 2,
+                            content: '数据异常'
+                        });
+                    }
+                },
+                dataType:'json'
+            });
+        }
     });
 </script>
 

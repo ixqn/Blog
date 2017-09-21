@@ -161,7 +161,7 @@
             </div>
             <div class="layui-form-item">
                 <select id="category_id" name="category_id" lay-filter="fenlei">
-                    <option value="">请选择分类</option>
+                    <option value="0">请选择分类</option>
                     @foreach($cates as $item)
                     <option id="f{{ $item->cate_id }}" value="{{ $item->cate_id }}">{{ $item->cate_names }}</option>
                     @endforeach
@@ -221,7 +221,38 @@
             var article_name = $('#article_name').val();
             var article_cont = layedit.getContent(index);
             var article_open = $("input[name='article_open']:checked").val();
-
+            if(category_id==0){
+                layer.open({
+                    title: '提示',
+                    icon: 5,
+                    content: '分类不能为空.',
+                });
+                return false;
+            }
+            if(article_name.length<=0){
+                layer.open({
+                    title: '提示',
+                    icon: 5,
+                    content: '文章标题不能为空.',
+                });
+                return false;
+            }
+            if(article_name.length>100){
+                layer.open({
+                    title: '提示',
+                    icon: 5,
+                    content: '文章标题不能大于100字符.',
+                });
+                return false;
+            }
+            if(article_cont.length<=0){
+                layer.open({
+                    title: '提示',
+                    icon: 5,
+                    content: '内容不能为空.',
+                });
+                return false;
+            }
             $.ajax('{{ url("/home/article/dowriter") }}', {
                 type:'POST',
                 data:{
@@ -341,6 +372,38 @@
             var article_name = $('#article_name').val();
             var article_cont = layedit.getContent(index2);
             var article_open = $("input[name='article_open']:checked").val();
+            if(category_id==0){
+                layer.open({
+                    title: '提示',
+                    icon: 5,
+                    content: '分类不能为空.',
+                });
+                return false;
+            }
+            if(article_name.length<=0){
+                layer.open({
+                    title: '提示',
+                    icon: 5,
+                    content: '文章标题不能为空.',
+                });
+                return false;
+            }
+            if(article_name.length>100){
+                layer.open({
+                    title: '提示',
+                    icon: 5,
+                    content: '文章标题不能大于100字符.',
+                });
+                return false;
+            }
+            if(article_cont.length<=0){
+                layer.open({
+                    title: '提示',
+                    icon: 5,
+                    content: '内容不能为空.',
+                });
+                return false;
+            }
 
             $.ajax('{{ url("/home/article/doedit") }}/'+article_id, {
                 // async:false,

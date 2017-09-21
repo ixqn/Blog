@@ -28,7 +28,7 @@ class Article extends Model
      *
      * @var array
      */
-    protected $fillable = ['category_id', 'user_id', 'article_author', 'article_name', 'article_cont' ,'article_status', 'article_open', 'article_at', 'article_up', 'article_view'];
+    protected $fillable = ['category_id', 'user_id', 'article_author', 'article_name', 'article_cont' ,'article_status', 'article_open', 'article_view'];
 
     // 关联分类表.
     public function Cate()

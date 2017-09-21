@@ -24,6 +24,10 @@ class ArtlistController extends Controller
         $article['length'] = mb_strlen($cont,'utf-8');
         // 计算文章总数.
         $article['number'] = Article::where('user_id',$article['user_id'])->count();
+
+        // 评论啊.
+
+
         // 输出页面.
         $title = '《'.$article['article_name'].'》';
         return view('home.article.index', compact('title', 'article'));

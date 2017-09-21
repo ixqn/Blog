@@ -57,7 +57,7 @@ class IndexController extends Controller
             $articles[$k]['date'] = $this->formatTime(strtotime($v['article_at']));
             // 去除html标签.
             $articles[$k]['article_cont'] = strip_tags($v['article_cont']);
-            // 截取前50字符.
+            // 截取前100字符.
             $articles[$k]['article_str'] = mb_substr($v['article_cont'], 0, 100, 'utf-8').'...';
             // 获取分类名称.
             $articles[$k]['article_cate'] = Article::find($v['article_id'])->Cate['cate_name'];

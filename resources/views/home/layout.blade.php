@@ -42,8 +42,8 @@
         <a class="btn write-btn" target="_blank" href="{{url('/writer/')}}">
             <i class="iconfont ic-write"></i>写文章
         </a>
-        <a class="btn sign-up" href="/sign_up">注册</a>
-        <a class="btn log-in" href="/sign_in">登录</a>
+        <a class="btn sign-up" href="{{ url('/sign_up') }}">注册</a>
+        <a class="btn log-in" href="{{ url('/sign_in') }}">登录</a>
         @else
         <!-- 登录显示写文章 -->
         <a class="btn write-btn" target="_blank" href="{{url('/writer/')}}">
