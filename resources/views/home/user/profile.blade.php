@@ -134,7 +134,7 @@ function errorMsg()
 function activeEmail()
 {
     $.ajax({
-        url:"/email/active", // 激活邮箱地址
+        url:"/active/email", // 激活邮箱地址
         type:"post",
         dataType:"json",
         async:false,

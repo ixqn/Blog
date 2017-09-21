@@ -23,13 +23,11 @@ class userSettingController extends Controller
     public function save(Request $request)
     {
 
-        // $input = $request->input('nickname');
+
         // $input = $request->only(['nickname', 'sex', 'birthday', 'email', 'desc']);
         $input = $request->only('nickname', 'sex', 'birthday', 'email', 'desc');
         
-        // dd($input);
-        // $input = 'www';
-        // dd($input);
+
         // $flag = Users_info::where('user_id', 21)->update($input); // 成功返回 1, 失败返回 0        
         $flag = Users_info::where('user_id', session('user')['user_id'])->update($input);
 
@@ -38,11 +36,13 @@ class userSettingController extends Controller
             $user = Users_info::where('user_id', session('user')['user_id'])->get()->toArray();
             $user = $user[0];
             session(['user' => $user]);
+            // 返回提示信息
             $status = true; 
-            $msg =  "保存成功";// 手机号不存在
+            $msg =  "保存成功";
         } else {
+            // 返回提示信息
             $status = false; 
-            $msg =  "保存失败";// 手机号不存在
+            $msg =  "保存失败";
         }
         return response()->json(['status'=>$status,'msg'=>$msg]);
     }

@@ -67,7 +67,8 @@ Route::post('/active/email', 'Home\activeEmailController@activeEmail');
 // 测试
 // Route::get('/active/email', 'Home\activeEmailController@activeEmail');
 // 激活邮箱
-Route::get('/active_email/{key}/{value}', 'Home\activeEmailController@doActiveEmail');
+Route::get('/active_email/{user_id}/{email}/{rand}/{value}', 'Home\activeEmailController@doActiveEmail');
+Route::get('/test', 'Home\activeEmailController@test');
 
 
 
