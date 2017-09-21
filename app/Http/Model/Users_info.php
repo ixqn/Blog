@@ -11,4 +11,10 @@ class Users_info extends Model
     // public $timestamps = false;
     protected $fillable = ['user_id', 'nickname', 'sex', 'birthday', 'email', 'email_active', 'pic', 'desc'];
 
+    // 关联用户登录表.
+    public function userLogin()
+    {
+        return $this->belongsTo('App\Http\Model\Users_login', 'user_id', 'user_id');
+    }
+
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('/bootstrap/css/bootstrap.min.css') }}">
     <title>Document</title>
 </head>
 <body>
@@ -120,8 +120,9 @@
     </div>
 
 </div>
-<script src="jquery/jquery.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="{{ asset('/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}"></script>
+
 <script>
 
 
@@ -417,7 +418,7 @@ function password_r_func()
 
 var tele_error = $('<li>号码有误或已注册</li>');
 var password_error = $('<li>密码不符合要求</li>');
-var password_r_Error = $('<li>密码不一致</li>');
+var password_r_error = $('<li>密码不一致</li>');
 var code_error = $('<li>验证码有误</li>');
 
 function errorMsg()
@@ -443,7 +444,7 @@ function errorMsg()
     if(password_r_hasGo){
         if(!password_r_cur){
             if(!password_r_flag){
-                alert.append(code_error);
+                alert.append(password_r_error);
             }
         }
     }

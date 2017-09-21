@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\home;
+namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,37 +12,37 @@ use \DefaultAcsClient;
 
 class sendMailController extends Controller
 {
+    public $request;
+    public $client;
     public function __construct()
     {
         $mail = config('aliyunmail');
         $iClientProfile = DefaultProfile::getProfile("cn-hangzhou", $mail['accessKeyId'], $mail['accessKeySecret']);        
-        $client = new DefaultAcsClient($iClientProfile);    
-        $request = new Dm\SingleSendMailRequest();
+        $this->client = new DefaultAcsClient($iClientProfile);    
+        $this-> request = new Dm\SingleSendMailRequest();
         // 控制台创建的发信地址     
-        $request->setAccountName($mail['setAccountName']);
+        $this-> request->setAccountName($mail['setAccountName']);
         // 发信人昵称
-        $request->setFromAlias($mail['setFromAlias']);
-        $request->setAddressType(1);
+        $this-> request->setFromAlias($mail['setFromAlias']);
+        $this-> request->setAddressType(1);
         // 控制台创建的模板
-        $request->setTagName("mailVerifyTemplate");
-        $request->setReplyToAddress("true");
+        $this-> request->setTagName("mailVerifyTemplate");
+        $this-> request->setReplyToAddress("true");
 
     }
     
     // 验证邮箱地址
-    public function emailVerify($setToAddress, $setSubject, $setHtmlBody)
+    public function sendMail($setToAddress, $setSubject, $setHtmlBody)
     {
 
         // 目标地址
         // 欢迎来到【作业部落】，请验证您的邮箱
-        $request->setToAddress($setToAddress);
-        $request->setSubject($setSubject);
-        $request->setHtmlBody($setHtmlBody);
+        $this-> request->setToAddress($setToAddress);
+        $this-> request->setSubject($setSubject);
+        $this-> request->setHtmlBody($setHtmlBody);
 
-        $response = $client->getAcsResponse($request);
+        $response = $this->client->getAcsResponse($this->request);
         return $response;
-
-
 
 
         // try {
@@ -60,18 +60,7 @@ class sendMailController extends Controller
 
     }
 
-    // 通过邮箱找回密码
-    public function emailReset()
-    {
-        // 目标地址
-        $request->setToAddress($setToAddress);
-        $request->setSubject($setSubject);
-        $request->setHtmlBody($setHtmlBody);
 
-        $response = $client->getAcsResponse($request);
-        return $response;
-    }
-    
 
 }
 

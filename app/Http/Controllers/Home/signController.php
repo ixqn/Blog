@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\home;
+namespace App\Http\Controllers\Home;
 
 
 use Illuminate\Http\Request;
@@ -28,7 +28,9 @@ class signController extends Controller
     public function signOut(Request $request)
     {
         //销毁session
+        $request->session()->forget('user');
         $request->session()->flush();
+
         // 返回首页
         return redirect('/');
     }
@@ -108,6 +110,7 @@ class signController extends Controller
                 break;
         }
         // 将用户登录信息保存
+        $user = Users_info::where('user_id', $user['user_id'])->get()->toArray();
         session(['user' => $user]);
         return redirect('/');
     }
@@ -177,7 +180,7 @@ class signController extends Controller
         // dd($res->id);
 
         if($Users_login){
-            $Users_info = Users_info::create(['user_id' => $Users_login->id]);
+            $Users_info = Users_info::create(['user_id' => $Users_login->user_id]);
             if($Users_info){
                 return redirect('/'); // 注册成功返回首页
             } else {
@@ -186,10 +189,6 @@ class signController extends Controller
         } else {
             return back()->with('errors','添加失败'); // 注册失败返回提示信息
         }
-
-
-
-
     }
 
 
@@ -198,7 +197,6 @@ class signController extends Controller
     public function test()
     {
 
-       // echo session('user')['user_id'];
 
     }
 

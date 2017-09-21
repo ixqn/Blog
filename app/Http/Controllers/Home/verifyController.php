@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\home;
+namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -76,8 +76,12 @@ class verifyController extends Controller
             $status = false; 
             $msg =  "此邮箱未激活或不存在";// 手机号不存在
             return response()->json(['status'=>$status,'msg'=>$msg]);
+        } else {
+            $status = true; 
+            $msg =  "此邮箱存在";// 手机号不存在
+            return response()->json(['status'=>$status,'msg'=>$msg]);
         }
-;
+
     }
 
     // 查询验证码是否正确
@@ -199,7 +203,7 @@ class verifyController extends Controller
 
         
         $this->getCode(); // 生成验证码,保存在session里
-        session(['tel'=>$tel]);
+        session(['tel'=>$tel]); // 保存手机号
 
         header('Content-Type: text/plain; charset=utf-8');
 
