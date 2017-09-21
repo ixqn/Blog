@@ -110,6 +110,8 @@ class signController extends Controller
                 break;
         }
         // 将用户登录信息保存
+        $user = Users_info::where('user_id', $user['user_id'])->get()->toArray();
+        $user = $user[0];
         session(['user' => $user]);
         return redirect('/');
     }
@@ -179,7 +181,7 @@ class signController extends Controller
         // dd($res->id);
 
         if($Users_login){
-            $Users_info = Users_info::create(['user_id' => $Users_login->id]);
+            $Users_info = Users_info::create(['user_id' => $Users_login->user_id, 'tel' => $Users_login->tel]);
             if($Users_info){
                 return redirect('/'); // 注册成功返回首页
             } else {
@@ -196,7 +198,6 @@ class signController extends Controller
     public function test()
     {
 
-       // echo session('user')['user_id'];
 
     }
 
