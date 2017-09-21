@@ -65,7 +65,9 @@ class resetPasswordController extends Controller
         // dd($res->id);
 
         if($Users_login){
-                return redirect('/'); // 重置密码成功返回首页
+                // 重置密码成功返回信息提示
+                return view('home.sign.msgResetPasswordResult')->with('errors','修改成功,去首页登录看看吧');
+
                 
         } else {
             return back()->with('errors','重置密码失败'); // 重置密码失败返回提示信息
@@ -102,7 +104,7 @@ class resetPasswordController extends Controller
                          ->withInput();
         }
         // dd($input);
-        // 判断邮箱地址是否存在
+        // 判断邮箱地址是否存在,并且是激活的
         $email = Users_info::where(['email'=>$input['email'], 'email_active'=>'1'])->first();
 
         if(!$email)
@@ -117,7 +119,7 @@ class resetPasswordController extends Controller
         // sendMailController::sendMail($setToAddress, $setSubject, $setHtmlBody)
         // 检验是否发送过
         $flag = Redis::exists($input['email']);
-        if(!$flag){
+        if($flag){
             return back()->with('errors','已经发送过了,一小时有效,去邮箱查看吧')
                          ->withInput();
         }
@@ -159,12 +161,12 @@ class resetPasswordController extends Controller
        // 判断是否存在$key
         if(!Redis::exists($key)){
             // 不存在,返回错误页面
-            return view('home.sign.urlError')->with('errors','链接已经失效,请重新操作');
+            return view('home.sign.msgResetPasswordResult')->with('errors','链接已经失效,请重新操作');
         }
         // 判断对应的value是否相等
         if(Redis::get($key) != $value){
             // 不相等,返回错误页面
-            return view('home.sign.urlError')->with('errors','链接有误');
+            return view('home.sign.msgResetPasswordResult')->with('errors','链接有误');
         }
 
         // 返回重置密码页面
@@ -176,16 +178,20 @@ class resetPasswordController extends Controller
     public function doRestpasswordByEmail(Request $request)
     {
        // 判断是否存在$key
+        $input = $request->only(['key', 'value']);
+        $key = $input['key'];
+        $value = $input['value'];
         if(!Redis::exists($key)){
             // 不存在,返回错误页面
-            return view('home.sign.noResetPassword')->with('errors','链接已经失效,请重新操作');
+            return view('home.sign.msgResetPasswordResult')->with('errors','链接已经失效,请重新操作');
         }
         // 判断对应的value是否相等
         if(Redis::get($key) != $value){
             // 不相等,返回错误页面
-            return view('home.sign.noResetPassword')->with('errors','链接有误');
+            return view('home.sign.msgResetPasswordResult')->with('errors','链接有误');
         }
 
+        // 获取密码,并且验证
         $input = $request->only(['password','password_r']);
         // dd($input);
         // 设置验证规则
@@ -203,15 +209,18 @@ class resetPasswordController extends Controller
         // 验证规则
         $this->validate($request, $rule, $msg);
 
+        // 修改密码
         $user = Users_info::where('email','=',$key)->first()->userLogin;
         $user->password = Hash::make($input['password']);
         // dd($user->password);
-        $flag = $user->save();
+        $flag = $user->save(); // 保存修改
         // dd($user->password);
+        
         if($flag){
-            return view('home.sign.okResetPassword')->with('errors','修改成功,去首页登录看看吧');
+            Redis::del($key); // 删除对应的键值对
+            return view('home.sign.msgResetPasswordResult')->with('errors','修改成功,去首页登录看看吧');
         } else {
-            return view('home.sign.noResetPassword')->with('errors','链接已经失效,请重新操作');
+            return view('home.sign.msgResetPasswordResult')->with('errors','修改失败,请重新操作');
         }
         
 
@@ -220,7 +229,22 @@ class resetPasswordController extends Controller
 
     public function test()
     {
-
+        $key = 'xqn@xqn.me';
+        // $value = Hash::make($key);
+        // $value = str_replace('/', '', $value); // 为了路由正确替换掉斜杠
+        // Redis::setex($key, '3600', $value); // 3600秒(1小时)有效
+        $value = Redis::get($key);
+        echo $value;
+        echo '<br>';
+        $flag = Redis::exists($key);
+        echo $flag;
+        // var_dump($flag);
+        // 
+        $num = Redis::del($key);
+        echo '<br>';
+        echo $num;
+        
+       
     }
 
 }

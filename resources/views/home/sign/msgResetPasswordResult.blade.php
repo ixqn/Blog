@@ -26,7 +26,7 @@
                         </ul>
                     </div>
                 @endif
-                <a class="btn btn-info" href="{{config('app.url')}}" role="button">竹文首页</a>
+                <a class="btn btn-info" href="{{config('app.url')}}" role="button">点击去竹文首页</a>
             </p>
 
         </div>

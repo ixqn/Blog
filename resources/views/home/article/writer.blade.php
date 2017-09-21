@@ -124,7 +124,7 @@
                         <div class="layui-timeline-content layui-text">
                             <h4 class="layui-timeline-title">{{ $v->article_up }}</h4>
                             <p>
-                                <b name="old_category_name">《{{ $v->article_name }}》</b>
+                                <b name="old_category_name">《{{ $v->article_name }}》 写了:{{$v->length}}字</b>
                                 <br>
                                 <em name="old_category_cont">“{!!  $v->article_cont !!}”</em>
                                 <br>
