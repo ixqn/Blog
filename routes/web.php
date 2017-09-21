@@ -134,9 +134,9 @@ Route::post('admin/inf/discom/{id}','Admin\InfController@discom');
 //文章收藏页面
 Route::get('home/collect' , 'Home\collectController@collect');
 //将收藏的文章插入数据库
-Route::get('home/collect/insert/{id}' , 'Home\collectController@insert');
+Route::post('home/collect/insert/{id}' , 'Home\collectController@insert');
 //取消文章收藏
-Route::get('home/collect/delete/{id}' , 'Home\collectController@delete');
+Route::post('home/collect/delete/{id}' , 'Home\collectController@delete');
 
 
 
@@ -145,13 +145,13 @@ Route::get('home/collect/delete/{id}' , 'Home\collectController@delete');
 //显示关注页面
 Route::get('home/attention' , 'Home\AttentionController@attention');
 //将关注的用户插入数据库
-Route::get('home/attention/insert/{id}' , 'Home\AttentionController@insert');
+Route::post('home/attention/insert/{id}' , 'Home\AttentionController@insert');
 //取消关注用户
 Route::post('home/attention/delete/{id}' , 'Home\AttentionController@delete');
 //查看被关注用户的主页
-Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
+Route::get('/u/{id}' , 'Home\UserarticleController@userarticle');
 //浏览被关注用户的文章
-Route::post('home/attention/index/{id}' , 'Home\AttentionController@index');
+//Route::get('home/layout1' , 'Home\AttentionController@layout1');
 //Route::get('home/attention/index' , 'Home\AttentionController@index');
 
 

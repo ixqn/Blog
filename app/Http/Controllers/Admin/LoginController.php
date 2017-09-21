@@ -15,6 +15,9 @@ class LoginController extends Controller
     //登录
     public function login()
     {
+
+
+
         return view('admin/login');
 
 //        $a = encrypt('111111');

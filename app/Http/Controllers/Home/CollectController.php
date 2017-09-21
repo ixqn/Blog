@@ -4,24 +4,17 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
-<<<<<<< HEAD:
-app/Http/Controllers/Home/CollectController.php
 class collectController extends Controller
-=======
-class CollectController extends Controller
->>>>>>> master:
-app/Http/Controllers/Home/CollectController.php
 {
-    //插入  inset数据
-    public function insert(Request $request, $article_id)
-    {
 
+
+    //插入  inset数据
+    public function insert($article_id)
+    {
         //从数据库提取数据；
 
         $data = \DB::table('article_users')->where('article_id', $article_id)->first();
 
-//                  dd($data);
         $articles_id = $data->article_id;
         $article_name = $data->article_name;
         $article_cont = $data->article_cont;
@@ -29,6 +22,8 @@ app/Http/Controllers/Home/CollectController.php
         $category_id = $data->category_id;
         $article_status = $data->article_status;
         $user_id = $data->user_id;
+        $src = \DB::table('users_info')->where('user_id' , $user_id)->first();
+        $user_pic = $src->pic;
 
         $conl['article_id'] = $articles_id;
         $conl['article_name'] = $article_name;
@@ -36,80 +31,62 @@ app/Http/Controllers/Home/CollectController.php
         $conl['article_author'] = $article_author;
         $conl['category_id'] = $category_id;
         $conl['article_status'] = $article_status;
-        $conl['user_id'] = $user_id;
-//        dd($conl);
+        $conl['collect_user_id'] = $user_id;
+        $conl['user_id'] = 1;
+        $conl['user_pic'] = $user_pic;
 
-        $res = \DB::table('article_collect')->where('article_id', $conl['article_id'])->first();
 
-        if($res)
-        {
-            die('这片文章你已经收藏过了,再去看看其他的把');
-        }else{
-            $str = \DB::table('article_collect')->insert($conl);
-<<<<<<< HEAD:app/Http/Controllers/Home/CollectController.php
-            if ($str) {
-=======
+
+        $str = \DB::table('article_collect')->where('article_id', $conl['article_id'])->first();
         if ($str) {
->>>>>>> master:app/Http/Controllers/Home/CollectController.php
-                return redirect('/home/collect')->with(['info' => '添加收藏成功']);
+            $data = [
+                'state' => 2,
+                'msg' => '你应经收藏过这篇文章了'
+            ];
+        } else {
+            $res = \DB::table('article_collect')->insert($conl);
+            if ($res) {
+                $data = [
+                    'state' => 0,
+                    'msg' => '添加成收藏功'
+                ];
             } else {
-                return back()->with(['info' => '添加收藏失败']);
+                $data = [
+                    'state' => 1,
+                    'msg' => '添加收藏失败'
+                ];
             }
+            return $data;
         }
     }
 
-
-
-<<<<<<< HEAD:app/Http/Controllers/Home/CollectController.php
     //collect显示在页面
-    public
-    function collect(Request $request)
+    public function collect(Request $request)
     {
-
-        $str = \DB::table('article_collect')->get();
+        $str = \DB::table('article_collect')->where('user_id' , 1)->get();
+//        $data = \DB::table('users_info')->where;
 
         return view('home.collect', ['str' => $str , 'title'=>'文章收藏']);
-=======
-        //collect显示在页面
-        public
-        function collect(Request $request)
-        {
-
-            $str = \DB::table('article_collect')->get();
-            return view('home.collect', ['str' => $str]);
->>>>>>> master:app/Http/Controllers/Home/CollectController.php
-
-
-
-
     }
 
 //取消收藏
-<<<<<<< HEAD:app/Http/Controllers/Home/CollectController.php
+
 
     public function delete($article_id)
     {
-
-        $res = \DB::table('article_users')->where('article_user' , $article_id)->delete();
+        $res = \DB::table('article_collect')->where('article_id' , $article_id)->delete();
         if($res){
             $data = [
+                'state'=>0,
                 'msg'=>'取消收藏成功'
             ];
         }else{
             $data = [
+                'state'=>1,
                 'msg'=>'取消收藏失败 '
             ];
-=======
-        public
-        function delete($id)
-        {
-            $res = \DB::table('article_collect')->where('article_id', $id)->delete();
-            if ($res) {
-                return redirect('/home/collect')->with(['info' => '删除成功']);
-            } else {
-                return back()->with(['info' => '删除失败']);
-            }
->>>>>>> master:app/Http/Controllers/Home/CollectController.php
+
+
         }
         return $data;
     }

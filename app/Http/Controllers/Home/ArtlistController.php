@@ -26,6 +26,7 @@ class ArtlistController extends Controller
         $article['number'] = Article::where('user_id',$article['user_id'])->count();
         // 输出页面.
         $title = '《'.$article['article_name'].'》';
+
         return view('home.article.index', compact('title', 'article'));
     }
 }

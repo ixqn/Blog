@@ -16,7 +16,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }} - {{ $title }}</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/Home/logo_ico_16X16.ico') }}" media="screen">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/home/logo_ico_16X16.ico') }}" media="screen">
     <link rel="stylesheet" href="{{ asset('layui/css/layui.css') }}">
 
     <link rel="stylesheet" media="all" href="{{ asset('home/css/web-e7e403d2843dd1edd8db.css') }}" />
@@ -36,64 +36,66 @@
         <!-- 左上方 Logo -->
         <a class="logo" href="/"><img src="{{ asset('images/home/logo_home.png') }}" alt="Logo" /></a>
 
+    @if(!session('user'))
         <!-- 右上角 -->
-        <!-- 未登录显示登录/注册/写文章 -->
-        <!--<a class="btn write-btn" target="_blank" href="/writer#/">-->
-        <!--<i class="iconfont ic-write"></i>写文章-->
-        <!--</a>-->
-        <!--<a class="btn sign-up" href="/sign_up">注册</a>-->
-        <!--<a class="btn log-in" href="/sign_in">登录</a>-->
-
+            <!-- 未登录显示登录/注册/写文章 -->
+            <a class="btn write-btn" target="_blank" href="{{url('/writer/')}}">
+                <i class="iconfont ic-write"></i>写文章
+            </a>
+            <a class="btn sign-up" href="/sign_up">注册</a>
+            <a class="btn log-in" href="/sign_in">登录</a>
+    @else
         <!-- 登录显示写文章 -->
-        <a class="btn write-btn" target="_blank" href="{{url('/writer#/')}}">
-            <i class="iconfont ic-write"></i>写文章
-        </a>
-        <!-- 如果用户登录，显示下拉菜单 -->
+            <a class="btn write-btn" target="_blank" href="{{url('/writer/')}}">
+                <i class="iconfont ic-write"></i>写文章
+            </a>
+            <!-- 如果用户登录，显示下拉菜单 -->
 
-        <!--js移入事件 class加 open-->
-        <div class="user" id="yonghu">
-            <div data-hover="dropdown">
-                <a class="avatar" href="/u/d6fc8a033b98"><img src="{{asset('home/images/picture/72f15e83-7f50-45ab-af3a-d031fb4e8934.jpg')}}" alt="120" /></a>
+            <!--js移入事件 class加 open-->
+            <div class="user" id="yonghu">
+                <div data-hover="dropdown">
+                    <a class="avatar" href="/u/d6fc8a033b98"><img src="{{asset('home/images/picture/72f15e83-7f50-45ab-af3a-d031fb4e8934.jpg')}}" alt="120" /></a>
+                </div>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/u/d6fc8a033b98">
+                            <i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
+                        </a>
+                    </li>
+                    <li>
+                        <!-- TODO bookmarks_path -->
+                        <a href="/bookmarks">
+                            <i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/users/d6fc8a033b98/liked_notes">
+                            <i class="iconfont ic-navigation-like"></i><span>喜欢的文章</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/wallet">
+                            <i class="iconfont ic-navigation-wallet"></i><span>我的钱包</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/settings">
+                            <i class="iconfont ic-navigation-settings"></i><span>设置</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/faqs">
+                            <i class="iconfont ic-navigation-feedback"></i><span>帮助与反馈</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a rel="nofollow" data-method="delete" href="{{ url('/sign_out') }}">
+                            <i class="iconfont ic-navigation-signout"></i><span>退出</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <ul class="dropdown-menu">
-                <li>
-                    <a href="/u/d6fc8a033b98">
-                        <i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
-                    </a>
-                </li>
-                <li>
-                    <!-- TODO bookmarks_path -->
-                    <a href="/bookmarks">
-                        <i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/users/d6fc8a033b98/liked_notes">
-                        <i class="iconfont ic-navigation-like"></i><span>喜欢的文章</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/wallet">
-                        <i class="iconfont ic-navigation-wallet"></i><span>我的钱包</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/settings">
-                        <i class="iconfont ic-navigation-settings"></i><span>设置</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/faqs">
-                        <i class="iconfont ic-navigation-feedback"></i><span>帮助与反馈</span>
-                    </a>
-                </li>
-                <li>
-                    <a rel="nofollow" data-method="delete" href="/sign_out">
-                        <i class="iconfont ic-navigation-signout"></i><span>退出</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        @endif
         <div class="container">
             <div class="navbar-header">
                 <button id="caidan" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu" aria-expanded="true">
@@ -104,73 +106,76 @@
             </div>
             <div class="collapse navbar-collapse" id="menu" aria-expanded="false" style="230px">
                 <ul class="nav navbar-nav">
+                @if(!session('user'))
                     <!--未登录显示 首页 -->
-                    <!--<li class="active">-->
-                    <!--<a href="/">-->
-                    <!--<span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>-->
-                    <!--</a>-->
-                    <!--</li>-->
+                        <li class="active">
+                            <a href="/">
+                                <span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+                            </a>
+                        </li>
+                @else
                     <!--登录显示 发现 关注 消息-->
-                    <li class="active">
-                        <a href="/">
-                            <span class="menu-text">发现</span><i class="iconfont ic-navigation-discover menu-icon"></i>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="{{ url('/home/attention') }}">
-                            <span class="menu-text">关注</span><i class="iconfont ic-navigation-follow menu-icon"></i>
-                        </a>
-                    </li>
-                    <li class="notification" id="xiaoxi">
-                        <a data-hover="dropdown" href="/notifications" class="notification-btn">
-                            <span class="menu-text">消息</span>
-                            <i class="iconfont ic-navigation-notification menu-icon"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="/notifications#/comments">
-                                    <i class="iconfont ic-comments"></i>
-                                    <span>评论</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/home/messages') }}">
-                                    <i class="iconfont ic-chats"></i>
-                                    <span>简信</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/notifications#/requests">
-                                    <i class="iconfont ic-requests"></i>
-                                    <span>投稿请求</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/notifications#/likes">
-                                    <i class="iconfont ic-likes"></i>
-                                    <span>喜欢和赞</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/notifications#/follows">
-                                    <i class="iconfont ic-follows"></i>
-                                    <span>关注</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/notifications#/money">
-                                    <i class="iconfont ic-money"></i>
-                                    <span>赞赏</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/notifications#/others">
-                                    <i class="iconfont ic-others"></i>
-                                    <span>其他消息</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li class="active">
+                            <a href="/">
+                                <span class="menu-text">发现</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="{{ url('/home/attention') }}">
+                                <span class="menu-text">关注</span><i class="iconfont ic-navigation-follow menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="notification" id="xiaoxi">
+                            <a data-hover="dropdown" href="/notifications" class="notification-btn">
+                                <span class="menu-text">消息</span>
+                                <i class="iconfont ic-navigation-notification menu-icon"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/notifications#/comments">
+                                        <i class="iconfont ic-comments"></i>
+                                        <span>评论</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/home/messages') }}">
+                                        <i class="iconfont ic-chats"></i>
+                                        <span>简信</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/notifications#/requests">
+                                        <i class="iconfont ic-requests"></i>
+                                        <span>投稿请求</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/notifications#/likes">
+                                        <i class="iconfont ic-likes"></i>
+                                        <span>喜欢和赞</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/notifications#/follows">
+                                        <i class="iconfont ic-follows"></i>
+                                        <span>关注</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/notifications#/money">
+                                        <i class="iconfont ic-money"></i>
+                                        <span>赞赏</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/notifications#/others">
+                                        <i class="iconfont ic-others"></i>
+                                        <span>其他消息</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
                     <li class="search">
                         <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
                             <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索" class="search-input" />
@@ -183,57 +188,22 @@
     </div>
 </nav>
 
-<div class="container subscription">
-    <div class="row"><div class="aside">
-            <a data-toggle="dropdown" class="change-type">全部关注123<i class="iconfont ic-filter"></i></a>
-            <ul class="dropdown-menu arrow-top"><li><a>全部关注</a></ul>
-            <a href="#/recommendation" class="add-people"><i class="iconfont ic-addpeople"></i><span>添加关注</span></a>
-            <ul class="js-subscription-list">
-                <li class=""><div class="avatar-collection"></div>
-                    <div class="name">
-                        @foreach($data as $k=>$v)
-                            <td>{{ $v->id }}</td>
-                            {{--<td><a href="javascript:;" onclick="wzh({{ $v->attension_user_id }})">{{ $v->nickname }}</a></br></td>--}}
-                            <td><a href="{{ url('/home/attention/index') }}/{{ $v->attension_user_id }}">{{ $v->nickname }}</a></br></td>
 
-                            <td>{{ $v->email }}</td></br>
-                            <a href="javascript:;" onclick="delHome({{$v->attension_user_id}})">取消关注</a></br></br>
 
-                        @endforeach
-                    </div> <!---->
-                </li>
-                <li class=""></li>
-            </ul> <!----> <!---->
-        </div>
-        <div class="col-xs-16 col-xs-offset-8 main"><div><ul class="note-list">
 
-@yield('content')
+
+        @yield('content')
 
 
 <!--返回顶部代码-->
     <!----> <a class="load-more">阅读更多</a></ul> <!----></div></div></div></div>
-<footer class="container">
-    <div class="row">
-        <div class="col-xs-17 main">
-            <a target="_blank" href="http://www.jianshu.com/c/jppzD2">关于简书</a><em> · </em><a target="_blank" href="http://www.jianshu.com/contact">联系我们</a><em> · </em><a target="_blank" href="http://www.jianshu.com/c/bfeec2e13990">加入我们</a><em> · </em><a target="_blank" href="http://www.jianshu.com/p/fc1c113e5b6b">简书出版</a><em> · </em><a target="_blank" href="http://www.jianshu.com/press">品牌与徽标</a><em> · </em><a target="_blank" href="http://www.jianshu.com/faqs">帮助中心</a><em> · </em><a target="_blank" href="http://www.jianshu.com/p/cabc8fa39830">合作伙伴</a>      <div class="icp">
-                ©2012-2017 上海佰集信息科技有限公司 / Tel:021-61995350 / 简书 / 沪ICP备11018329号-5 /  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402002252">沪公网安备31010402002252号 / </a>
-                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402002252">
-                    <img src="{{ asset('home/images/picture/smrz-14723344f0991457bfc9f5172c219a5f.png') }}" alt="Smrz" />
-                </a>
-                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402002252">沪公网安备31010402002252号 / </a>
-                <a target="_blank" href="http://www.shjbzx.cn/">
-                    <img src="{{ asset('home/images/picture/wxb-a216456895eb66c17497dbd3da443cf8.png') }}" alt="Wxb" />
-                </a>        举报电话：021-34770013
-            </div>
-        </div>
-    </div>
-</footer>
+
 
 <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('layui/layui.all.js') }}"></script>
-<link rel="stylesheet" media="all" href="{{ asset('./css/web-1520e0147b6838647211.css') }}">
-<link rel="stylesheet" media="all" href="{{ asset('./css/entry-b8b6c8d0b3aed7579000.css') }}">
-
+<link rel="stylesheet" media="all" href="{{ asset('./home/css/entry-b8b6c8d0b3aed7579000.css') }}">
+<link rel="stylesheet" media="all" href="{{ asset('./home/css/web-1520e0147b6838647211.css') }}">
+<link rel="stylesheet" media="all" href="{{ asset('./home/css/entry-b8b6c8d0b3aed7579000.css') }}">
 <script>
     layui.use(['util','layer'], function(){
         var util = layui.util,

@@ -12,7 +12,7 @@ class MessagesController extends Controller
     {
         $data = \DB::table('messages')->get();
 //        dd($data);
-        return view('home.messages' , ['data' , $data]);
+        return view('home.messages' , ['data' , $data , 'title'=>'站内信']);
 
     }
 

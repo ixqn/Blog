@@ -9,17 +9,17 @@ use App\Http\Controllers\Controller;
 class AttentionController extends Controller
 {
 //insert插入到数据库
-        public function insert(Request $request,$user_id)
+        public function insert($user_id)
         {
             //提取要关注作者的数据
             $data = \DB::table('users_info')->where('user_id', $user_id)->first();
 
-            $id = $data->id;
             $users_id = $data->user_id;
             $nickname = $data->nickname;
             $sex = $data->sex;
             $birthday = $data->birthday;
             $email = $data->email;
+            $pic = $data->pic;
 
 
             $dat['user_id'] = 1;
@@ -27,73 +27,60 @@ class AttentionController extends Controller
             $dat['nickname'] = $nickname;
             $dat['birthday'] = $birthday;
             $dat['email'] = $email;
-
-
+            $dat['pic'] = $pic;
 
             //添加关注
             $str = \DB::table('users_attention')->where('attension_user_id', $dat['attension_user_id'])->first();
             if ($str) {
-                die('这个作者你已经关注过了，快去我的关注页面查看把');
-
+                $data = [
+                    'state' => 2,
+                    'msg' => '你应经关注过这个人了'
+                ];
             } else {
-
-            $res = \DB::table('users_attention')->insert($dat);
-
-            if ($res) {
-                return redirect('/home/attention')->with(['info' => '添加关注成功']);
-            } else {
-                return back()->with(['info' => '添加关注失败']);
+                $res = \DB::table('users_attention')->insert($dat);
+                if ($res) {
+                    $data = [
+                        'state' => 0,
+                        'msg' => '添加关注成功'
+                    ];
+                } else {
+                    $data = [
+                        'state' => 1,
+                        'msg' => '添加关注失败'
+                    ];
+                }
+                return $data;
             }
         }
-        }
-
-//attention 显示我的关注在页面上
-             public function attention(Request $request)
-            {
-              $data = \DB::table('users_attention')->where('user_id' , 15)->get();
-
-//                 $res = 16;
-//                 $wz = \DB::table('article_users')->where('user_id' , $res)->get();
 
 
 
+         //取消关注
+          public function delete($attension_user_id)
+          {
 
-              return view('home.layout1' , ['data'=>$data , 'title'=>'关注用户']);
-            }
-
- //取消关注
-        public function delete($attension_user_id)
-        {
             $res = \DB::table('users_attention')->where('attension_user_id' , $attension_user_id)->delete();
             if($res){
                 $data = [
+                    'state'=>0,
                     'msg'=>'取消关注成功'
                 ];
             }else{
                 $data = [
+                    'state'=>1,
                     'msg'=>'取消关注失败 '
                 ];
             }
             return $data;
-        }
-//   //显示我的关注的人的文章
-       public function index()
+          }
+       //显示我的关注的人的文章
+       public function attention()
        {
-//           if($src)
-//           {
-//               $attension_user_id = $id;
+           $data = \DB::table('users_attention')->where('user_id' , 1)->get();
 
-//               $src = \DB::table('article_users')->where('user_id' , $attension_user_id)->get();
-//           }else{
-               $wz = \DB::table('article_users')->where('user_id' , 16)->get();
-//               dd($wz);
-//           }
-
-//           dd($src);
-//           return $src;
-           return view('home.attention' , ['wz'=>$wz , 'title'=>'关注文章']);
+           $wz = \DB::table('article_users')->get();
+           return view('home.attention' , ['data'=>$data , 'wz'=>$wz  , 'title'=>'关注文章']);
        }
-
 
 
 }

@@ -55,7 +55,7 @@
                 <div class="info">
                     <a class="avatar" href="{{url('u')}}/{{$article['user_id']}}">
                         <img src="{{ asset($article['user']['pic']) }}" alt="96">
-                    </a>          <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
+                    </a>          <a class="btn btn-success follow" href="javascript:;" onclick="insert({{ $article['user_id'] }})"><i class="iconfont ic-follow"></i><span>关注</span></a>
                     <a class="title" href="{{url('u')}}/{{$article['user_id']}}">{{ $article['article_author'] }}</a>
                     <i class="iconfont @if ($article['user']['sex'] == 'm') ic-man @elseif($article['user']['sex'] == 'w') ic-woman @else @endif "></i>
                     <p>写了 {{ $article['number'] }} 篇文章，被 42301 人关注</p></div>
@@ -184,7 +184,18 @@
             ,bgcolor: '#393D49'
             ,click: function(type){
                 if(type === 'bar1'){
-                    layer.msg('icon是可以随便换的')
+                $.post('{{url('/home/collect/insert/')}}/' + {{ $article['article_id'] }}, {
+                 '_token': '{{csrf_token()}}'
+                },function(data){
+                    if (data.state == 0) {
+                        layer.msg(data.msg, {icon: 6});
+                        location.href = location.href;
+                    } else if(data.state == 2){
+                        layer.msg('已经收藏过了');
+                    } else{
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
                 } else if(type === 'bar2') {
                     layer.msg('两个bar都可以设定是否开启')
                 }
@@ -193,7 +204,30 @@
 
         // 取消导航选中状态.
         $('.nav .active').attr('class', '');
+
+        //添加关注
+        window.insert = function(user_id)
+        {
+            layer.confirm('是否确定添加关注?', {
+                btn: ['对对', '不行']
+            }, function () {
+                $.post('{{url('/home/attention/insert/')}}/' + user_id, {
+                    '_token': '{{csrf_token()}}'
+                }, function (data) {
+                    if (data.state == 0) {
+                        layer.msg(data.msg, {icon: 6});
+                        location.href = location.href;
+                    } else if(data.state == 2){
+                        layer.msg('已经关注过了');
+                    } else{
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
+            }, function () {});
+
+        }
     });
+
 </script>
 
 @stop
