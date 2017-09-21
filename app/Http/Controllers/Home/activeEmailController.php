@@ -136,6 +136,11 @@ class activeEmailController extends Controller
         if($flag){
             $msg = '邮箱激活成功';
             Redis::del($key); // 删除对应的键值对
+            // 更新session中用户的信息
+            $user = Users_info::where('user_id', $user->user_id)->get()->toArray();
+            $user = $user[0];
+            session(['user' => $user]);
+
         } else {
             $msg = '邮箱激活失败,请重新操作';
         }

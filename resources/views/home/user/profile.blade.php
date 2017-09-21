@@ -47,9 +47,9 @@
                             <tr>
                                 <td>性别</td> 
                                 <td>
-                                    <input type="radio" name="sex" @if($user['sex'] == 'w') checked @endif value="w">女
-                                    <input type="radio" name="sex" @if($user['sex'] == 'm') checked @endif value="m">男
-                                    <input type="radio" name="sex" @if($user['sex'] == 'x') checked @endif value="x">未知
+                                    <input type="radio" name="sex" @if($user['sex'] == "w") checked @endif value="w">女
+                                    <input type="radio" name="sex" @if($user['sex'] == "m") checked @endif value="m">男
+                                    <input type="radio" name="sex" @if($user['sex'] == "x") checked @endif value="x">未知
                                 </td>
                             </tr>
 
@@ -180,7 +180,7 @@ function save(){
 function get()
 {
     nickname = $("input[name = 'nickname']").val();
-    sex = $("input[name = sex").val();
+    sex = $("input:checked").val();
     birthday= $("input[name = birthday").val();
     email = $("input[name = 'email']").val();
     desc = $("textarea[name = 'desc']").val();
