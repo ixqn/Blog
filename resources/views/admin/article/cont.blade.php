@@ -8,43 +8,65 @@
     <title>Document</title>
     <style>
         #cont{
-            width:1333px;
-            height:800px;
+
             border:1px solid transparency;
             position:relative;
-            background:url('{{ url('/uploads/bg/1.jpg') }}');
-            opacity:0.5;
+            background:url('{{ url('/uploads/bg/1.jpg') }}') no-repeat;
+
+            /*opacity:0.5;*/
             margin:0px;
             padding: 0px;
         }
         .box{
-            color:black;
+            color:red;
             width:800px;
-            height:800px;
+            height:650px;
             border:1px solid transparency;
             position:absolute;
             left:300px;
 
         }
+        .box2{
+            width:100px;
+            height:100px;
+            text-align:center;
+            line-height:50px;
+            border:1px solid transparency;
+            background-color:cyan;
+            position:absolute;
+            left:1200px;
+            top:500px;
+            opacity:0.5;
 
+        }
 
 
     </style>
 </head>
-<body>
-    <div id="cont">
-        @foreach($datas as $item)
-            <div class="box">
+<body id="cont">
 
+
+            <div class="box">
+                @foreach($datas as $item)
                 <p>
                     {!! $item->article_cont !!}
+
                 </p>
+
+                @endforeach
+
+            </div>
+
+
+            <div class="box2">
+
+                <h4>
+                    <a href="{{ url('admin/article') }}">返回</a>
+
+                </h4>
 
 
             </div>
-        @endforeach
-
-    </div>
 
 
 

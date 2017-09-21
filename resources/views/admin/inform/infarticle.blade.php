@@ -46,7 +46,7 @@
                                         <th>文章名称</th>
                                         <th>文章图片</th>
                                         <th>举报原因</th>
-                                        <th>举报内容</th>
+                                        <th style="width:350px">举报内容</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -67,13 +67,15 @@
                                             {{--<td><img src="/uploads/{{ $item->cate_pic }}" width="30px"></td>--}}
 
 
-                                                <td><a href="javascript:;" onclick="disarticle({{ $item->id }})">
+                                                <td>
+                                                    <a href="javascript:;" onclick="disarticle({{ $item->id }})">
                                                         @if( $item->status == 0)
                                                             <p style="color:#ff00ff">未处理</p>
                                                         @elseif( $item->status == 1)
                                                             已处理
                                                         @endif
-                                                    </a></td>
+                                                    </a>
+                                                </td>
 
                                         </tr>
 

@@ -43,16 +43,7 @@ class CategoryController extends Controller
     {
         //
         $cates = (new Cate)->tree();
-
-//        $cates = Cate::get();
-//
-//            $subs = [];
-//            foreach($arr as $v){
-//                if($v['article_pid'] == $id){
-//                    $subs[] = $v;
-//                }
-//
-//            }
+        
 
 
 
@@ -130,9 +121,9 @@ class CategoryController extends Controller
         //create 是模型的一种保存到数据库的方法,返回是一条数据
         $cate = Cate::create($input);
         if($cate){
-            return redirect('admin/category');
+            return redirect('admin/category')->with('errors','添加成功');
         }else{
-            return back()->with('error','添加失败');
+            return back()->with('errors','添加失败');
         }
     }
 
@@ -203,7 +194,7 @@ class CategoryController extends Controller
 //        如果修改成功
         if($re){
 //            跳转到列表页
-            return redirect('admin/category');
+            return redirect('admin/category')->with('errors','修改成功');
         }else{
             return back()->with('errors','修改失败');
         }

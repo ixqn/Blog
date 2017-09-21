@@ -20,6 +20,7 @@ class Cate extends Model
     {
         //获取所有的分类数据
         $cate = $this->orderBy('cate_order','asc')->get();
+
         //自定义一个格式化数据的方法,返回排好序而且有缩进的数据
         return $this->getTree($cate);
     }

@@ -12,7 +12,7 @@ class InfController extends Controller
     //举报文章页
     public function index()
     {
-        $datas = \DB::table('inf_tables')->join('article_users', 'inf_tables.article_id', '=', 'article_users.article_id')->orderBy('id','desc')->paginate(3);
+        $datas = \DB::table('inf_tables')->join('article_users', 'inf_tables.article_id', '=', 'article_users.article_id')->orderBy('id','desc')->paginate(10);
 
 
 //
@@ -43,7 +43,7 @@ class InfController extends Controller
     //举报评论页
     public function show()
     {
-        $datas = \DB::table('inf_comment')->join('article_users_comment','inf_comment.comm_id','=','article_users_comment.comm_id')->orderBy('id','desc')->paginate(3);
+        $datas = \DB::table('inf_comment')->join('article_users_comment','inf_comment.comm_id','=','article_users_comment.comm_id')->orderBy('id','desc')->paginate(10);
 
 
         return view('admin.inform.infcomment',['title'=>'举报评论','datas'=>$datas]);

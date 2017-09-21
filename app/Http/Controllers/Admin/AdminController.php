@@ -18,7 +18,7 @@ class AdminController extends Controller
     {
         $input = $request->input('keywords')?$request->input('keywords'):'';
         $admin = Admin::orderBy('admin_id','asc')->where('nickname','like','%'.$input.'%')->paginate(5);
-        return view('admin/admin/details',compact('admin','input') );
+        return view('admin/admin/details',['title'=>'管理员列表'],compact('admin','input') );
 
     }
 
@@ -30,7 +30,7 @@ class AdminController extends Controller
     public function create()
     {
             //添加管理员
-            return view('admin/admin/create');
+            return view('admin/admin/create',['title'=>'添加管理员']);
 
     }
 
@@ -106,7 +106,7 @@ class AdminController extends Controller
     {
         //
         $admin = Admin::find($id);
-        return view('admin/admin/edit',compact('admin'));
+        return view('admin/admin/edit',['title'=>'修改管理页'],compact('admin'));
     }
 
     /**

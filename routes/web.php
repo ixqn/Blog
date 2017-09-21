@@ -176,6 +176,8 @@ Route::post('/home/article/noprint/{id}', 'Home\ArticleController@noprint');
 // 文章详情.
 Route::get('/p/{id}', 'Home\ArtlistController@index');
 
+// 更多分类.
+Route::get('/category','Home\CategoryController@index');
 
-
-
+//分类详情
+Route::get('/c/{id}','Home\CategoryController@cateils');
