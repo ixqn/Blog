@@ -42,12 +42,6 @@ Route::post('/resetPasswordByEmail', 'Home\resetPasswordController@resetPassword
 // 点击邮件链接修改密码的页码
 Route::get('/password/{key}/{value}','Home\resetPasswordController@doRestpasswordByEmailView');
 Route::post('/doRestpasswordByEmail','Home\resetPasswordController@doRestpasswordByEmail');
-// 测试
-// Route::get('/test','Home\resetPasswordController@test');
-
-
-// 测试
-// Route::get('/doSignUp', 'Home\signController@doSignUp');
 // 获取图片验证码
 Route::get('/code', 'Home\verifyController@code');
 // 注册,发送手机验证码
@@ -55,21 +49,25 @@ Route::post('/sendRegCode', 'Home\verifyController@sendRegCode');
 // 重置密码,发送手机验证码
 Route::post('/sendResetPasswordCode', 'Home\verifyController@sendResetPasswordCode');
 // 验证手机是否已经注册过
-// Route::get('/is_telReg', 'Home\verifyController@is_telReg');
-// Route::get('/test', 'Home\verifyController@test');
 Route::post('/is_telReg', 'Home\verifyController@is_telReg');
 // 查询验证码(图片和手机验证码)是否正确
 Route::post('/is_codeRight', 'Home\verifyController@is_codeRight');
-// signController的测试路由
-// Route::get('/test', 'Home\signController@test');
 // 验证邮箱是否存在或激活
-// Route::get('/is_emailActive', 'Home\verifyController@is_emailActive');
 Route::post('/is_emailActive', 'Home\verifyController@is_emailActive');
 
 
 
-// 个人资料
+// 个人资料页面
 Route::get('/settings/profile', 'Home\userSettingController@index');
+// 保存个人资料
+Route::post('/save/profile', 'Home\userSettingController@save');
+// Route::get('/settings/test', 'Home\userSettingController@test');
+// 发送激活邮箱的邮件
+Route::post('/active/email', 'Home\activeEmailController@activeEmail');
+// 测试
+// Route::get('/active/email', 'Home\activeEmailController@activeEmail');
+// 激活邮箱
+Route::get('/active_email/{key}/{value}', 'Home\activeEmailController@doActiveEmail');
 
 
 

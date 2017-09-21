@@ -29,57 +29,75 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <img src="xxx.jpg">
+                                        <img src="{{url($user['pic'])}}" style="width: 100px; height: auto;">
                                     </div>
                                 </td> 
                                 <td>
-                                    <a>
-                                        <input unselectable="on" type="file" class="hide">更改头像
-                                    </a>
+                                    <span>没时间更改头像了</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>昵称</td> 
-                                <td><input type="text" placeholder="{{$user_info->nickname}}"></td>
+                                <td><input type="text" name="nickname" value="{{$user['nickname']}}"></td>
+                            </tr>
+                            <tr>
+                                <td>手机号</td> 
+                                <td><span>{{$user['tel']}}</span></td>
                             </tr>
                             <tr>
                                 <td>性别</td> 
                                 <td>
-                                    <input type="radio" name="sex" @if($user_info->sex == 'w') checked @endif value="w">女
-                                    <input type="radio" name="sex" @if($user_info->sex == 'm') checked @endif value="m">男
-                                    <input type="radio" name="sex" @if($user_info->sex == 'x') checked @endif value="x">未知
+                                    <input type="radio" name="sex" @if($user['sex'] == 'w') checked @endif value="w">女
+                                    <input type="radio" name="sex" @if($user['sex'] == 'm') checked @endif value="m">男
+                                    <input type="radio" name="sex" @if($user['sex'] == 'x') checked @endif value="x">未知
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>生日</td> 
-                                <td><input type="datetime" placeholder="{{$user_info->birthday}}"></td>
+                                <td><input type="date" name="birthday" value="{{$user['birthday']}}"></td>
                             </tr>
 
                             <tr>
                                 <td>邮箱地址</td> 
 
-                                <td class="setted">
-                                    <span>{{$user_info->email}}</span>
-                                    <span>已验证</span>
-                                </td>
-
-                                <!-- 
+                                @if($user['email_active'])
                                     <td>
-                                        <form>
-                                            <input type="email" placeholder="请输入你的常用邮箱">
-                                            <input type="button" value="发送" class="btn pull-right"> 
-                                        </form>
+                                        <span>{{$user['email']}}</span>
+                                        <span>已验证</span>
                                     </td>
-                                -->
+                                @elseif($user['email'])
+                                    <td>
+                                        <!-- <form> -->
+                                            <input type="email" name="email" value="{{ $user['email'] }}">
+                                            <input type="button" value="激活邮箱" onclick="activeEmail()"  class="btn"> 
+                                        <!-- </form> -->
+                                    </td>
+                                @else
+                                    <td>
+                                        <input type="email" name="email" placeholder="输入邮箱地址">
+                                    </td>
+                                @endif
                             </tr>
+
+                            <tr>
+                                <td>描述</td> 
+                                <td><textarea name="desc">{{$user['desc']}}</textarea></td>
+                            </tr>
+
                         </tbody>
                     </table> 
-
-                    <input type="submit" class="btn btn-success setting-save" value="保存"> 
+                    <p>
+                        <div class="alert alert-danger" style="display: none;">
+                            <ul id="alert"></ul>
+                        </div>
+                    </p>
+                    <input type="submit" class="btn btn-success" onclick="save()" value="保存">
+                    <a href="{{url('/')}}" class="btn btn-success">竹文首页</a>
                 </div>
 
                 <div class="col-md-4">
+ 
                 </div>
             </div>
         </div>
@@ -90,6 +108,89 @@
 
 <script src="{{ asset('/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}"></script>
+<script>
+// 设置TOKEN值
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+
+// ----------------------------------------------------------------------------------------------------------
+// 消息提示
+var alert = $('#alert');
+var msg
+function errorMsg()
+{
+    alert.empty();
+    alert.append(msg);
+    alert.parent().show();
+    alert.parent().fadeOut(5000);
+}
+
+// ----------------------------------------------------------------------------------------------------------
+// 激活邮箱
+function activeEmail()
+{
+    $.ajax({
+        url:"/email/active", // 激活邮箱地址
+        type:"post",
+        dataType:"json",
+        async:false,
+        success:function(data){
+            msg = data['msg'];
+            errorMsg();
+        }
+    });
+
+}
+
+
+
+
+
+
+// ----------------------------------------------------------------------------------------------------------
+
+var nickname,sex,birthday,email,desc;
+function save(){
+    get();
+    $.ajax({
+        url:"/save/profile", // 保存资料
+        type:"post",
+        data:{
+            "nickname":nickname,
+            "sex":sex,
+            "birthday":birthday,
+            "email":email,
+            "desc":desc
+        },
+        dataType:"json",
+        async:false,
+        success:function(data){
+            msg = data['msg'];
+            errorMsg();
+        }
+    });
+
+}
+
+// 获取输入的资料
+function get()
+{
+    nickname = $("input[name = 'nickname']").val();
+    sex = $("input[name = sex").val();
+    birthday= $("input[name = birthday").val();
+    email = $("input[name = 'email']").val();
+    desc = $("textarea[name = 'desc']").val();
+
+}
+
+
+
+</script>
+
 
 </body>
 </html>

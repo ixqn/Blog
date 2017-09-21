@@ -16,14 +16,45 @@ class userSettingController extends Controller
     {
         // dd('1111');
         $user = session('user');
-        // dd($user['user_id']);
-        $user_info = Users_info::where('user_id',$user['user_id'])->first();
-        // dd($user_info->sex);
-        // if($user_info->sex == 'x'){
-        //     echo 'ddd';
-        // }
-        // die;
-        // dd($info->email);
-        return view('home.user.profile', compact('user_info'));
+        // dd($user);
+        return view('home.user.profile', compact('user'));
+    }
+
+    public function save(Request $request)
+    {
+
+        // $input = $request->input('nickname');
+        // $input = $request->only(['nickname', 'sex', 'birthday', 'email', 'desc']);
+        $input = $request->only('nickname', 'sex', 'birthday', 'email', 'desc');
+        
+        // dd($input);
+        // $input = 'www';
+        // dd($input);
+        // $flag = Users_info::where('user_id', 21)->update($input); // 成功返回 1, 失败返回 0        
+        $flag = Users_info::where('user_id', session('user')['user_id'])->update($input);
+
+        if($flag){
+            // 更新session中用户的信息
+            $user = Users_info::where('user_id', session('user')['user_id'])->get()->toArray();
+            $user = $user[0];
+            session(['user' => $user]);
+            $status = true; 
+            $msg =  "保存成功";// 手机号不存在
+        } else {
+            $status = false; 
+            $msg =  "保存失败";// 手机号不存在
+        }
+        return response()->json(['status'=>$status,'msg'=>$msg]);
+    }
+
+
+    // 测试的
+    public function test(Request $request)
+    {
+
+
+        return view('home.sign.test');
+        
+
     }
 }
