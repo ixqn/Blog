@@ -310,7 +310,7 @@
             layer.confirm('是否确认删除？', {
                 btn: ['确定','取消'] //按钮
             }, function(){
-                $.post('{{url('/home/article/delete/')}}/'+id,function(data){
+                $.post("{{url('/home/article/delete/')}}/"+id,function(data){
                     if(data.state == 0){
                         layer.msg(data.msg, {icon: 6});
                         location.href = location.href;
@@ -318,7 +318,7 @@
                         layer.msg(data.msg, {icon: 5});
                         location.href = location.href;
                     }
-                })
+                });
             });
         }
         // 编辑事件.

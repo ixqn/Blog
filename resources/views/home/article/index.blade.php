@@ -37,11 +37,11 @@
                         © 著作权归作者所有
                     </div>
                 {{--是否是自己的文章--}}
-{{--                @if($article['user_id'] != session('user')['user_id'])--}}
+                @if($article['user_id'] != session('user')['user_id'])
                     <div class="modal-wrap" data-report-note="">
                         <a id="report-modal" onclick="report({{$article['article_id']}})">举报文章</a>
                     </div>
-                {{--@endif--}}
+                @endif
                 </div>
             </div>
 
@@ -369,7 +369,6 @@
                     send({{ $article['article_id'] }});
                 }
             });
-
         });
         // 二级回复.
         var flag = 1;
@@ -486,7 +485,6 @@
                 dataType:'json'
             });
         }
-
         // 删除评论.
         window.dl = function(id)
         {
@@ -541,7 +539,6 @@
                 });
             });
         }
-
         // 举报文章.
         window.report = function(id)
         {
@@ -571,7 +568,6 @@
                 '        </div>'
             });
         }
-
         // 去举报.
         window.goreport = function(id)
         {
@@ -624,8 +620,6 @@
                 dataType:'JSON'
             });
         }
-
     });
 </script>
-
 @stop

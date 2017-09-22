@@ -1,0 +1,53 @@
+/* Code tidied up by ScrapBook */
+.note-list { margin: 0px; padding: 0px; list-style: outside none none; }
+.note-list li { position: relative; width: 100%; margin: 0px 0px 17px; padding: 0px 2px 17px 0px; border-bottom: 1px solid rgb(240, 240, 240); overflow-wrap: break-word; }
+.note-list li.have-img { min-height: 140px; }
+.note-list .have-img .wrap-img { position: absolute; top: 50%; margin-top: -68px; right: 0px; width: 150px; height: 120px; }
+.note-list .have-img .wrap-img img { width: 100%; height: 100%; border-radius: 4px; border: 1px solid rgb(240, 240, 240); }
+.note-list .have-img > div { padding-right: 160px; }
+.note-list .author { margin-bottom: 14px; font-size: 13px; }
+.note-list .author .avatar { margin: 0px 5px 0px 0px; }
+.note-list .author .avatar, .note-list .author .name { display: inline-block; vertical-align: middle; }
+.note-list .author .name span { display: inline-block; padding-left: 3px; color: rgb(150, 150, 150); }
+.note-list .author a { color: rgb(51, 51, 51); }
+.note-list .author a:hover { color: rgb(47, 47, 47); }
+.note-list .title { margin: -7px 0px 4px; display: inherit; font-size: 18px; font-weight: 700; line-height: 1.5; }
+.note-list .title:hover { text-decoration: underline; }
+.note-list .title:visited { color: rgb(150, 150, 150); }
+.note-list .title:empty::before { content: "无题"; }
+.note-list .origin-author { display: inline; margin-bottom: 5px; font-size: 12px; color: rgb(150, 150, 150); }
+.note-list .origin-author a { margin-right: 5px; color: rgb(49, 148, 208) !important; }
+.note-list .origin-author a:hover { color: rgb(49, 148, 208) !important; }
+.note-list .abstract { margin: 0px 0px 8px; font-size: 13px; line-height: 24px; }
+.note-list .meta { padding-right: 0px !important; font-size: 12px; font-weight: 400; line-height: 20px; }
+.note-list .meta a { margin-right: 10px; color: rgb(180, 180, 180); }
+.note-list .meta a, .note-list .meta a:hover { transition: all 0.1s ease-in 0s; }
+.note-list .meta a:hover { color: rgb(120, 120, 120); }
+.note-list .meta span { margin-right: 10px; color: rgb(180, 180, 180); }
+@media (max-width: 1080px) {
+  .note-list li.have-img { min-height: 112px; }
+  .note-list .have-img .wrap-img { margin-top: -58px; bottom: 40px; width: 125px; height: 100px; }
+  .note-list .have-img > div { padding-right: 135px; }
+}
+.subscription .row { padding-top: 30px; }
+.subscription .aside { position: fixed; top: 0px; bottom: 0px; margin: 86px 0px 0px; padding: 0px 0px 30px; width: 280px; overflow: auto; border-right: 1px solid rgb(240, 240, 240); }
+.subscription .aside .change-type { margin-left: 15px; font-size: 15px; }
+.subscription .aside .ic-filter { margin-left: 5px; color: rgb(200, 200, 200); }
+.subscription .aside .dropdown-menu { top: 23px; left: 20px; min-width: 130px; text-align: center; }
+.subscription .aside .dropdown-menu a { padding: 10px 20px; }
+.subscription .aside .arrow-top::after, .subscription .aside .arrow-top::before { left: 45%; }
+.subscription .aside .add-people { float: right; margin: 4px 10px 0px 0px; font-size: 13px; color: rgb(51, 51, 51); }
+.subscription .aside .add-people span { margin-left: 4px; }
+.subscription .aside ul { margin-top: 7px; list-style: outside none none; border-top: 1px solid rgb(240, 240, 240); }
+.subscription .aside li:hover .wrap { background-color: rgb(240, 240, 240); border-radius: 4px 0px 0px 4px; }
+.subscription .aside li:first-child .wrap { border-radius: 0px 0px 0px 4px !important; }
+.subscription .aside .wrap { padding: 10px 13px; display: block; }
+.subscription .aside .avatar, .subscription .aside .avatar-collection { width: 40px; height: 40px; margin-right: 4px; display: inline-block; }
+.subscription .aside .name { font-size: 14px; vertical-align: middle; display: inline-block; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.subscription .aside li.active .wrap { background-color: rgb(240, 240, 240); border-radius: 4px 0px 0px 4px; }
+.subscription .main { padding-left: 0px; }
+.subscription .main .note-list .author .name span { margin-left: 5px; }
+@media (max-width: 1080px) {
+  .subscription .aside { width: 218.75px; }
+  .subscription .aside .name { max-width: 100px; }
+}

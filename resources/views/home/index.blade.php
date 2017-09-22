@@ -161,7 +161,7 @@
             ,bgcolor: '#393D49'
             ,click: function(type){
                 if(type === 'bar1'){
-                    layer.msg('icon是可以随便换的')
+                    layer.msg('icon可以随便点击')
                 } else if(type === 'bar2') {
                     layer.msg('两个bar都可以设定是否开启')
                 }

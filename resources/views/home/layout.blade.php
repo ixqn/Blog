@@ -110,14 +110,14 @@
             </div>
             <div class="collapse navbar-collapse" id="menu" aria-expanded="false" style="230px">
                 <ul class="nav navbar-nav">
-                    @if(!session('user'))
-                    <!--未登录显示 首页 -->
-                    <li class="active">
-                        <a href="/">
-                            <span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
-                        </a>
-                    </li>
-                    @else
+                    {{--@if(!session('user'))--}}
+                    {{--<!--未登录显示 首页 -->--}}
+                    {{--<li class="active">--}}
+                        {{--<a href="/">--}}
+                            {{--<span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                    {{--@else--}}
                     <!--登录显示 发现 关注 消息-->
                     <li class="active">
                         <a href="/">
@@ -125,7 +125,7 @@
                         </a>
                     </li>
                     <li class="">
-                        <a href="/subscriptions">
+                        <a href="{{ url('/home/attention') }}">
                             <span class="menu-text">关注</span><i class="iconfont ic-navigation-follow menu-icon"></i>
                         </a>
                     </li>
@@ -142,7 +142,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/notifications#/chats">
+                                <a href="{{ url('/home/messages') }}">
                                     <i class="iconfont ic-chats"></i>
                                     <span>简信</span>
                                 </a>
@@ -179,7 +179,7 @@
                             </li>
                         </ul>
                     </li>
-                    @endif
+                    {{--@endif--}}
                     <li class="search">
                         <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
                             <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索" class="search-input" />
@@ -193,6 +193,7 @@
 </nav>
 
 @yield('content')
+
 
 <!--返回顶部代码-->
 

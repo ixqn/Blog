@@ -36,5 +36,6 @@ class ArtlistController extends Controller
         // 输出页面.
         $title = '《'.$article['article_name'].'》';
         return view('home.article.index', compact('title', 'article', 'comment'));
+
     }
 }
