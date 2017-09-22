@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Http\Model\Cate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Article;
@@ -39,6 +40,10 @@ class IndexController extends Controller
     // 显示主页
     public function index()
     {
+        //分类专题
+        $cates = Cate::limit(7)->where('cate_order','1')->get();
+
+
         // 文章列表,判断是否发布.
         $articles = Article::orderby('article_at', 'desc')->where('article_status', '2')->paginate(5);
         // 获取第一张图片作为封面.
@@ -66,7 +71,9 @@ class IndexController extends Controller
             $articles[$k]['comm'] = Comment::where('article_id',$v['article_id'])->count();
         }
         $title = '简单你的创作';
-        return view('home.index',compact('title', 'articles'));
+        return view('home.index',compact('title', 'articles','cates'));
     }
 
+
+//
 }

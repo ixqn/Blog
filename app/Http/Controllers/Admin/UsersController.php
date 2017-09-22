@@ -19,7 +19,7 @@ class UsersController extends Controller
     {
 //        $input = $request->input('keywords')?$request->input('keywords'):'';
 //        $users = Users::orderBy('admin_id','asc')->where('nickname','like','%'.$input.'%')->paginate(5);   ,compact('admin','input')
-        return view('admin/users/details');
+        return view('admin/users/details',['title'=>'用户列表']);
 
     }
 
@@ -108,7 +108,7 @@ class UsersController extends Controller
     {
         //
         $users = Users::find($id);
-        return view('admin/users/edit',compact('admin'));
+        return view('admin/users/edit',['title'=>'修改用户'],compact('admin'));
     }
 
     /**

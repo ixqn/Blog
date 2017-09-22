@@ -43,6 +43,12 @@ class CategoryController extends Controller
     {
         //
         $cates = (new Cate)->tree();
+        
+
+
+
+
+
         return view('admin.category.index',['title'=>'分类列表'],compact('cates'));
     }
 
@@ -115,9 +121,9 @@ class CategoryController extends Controller
         //create 是模型的一种保存到数据库的方法,返回是一条数据
         $cate = Cate::create($input);
         if($cate){
-            return redirect('admin/category');
+            return redirect('admin/category')->with('errors','添加成功');
         }else{
-            return back()->with('error','添加失败');
+            return back()->with('errors','添加失败');
         }
     }
 
@@ -188,7 +194,7 @@ class CategoryController extends Controller
 //        如果修改成功
         if($re){
 //            跳转到列表页
-            return redirect('admin/category');
+            return redirect('admin/category')->with('errors','修改成功');
         }else{
             return back()->with('errors','修改失败');
         }
@@ -205,13 +211,25 @@ class CategoryController extends Controller
         //分类删除
         //找到要删除的那条数据
         $cate  =  Cate::find($id);
+//        $pid = $cate->cate_pid;
+        //查询数据库中所有数据pid等于传过来的id
+        $re = Cate::where('cate_pid',$id)->get()->toArray();
+//        dd($re);
+        //判断,查到不能删,查不到可删
+        if($re){
 
+            $data = [
+                'state'=>1,
+                'msg'=>'有子分类不能删除'
+            ];
+            return $data;
+        }
 
-        $re = $cate->delete();
+            $res = $cate->delete();
 //        删除
 
 
-            if($re){
+            if($res){
                 $data = [
                     'state'=>0,
                     'msg'=>'删除成功'

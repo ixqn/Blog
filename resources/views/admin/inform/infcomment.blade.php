@@ -42,7 +42,7 @@
                                     <th>ID</th>
                                     <th>文章名称</th>
                                     <th>举报原因</th>
-                                    <th>举报内容</th>
+                                    <th style="width:350px">举报内容</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>

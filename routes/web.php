@@ -151,6 +151,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'Login'],func
     Route::get('inf/comment','InfController@show');
     Route::post('inf/discom/{id}','InfController@discom');
 
+
+
 });
 
 
@@ -181,16 +183,16 @@ Route::post('/home/article/noprint/{id}', 'Home\ArticleController@noprint');
 // 文章详情.
 Route::get('/p/{id}', 'Home\ArtlistController@index');
 
+
 // 评论功能.
 Route::post('/comment/new/{id}', 'Home\CommentController@new');
 // 评论回复.
 Route::post('/comment/hf/{id}', 'Home\CommentController@hf');
 // 删除回复.
 Route::post('/comment/dl/{id}', 'Home\CommentController@dl');
-
 // 举报文章.
 Route::post('/article/report', 'Home\ReportController@add');
-
-
-
-
+// 更多分类.
+Route::get('/category','Home\CategoryController@index');
+//分类详情
+Route::get('/c/{id}','Home\CategoryController@cateils');
