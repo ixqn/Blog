@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>后台系统管理</title>
+    <title>后台管理系统</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -63,7 +63,7 @@
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>A</b></span>
+            <span class="logo-lg"><b>Admin</b>LTE</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -74,16 +74,11 @@
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-<<<<<<< HEAD
-
-
-=======
                     <!-- Messages: style can be found in dropdown.less-->
 
                     <!-- Notifications: style can be found in dropdown.less -->
 
                     <!-- Tasks: style can be found in dropdown.less -->
->>>>>>> b9e831faaf4046343212d2194dd0f90d7a8f2a91
 
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
@@ -111,11 +106,7 @@
                     </li>
                     <!-- Control Sidebar Toggle Button -->
                     <li>
-<<<<<<< HEAD
-                        <a href="{{url('admin/logout')}}" ><i>退出登录</i></a>
-=======
                         <a href="{{url('admin/logout')}}" ><i class="fa fa-dashboard">退出登录</i></a>
->>>>>>> b9e831faaf4046343212d2194dd0f90d7a8f2a91
                     </li>
 
                 </ul>
@@ -135,10 +126,7 @@
                     <p>{{session('admin')->nickname}}</p>
                 </div>
             </div>
-<<<<<<< HEAD
-=======
             <!-- search form -->
->>>>>>> b9e831faaf4046343212d2194dd0f90d7a8f2a91
 
             <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -161,13 +149,9 @@
                     <a href="#">
                         <i class="fa fa-files-o"></i>
                         <span>前台用户管理</span>
-<<<<<<< HEAD
-
-=======
                         <span class="pull-right-container">
                             <span class="label label-primary pull-right"></span>
                         </span>
->>>>>>> b9e831faaf4046343212d2194dd0f90d7a8f2a91
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('admin/users')}}"><i class="fa fa-circle-o"></i>用户列表</a></li>
@@ -177,21 +161,6 @@
 
                 <li class="treeview">
                     <a href="#">
-<<<<<<< HEAD
-                        <i class="fa fa-pie-chart"></i>
-                        <span>举报管理</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/inf/article') }}"><i class="fa fa-anchor"></i>举报文章</a></li>
-                        <li><a href="{{ url('/admin/inf/comment') }}"><i class="fa fa-asterisk"></i>举报评论</a></li>
-
-                    </ul>
-                </li>
-
-=======
                                     <i class="fa fa-pie-chart"></i>
                                     <span>文章管理</span>
                         <span class="pull-right-container">
@@ -236,7 +205,6 @@
                         {{--<li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>--}}
                     </ul>
                 </li>
->>>>>>> b9e831faaf4046343212d2194dd0f90d7a8f2a91
             </ul>
         </section>
         <!-- /.sidebar -->
