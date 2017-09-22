@@ -55,6 +55,8 @@ Route::post('/is_telReg', 'Home\verifyController@is_telReg');
 Route::post('/is_codeRight', 'Home\verifyController@is_codeRight');
 // 验证邮箱是否存在或激活
 
+
+// Route::get('/is_emailActive', 'Home\verifyController@is_emailActive');
 Route::post('/is_emailActive', 'Home\verifyController@is_emailActive');
 
 // 个人资料页面
@@ -79,8 +81,8 @@ Route::get('/test', 'Home\activeEmailController@test');
 // Route::get('/is_emailActive', 'home\verifyController@is_emailActive');
 Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
 
-
-
+// Route::get('/is_emailActive', 'home\verifyController@is_emailActive');
+Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
 
 
 // zhangyu
@@ -106,7 +108,14 @@ Route::post('admin/inf/dis/{id}','Admin\InfController@dis');
 Route::get('admin/inf/comment','Admin\InfController@show');
 Route::post('admin/inf/discom/{id}','Admin\InfController@discom');
 
+<<<<<<< HEAD
 
+=======
+Route::get('home/collect' , 'Home\CollectController@collect');
+Route::get('home/collect/insert/{id}' , 'Home\CollectController@insert');
+Route::get('home/collect/delete/{id}' , 'Home\CollectController@delete');
+//Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
+>>>>>>> b9e831faaf4046343212d2194dd0f90d7a8f2a91
 
 
 //文章收藏
@@ -149,13 +158,14 @@ Route::get('logout','IndexController@logout');
 Route::resource('admin','AdminController');
 Route::resource('users','UsersController');
 
-    //zhangyu
+// zhangyu
+//文章列表
     Route::get('article','ArticleController@index');
 //文章内容单页
     Route::get('article/cont/{id}','ArticleController@cont');
-//状态显示文章(删除)
+//显示文章
     Route::post('article/show/{id}','ArticleController@show');
-
+//删除文章
 
 //分类管理模块
     Route::resource('category','CategoryController');

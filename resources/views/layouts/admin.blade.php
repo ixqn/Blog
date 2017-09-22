@@ -59,7 +59,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="{{url('admin/index')}}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
@@ -74,45 +74,34 @@
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+<<<<<<< HEAD
 
 
+=======
+                    <!-- Messages: style can be found in dropdown.less-->
+
+                    <!-- Notifications: style can be found in dropdown.less -->
+
+                    <!-- Tasks: style can be found in dropdown.less -->
+>>>>>>> b9e831faaf4046343212d2194dd0f90d7a8f2a91
 
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/admin/uploads/{{session('admin')->picture}}" style="width: 30px"class="user-image" alt="User Image">
+                            <img src="/admin/uploads/{{session('admin')->picture}}" style="width: 40px; height:40px"class="user-image" alt="User Image">
                             <span class="hidden-xs">{{session('admin')->nickname}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
-                                </p>
+                                <img src="/admin/uploads/{{session('admin')->picture}}" style="width: 140px; height:140px"class="user-image" alt="User Image">
                             </li>
                             <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
 
-                                <!-- /.row -->
-                            </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">个人信息</a>
+                                    {{--<a href="#" class="btn btn-default btn-flat">个人信息</a>--}}
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{url('admin/amend')}}" class="btn btn-default btn-flat">修改密码</a>
@@ -122,7 +111,11 @@
                     </li>
                     <!-- Control Sidebar Toggle Button -->
                     <li>
+<<<<<<< HEAD
                         <a href="{{url('admin/logout')}}" ><i>退出登录</i></a>
+=======
+                        <a href="{{url('admin/logout')}}" ><i class="fa fa-dashboard">退出登录</i></a>
+>>>>>>> b9e831faaf4046343212d2194dd0f90d7a8f2a91
                     </li>
 
                 </ul>
@@ -140,14 +133,17 @@
                 </div>
                 <div class="pull-left info">
                     <p>{{session('admin')->nickname}}</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
+<<<<<<< HEAD
+=======
+            <!-- search form -->
+>>>>>>> b9e831faaf4046343212d2194dd0f90d7a8f2a91
 
             <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">MAIN NAVIGATION</li>
+                <li class="header">BLOG</li>
                 <li class="active treeview">
                     <a href="#">
                         <i class="fa fa-dashboard"></i>
@@ -165,44 +161,23 @@
                     <a href="#">
                         <i class="fa fa-files-o"></i>
                         <span>前台用户管理</span>
+<<<<<<< HEAD
 
+=======
+                        <span class="pull-right-container">
+                            <span class="label label-primary pull-right"></span>
+                        </span>
+>>>>>>> b9e831faaf4046343212d2194dd0f90d7a8f2a91
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('admin/users')}}"><i class="fa fa-circle-o"></i>用户列表</a></li>
-
-                    </ul>
-
-                <li>
-
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-pie-chart"></i>
-                        <span>文章管理</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/article') }}"><i class="fa fa-anchor"></i>文章列表</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-pie-chart"></i>
-                        <span>分类管理</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/category/create') }}"><i class="fa fa-anchor"></i> 分类添加</a></li>
-                        <li><a href="{{ url('/admin/category') }}"><i class="fa fa-asterisk"></i> 分类列表</a></li>
-
                     </ul>
                 </li>
 
+
                 <li class="treeview">
                     <a href="#">
+<<<<<<< HEAD
                         <i class="fa fa-pie-chart"></i>
                         <span>举报管理</span>
                         <span class="pull-right-container">
@@ -216,6 +191,52 @@
                     </ul>
                 </li>
 
+=======
+                                    <i class="fa fa-pie-chart"></i>
+                                    <span>文章管理</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('admin/article') }}"><i class="fa fa-anchor"></i>文章列表</a></li>
+                        {{--<li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>--}}
+                        {{--<li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>--}}
+                        {{--<li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>--}}
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-laptop"></i>
+                                    <span>分类管理</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('admin/category/create') }}"><i class="fa fa-anchor"></i> 分类添加</a></li>
+                        <li><a href="{{ url('admin/category') }}"><i class="fa fa-asterisk"></i> 分类列表</a></li>
+
+                        {{--<li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>--}}
+                        {{--<li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>--}}
+                        {{--<li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>--}}
+                        {{--<li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>--}}
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-edit"></i> <span>举报管理</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('admin/inf/article') }}"><i class="fa fa-anchor"></i>举报文章</a></li>
+                        <li><a href="{{ url('admin/inf/comment') }}"><i class="fa fa-asterisk"></i>举报评论</a></li>
+                        {{--<li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>--}}
+                    </ul>
+                </li>
+>>>>>>> b9e831faaf4046343212d2194dd0f90d7a8f2a91
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -407,12 +428,7 @@
                     </div>
                     <!-- /.form-group -->
 
-                    <div class="form-group">
-                        <label class="control-sidebar-subheading">
-                            Delete chat history
-                            <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-                        </label>
-                    </div>
+
                     <!-- /.form-group -->
                 </form>
             </div>

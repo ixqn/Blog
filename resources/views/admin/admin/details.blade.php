@@ -43,11 +43,12 @@
                 <table class="table table-bordered">
                 <form action="{{url('admin/admin')}}" method="get">
                         <div class="row">
-                            <div class="col-md-offset-8 col-md-4">
+                            <div class="col-md-offset-7 col-md-5">
                                 <div class="input-group input-group-sm">
                                     <input name="keywords" type="text" value="{{$input}}" class="form-control">
                                     <span class="input-group-btn">
                                       <button type="submit" class="btn btn-info btn-flat">搜索</button>
+                                      <button type="submit" class="btn btn-info btn-flat" onclick="history.go(-1)"><a href="{{url('admin/admin')}}">返回</a></button>
                                     </span>
                                 </div>
                             </div>
@@ -58,6 +59,7 @@
                         <tr>
                             <th>ID</th>
                             <th>姓名</th>
+                            <th>状态</th>
                             <th>性别</th>
                             <th>头像</th>
                             <th>最后登录时间</th>
@@ -67,7 +69,10 @@
                             <tr>
                                 <td>{{$v->admin_id}}</td>
                                 <td>{{$v->nickname}}</td>
+                                <td>{{$v->status}}</td>
                                 <td>{{$v->sex}}</td>
+
+                                {{--<td>{{$v->sex}}</td>--}}
                                 <td>
                                     <img src="/admin/uploads/{{$v->picture}}" width="30px" />
                                 </td>
@@ -87,7 +92,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-                {!! $admin->appends(['keywords'=>$input])->render() !!}
+                {!! $admin->appends(['keywords'=>$input])->links() !!}
             </div>
         </div>
         </div>

@@ -10,7 +10,7 @@ class Admin extends Model
     protected $table = 'admin_admin';
     public $primaryKey = 'admin_id';
     protected $fillable = [
-        'nickname', 'password','sex','picture','last_login_at',
+        'nickname', 'password','status','sex','picture','last_login_at',
     ];
     protected $hidden = [
         'password', 'remember_token',
