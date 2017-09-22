@@ -58,10 +58,15 @@ Route::post('/is_emailActive', 'Home\verifyController@is_emailActive');
 
 
 // 个人资料页面
-Route::get('/settings/profile', 'Home\userSettingController@index');
-// 保存个人资料
-Route::post('/save/profile', 'Home\userSettingController@save');
-// Route::get('/settings/test', 'Home\userSettingController@test');
+//中间件
+Route::group(['middleware'=>'HomeLogin'],function(){
+    Route::get('/settings/profile', 'Home\userSettingController@index');
+    // 保存个人资料
+    Route::post('/save/profile', 'Home\userSettingController@save');
+    // Route::get('/settings/test', 'Home\userSettingController@test');
+});
+
+
 // 发送激活邮箱的邮件
 Route::post('/active/email', 'Home\activeEmailController@activeEmail');
 // 测试
