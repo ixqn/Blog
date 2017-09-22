@@ -11,7 +11,7 @@ class collectController extends Controller
     //插入  inset数据
     public function insert(Request $request,$article_id)
     {
-        dd($request);
+      dd($Rquest);
         //从数据库提取数据；
 
         $data = \DB::table('article_users')->where('article_id', $article_id)->first();
@@ -48,6 +48,7 @@ class collectController extends Controller
             $conl['user_id'] = 1;
             $conl['user_pic'] = 'uploads/users/4.jpg';
         }
+
         $str = \DB::table('article_collect')->where('article_id', $conl['article_id'])->first();
         if ($str) {
             $data = [
