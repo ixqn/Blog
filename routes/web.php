@@ -72,17 +72,6 @@ Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // zhangyu
 //文章列表
 Route::get('admin/article','Admin\ArticleController@index');
@@ -109,39 +98,14 @@ Route::post('admin/inf/discom/{id}','Admin\InfController@discom');
 
 
 
-
-
-
-
-
-
-
-
-
-// hy
-
-//前台
-//Route::get('/Home/content' , function(){
-//    return view('Home/content');
-//});
-
-
-//文章内容
-//Route::get('home/content/{id}' , 'Home\ContentController@content');
-
 //文章收藏
-
 //文章收藏页面
 Route::get('home/collect' , 'Home\collectController@collect');
 //将收藏的文章插入数据库
 Route::post('home/collect/insert/{id}' , 'Home\collectController@insert');
 //取消文章收藏
 Route::post('home/collect/delete/{id}' , 'Home\collectController@delete');
-
-
-
 //关注
-
 //显示关注页面
 Route::get('home/attention' , 'Home\AttentionController@attention');
 //将关注的用户插入数据库
@@ -150,17 +114,9 @@ Route::post('home/attention/insert/{id}' , 'Home\AttentionController@insert');
 Route::post('home/attention/delete/{id}' , 'Home\AttentionController@delete');
 //查看被关注用户的主页
 Route::get('/u/{id}' , 'Home\UserarticleController@userarticle');
-//浏览被关注用户的文章
-//Route::get('home/layout1' , 'Home\AttentionController@layout1');
-//Route::get('home/attention/index' , 'Home\AttentionController@index');
-
-
-//站内信息管理
 //显示简信页面
 Route::get('home/messages' , 'Home\MessagesController@messages');
 //Route::get('Home/messages', 'Home\MessagesController@delete');
-
-
 
 
 

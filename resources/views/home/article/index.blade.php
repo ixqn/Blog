@@ -55,7 +55,8 @@
                 <div class="info">
                     <a class="avatar" href="{{url('u')}}/{{$article['user_id']}}">
                         <img src="{{ asset($article['user']['pic']) }}" alt="96">
-                    </a>          <a class="btn btn-success follow" href="javascript:;" onclick="insert({{ $article['user_id'] }})"><i class="iconfont ic-follow"></i><span>关注</span></a>
+                    </a>
+                    <a class="btn btn-success follow" href="javascript:;" onclick="insert({{ $article['user_id'] }})"><i class="iconfont ic-follow"></i><span>关注</span></a>
                     <a class="title" href="{{url('u')}}/{{$article['user_id']}}">{{ $article['article_author'] }}</a>
                     <i class="iconfont @if ($article['user']['sex'] == 'm') ic-man @elseif($article['user']['sex'] == 'w') ic-woman @else @endif "></i>
                     <p>写了 {{ $article['number'] }} 篇文章，被 42301 人关注</p></div>
@@ -218,7 +219,7 @@
                         layer.msg(data.msg, {icon: 6});
                         location.href = location.href;
                     } else if(data.state == 2){
-                        layer.msg('已经关注过了');
+                        layer.msg(data.msg, {icon: 5});
                     } else{
                         layer.msg(data.msg, {icon: 5});
                     }

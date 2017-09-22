@@ -21,7 +21,6 @@ class AttentionController extends Controller
             $email = $data->email;
             $pic = $data->pic;
 
-
             $dat['user_id'] = 1;
             $dat['attension_user_id'] = $users_id;
             $dat['nickname'] = $nickname;
@@ -54,6 +53,16 @@ class AttentionController extends Controller
         }
 
 
+        //显示我的关注的人的文章
+        public function attention()
+        {
+            $data = \DB::table('users_attention')->where('user_id' , 1)->get();
+
+            $wz = \DB::table('article_users')->get();
+            return view('home.attention' , ['data'=>$data , 'wz'=>$wz  , 'title'=>'关注文章']);
+        }
+
+
 
          //取消关注
           public function delete($attension_user_id)
@@ -73,14 +82,6 @@ class AttentionController extends Controller
             }
             return $data;
           }
-       //显示我的关注的人的文章
-       public function attention()
-       {
-           $data = \DB::table('users_attention')->where('user_id' , 1)->get();
-
-           $wz = \DB::table('article_users')->get();
-           return view('home.attention' , ['data'=>$data , 'wz'=>$wz  , 'title'=>'关注文章']);
-       }
 
 
 }

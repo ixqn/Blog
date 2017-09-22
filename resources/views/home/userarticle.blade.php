@@ -16,7 +16,7 @@
                 <div class="title">
                     <a class="name" href="/u/d6fc8a033b98"> {{ $v->nickname }}</a>
                     <i class="iconfont ic-man">{{ $v->sex }}</i>
-
+                    <a class="btn btn-success follow" href="javascript:;" onclick="gz({{ $v->user_id }})"><i class="iconfont ic-follow"></i><span>关注</span></a>
                 </div>
                 <div class="info">
 
@@ -32,6 +32,7 @@
 
             <div id="list-container">
                 <!-- 文章列表模块 -->
+
                 @foreach($res as $k=>$v)
                 <ul class="note-list" infinite-scroll-url="/u/b60bba75cfa0?order_by=shared_at">
 
@@ -61,6 +62,8 @@
                     </li>
                 </ul>
                 @endforeach
+
+
             </div>
 
         </div>
@@ -97,35 +100,44 @@
 </div>
 <div data-vcomp="side-tool"></div>
 <link rel="stylesheet" media="all" href="{{ asset('./home/css/web-e7e403d2843dd1edd8db.css') }}" />
-
 <link rel="stylesheet" media="all" href="{{ asset('./home/css/entry-11d7cd25712f81bc2af3.css') }}" />
-
 <script type="application/json" data-name="page-data">{"user_signed_in":true,"locale":"zh-CN","os":"other","read_mode":"day","read_font":"font2","current_user":{"id":7685793,"nickname":"UnaH","slug":"d6fc8a033b98","avatar":"http://upload.jianshu.io/users/upload_avatars/7685793/72f15e83-7f50-45ab-af3a-d031fb4e8934.jpg","unread_counts":{"chats":0,"total":0}},"user":{"slug":"d6fc8a033b98","gender":1},"has_collections":true}</script>
 
-<script src="{{ asset('./js/babel-polyfill-8053f0c4c81c27b7aff2.js') }}"></script>
-<script src="{{ asset('./js/web-base-b320bf388d58589cee5a.js') }}"></script>
-<script src="{{ asset('./js/web-2e3a2c956af037d7f010.js') }}"></script>
 
-<script src="{{ asset('./js/entry-a6d4dc90cc9f7a969767.js') }}"></script>
 @stop
 @section('js')
-@stop
+
 <script>
+    layui.use(['util','layer'], function(){
+        var util = layui.util,
+            layer = layui.layer,
+            $ = layui.jquery;
+        //添加关注
+        window.gz = function(user_id)
+        {
+            layer.confirm('是否确定添加关注?', {
+                btn: ['对对', '不行']
+            }, function () {
+                $.post('{{url('/home/attention/insert/')}}/' + user_id, {
+                    '_token': '{{csrf_token()}}'
+                }, function (data) {
+                    if (data.state == 0) {
+                        layer.msg(data.msg, {icon: 6});
+                        location.href = location.href;
+                    } else if(data.state == 2){
+                        layer.msg('已经关注过了');
+                    } else{
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
+            }, function () {});
+
+        }
+    });
 
 
-        (function(){
-            var bp = document.createElement('script');
-            var curProtocol = window.location.protocol.split(':')[0];
-            if (curProtocol === 'https') {
-                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-            }
-            else {
-                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-            }
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(bp, s);
-        })();
 </script>
+@stop
 
 </body>
 </html>

@@ -78,7 +78,6 @@
     @endforeach
 
 <link rel="stylesheet" media="all" href="{{ asset('./home/css/web-1520e0147b6838647211.css') }}">
-
 <link rel="stylesheet" media="all" href="{{ asset('./home/css/entry-b8b6c8d0b3aed7579000.css') }}">
 
 @stop
@@ -114,7 +113,6 @@
             </script>
 
 @stop
-
 
 
 <!---->
