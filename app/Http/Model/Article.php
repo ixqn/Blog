@@ -42,4 +42,11 @@ class Article extends Model
         return $this->belongsTo('App\Http\Model\Users_info', 'user_id', 'user_id');
     }
 
+    // 关联评论表.
+    public function Comment()
+    {
+        return $this->hasMany('App\Http\Model\Comment', 'article_id', 'article_id');
+    }
+
+
 }

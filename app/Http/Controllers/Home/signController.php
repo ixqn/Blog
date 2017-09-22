@@ -111,6 +111,7 @@ class signController extends Controller
         }
         // 将用户登录信息保存
         $user = Users_info::where('user_id', $user['user_id'])->get()->toArray();
+        $user = $user[0];
         session(['user' => $user]);
         return redirect('/');
     }

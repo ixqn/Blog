@@ -179,6 +179,10 @@ Route::get('/p/{id}', 'Home\ArtlistController@index');
 
 // 评论功能.
 Route::post('/comment/new/{id}', 'Home\CommentController@new');
+// 评论回复.
+Route::post('/comment/hf/{id}', 'Home\CommentController@hf');
+// 删除回复.
+Route::post('/comment/dl/{id}', 'Home\CommentController@dl');
 
 
 

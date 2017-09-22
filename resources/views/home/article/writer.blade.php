@@ -12,15 +12,6 @@
         width: 95%;
         margin: 10px;
     }
-    #time {
-        position: absolute;
-        right: 50%;
-        top: 50%;
-        width: 128px;
-    }
-    #time img {
-        width: 100%;
-    }
     .layui-form-label {
         text-align: left;
     }
@@ -267,8 +258,7 @@
                 },
                 beforeSend:function()
                 {
-                    var img = $("<img src='{{ asset('/images/home/loading.gif') }}'>");
-                    $("#time").append(img);
+                    layer.load();
                 },
                 success:function(data)
                 {
@@ -420,8 +410,7 @@
                 },
                 beforeSend:function()
                 {
-                    var img = $("<img src='{{ asset('/images/home/loading.gif') }}'>");
-                    $("#time").append(img);
+                    layer.load();
                 },
                 success:function(data)
                 {

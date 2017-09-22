@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Article;
+use App\Http\Model\Comment;
 
 class IndexController extends Controller
 {
@@ -61,6 +62,8 @@ class IndexController extends Controller
             $articles[$k]['article_str'] = mb_substr($v['article_cont'], 0, 100, 'utf-8').'...';
             // 获取分类名称.
             $articles[$k]['article_cate'] = Article::find($v['article_id'])->Cate['cate_name'];
+            // 评论数量.
+            $articles[$k]['comm'] = Comment::where('article_id',$v['article_id'])->count();
         }
         $title = '简单你的创作';
         return view('home.index',compact('title', 'articles'));

@@ -28,7 +28,7 @@ class Comment extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'parent_id', 'article_id', 'comm_cont'];
+    protected $fillable = ['user_id', 'parent_id', 'article_id', 'comm_cont', 'comm_floor'];
 
     // 关联用户信息表.
     public function userInfo()
