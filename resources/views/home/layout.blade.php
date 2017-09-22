@@ -42,8 +42,8 @@
         <a class="btn write-btn" target="_blank" href="{{url('/writer/')}}">
             <i class="iconfont ic-write"></i>写文章
         </a>
-        <a class="btn sign-up" href="/sign_up">注册</a>
-        <a class="btn log-in" href="/sign_in">登录</a>
+        <a class="btn sign-up" href="{{ url('/sign_up') }}">注册</a>
+        <a class="btn log-in" href="{{ url('/sign_in') }}">登录</a>
         @else
         <!-- 登录显示写文章 -->
         <a class="btn write-btn" target="_blank" href="{{url('/writer/')}}">
@@ -54,11 +54,11 @@
         <!--js移入事件 class加 open-->
         <div class="user" id="yonghu">
             <div data-hover="dropdown">
-                <a class="avatar" href="/u/d6fc8a033b98"><img src="{{asset('home/images/picture/72f15e83-7f50-45ab-af3a-d031fb4e8934.jpg')}}" alt="120" /></a>
+                <a class="avatar" href="{{url('u')}}/{{session('user')['user_id']}}"><img src="{{asset(session('user')['pic'])}}" alt="120" /></a>
             </div>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="/u/d6fc8a033b98">
+                    <a href="{{url('u')}}/{{session('user')['user_id']}}">
                         <i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
                     </a>
                 </li>
@@ -79,7 +79,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/settings">
+                    <a href="{{url('/settings/profile')}}">
                         <i class="iconfont ic-navigation-settings"></i><span>设置</span>
                     </a>
                 </li>

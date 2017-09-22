@@ -28,7 +28,7 @@ class Article extends Model
      *
      * @var array
      */
-    protected $fillable = ['category_id', 'user_id', 'article_author', 'article_name', 'article_cont' ,'article_status', 'article_open', 'article_at', 'article_up', 'article_view'];
+    protected $fillable = ['category_id', 'user_id', 'article_author', 'article_name', 'article_cont' ,'article_status', 'article_open', 'article_view'];
 
     // 关联分类表.
     public function Cate()
@@ -41,5 +41,12 @@ class Article extends Model
     {
         return $this->belongsTo('App\Http\Model\Users_info', 'user_id', 'user_id');
     }
+
+    // 关联评论表.
+    public function Comment()
+    {
+        return $this->hasMany('App\Http\Model\Comment', 'article_id', 'article_id');
+    }
+
 
 }

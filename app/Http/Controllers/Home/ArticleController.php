@@ -35,7 +35,7 @@ class ArticleController extends Controller
     {
         // 表单验证.
         $this->validate($request, [
-            'article_name' => 'required|min:1|max:100',
+            'article_name' => 'required|max:100',
             'category_id' => 'required',
             'article_cont' => 'required',
         ], [
@@ -87,11 +87,13 @@ class ArticleController extends Controller
     {
         // 表单验证.
         $this->validate($request, [
-            'article_name' => 'required|min:1|max:100',
+            'article_name' => 'required|max:100',
+            'category_id' => 'required',
             'article_cont' => 'required',
         ], [
             'article_name.required' => '文章标题不能为空',
             'article_name.max' => '文章标题不能大于100字符',
+            'category_id.required' => '分类不能为空',
             'article_cont.required' => '内容不能为空',
         ]);
 

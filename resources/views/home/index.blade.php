@@ -74,7 +74,7 @@
                                     <a target="_blank" href="{{url('p')}}/{{$v->article_id}}">
                                         <i class="iconfont ic-list-read"></i> {{$v->article_view}}
                                     </a>        <a target="_blank" href="{{url('p')}}/{{$v->article_id}}#comments">
-                                        <i class="iconfont ic-list-comments"></i> 21
+                                        <i class="iconfont ic-list-comments"></i> {{$v->comm}}
                                     </a>
                                 </div>
                             </div>

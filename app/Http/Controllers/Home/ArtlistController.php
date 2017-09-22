@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Article;
+use App\Http\Model\Comment;
 
 class ArtlistController extends Controller
 {
@@ -24,8 +25,16 @@ class ArtlistController extends Controller
         $article['length'] = mb_strlen($cont,'utf-8');
         // 计算文章总数.
         $article['number'] = Article::where('user_id',$article['user_id'])->count();
+        // 文章评论数.
+        $article['comm'] = Comment::where('article_id',$id)->count();
+
+        // 评论啊.
+        $comment = Article::find($article['article_id'])->Comment;
+        foreach($comment as $k => $v){
+            $comment[$k]['user'] = Comment::find($v['comm_id'])->userInfo;
+        }
         // 输出页面.
         $title = '《'.$article['article_name'].'》';
-        return view('home.article.index', compact('title', 'article'));
+        return view('home.article.index', compact('title', 'article', 'comment'));
     }
 }
