@@ -45,7 +45,6 @@
                 <th>ID</th>
                 <th>分类名称</th>
                 <th>分类标题</th>
-                <th>查看次数</th>
                 <th>图片</th>
                 <th>操作</th>
             </tr>
@@ -60,7 +59,6 @@
                     <td>{{ $item->cate_id }}</td>
                     <td class="name">{{ $item->cate_names }}</td>
                     <td>{{ $item->cate_title }}</td>
-                    <td>{{ $item->cate_view }}</td>
                     <td><img src="/uploads/category/{{ $item->cate_pic }}" width="30px"></td>
 
                     <td>

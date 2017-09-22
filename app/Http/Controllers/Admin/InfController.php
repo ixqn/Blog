@@ -37,9 +37,6 @@ class InfController extends Controller
 
 
 
-
-
-
     //举报评论页
     public function show()
     {

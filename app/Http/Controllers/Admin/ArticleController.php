@@ -48,12 +48,12 @@ class ArticleController extends Controller
                 if($re){
                     $data = [
                         'status' => 0,
-                        'msg' => '隐藏删除成功'
+                        'msg' => '发布成功'
                     ];
                 }else{
                     $data = [
                         'status' => 1,
-                        'msg' => '隐藏删除失败'
+                        'msg' => '发布失败'
                     ];
                 }
                 return $data;
@@ -65,12 +65,12 @@ class ArticleController extends Controller
                 if($re){
                     $data = [
                         'status' => 0,
-                        'msg' => '显示成功'
+                        'msg' => '取消成功'
                     ];
                 }else{
                     $data = [
                         'status' => 1,
-                        'msg' => '显示失败'
+                        'msg' => '取消失败'
                     ];
                 }
                 return $data;

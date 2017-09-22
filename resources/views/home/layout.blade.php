@@ -24,6 +24,8 @@
     <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-0a03cade4dfc10c5a79b.css') }}" />
     <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-d9c558a309bc9df579a8.css') }}" />
     <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-53f9778aedd460fed5ab.css') }}" />
+
+
     <style>
         .layui-carousel {
             left: 15px;

@@ -165,9 +165,7 @@
                     <a href="#">
                         <i class="fa fa-files-o"></i>
                         <span>前台用户管理</span>
-                        <span class="pull-right-container">
-                            <span class="label label-primary pull-right">4</span>
-                        </span>
+
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('admin/users')}}"><i class="fa fa-circle-o"></i>用户列表</a></li>

@@ -42,7 +42,7 @@
                             <div class="content">
                                 <div class="author">
                                     <a class="avatar" target="_blank" href="/u/6d171f5a123b">
-                                        <img src="{{ $item->pic }}" alt="64" />
+                                        <img src="{{ asset($item->pic) }}" alt="64" />
                                     </a>      <div class="name">
                                         <a class="blue-link" target="_blank" href="/u/6d171f5a123b">{{ $item->article_author }}</a>
                                         <span class="time" data-shared-at="2017-09-20T20:02:36+08:00">{{ $item->date }}</span>
