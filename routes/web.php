@@ -108,14 +108,12 @@ Route::post('admin/inf/dis/{id}','Admin\InfController@dis');
 Route::get('admin/inf/comment','Admin\InfController@show');
 Route::post('admin/inf/discom/{id}','Admin\InfController@discom');
 
-<<<<<<< HEAD
 
-=======
 Route::get('home/collect' , 'Home\CollectController@collect');
 Route::get('home/collect/insert/{id}' , 'Home\CollectController@insert');
 Route::get('home/collect/delete/{id}' , 'Home\CollectController@delete');
 //Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
->>>>>>> b9e831faaf4046343212d2194dd0f90d7a8f2a91
+
 
 
 //文章收藏
