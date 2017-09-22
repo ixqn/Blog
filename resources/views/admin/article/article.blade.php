@@ -1,19 +1,18 @@
 @extends('layouts/admin')
-
-
 @section('content')
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                分类列表
-                <small>分类管理</small>
+                文章列表
+                <small>文章管理</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
-                <li><a href="#">分类管理</a></li>
-                <li class="active">分类列表</li>
+                <li><a href="#">文章管理</a></li>
+                <li class="active">文章列表</li>
             </ol>
         </section>
 
@@ -40,27 +39,31 @@
         @endif
 
 
-
-        <button type="submit" class="btn btn-default"><a href="{{ url('admin/article') }}">全部</a></button>
         <form action="{{ url('/admin/article') }}" method="get">
             <div class="row">
 
 
-                <div class="col-md-offset-8 col-md-4">
+
+                <div class=" col-md-offset-7  col-md-4">
                     <div class="input-group input-group">
                         <input name="keywords" type="text" class="form-control" value="
 						@if(!empty($request['keywords']))
                         {{ $request['keywords'] }}
                         @endif
                                 ">
+
                         <span class="input-group-btn">
 		                      <button type="submit" class="btn btn-info btn-flat">搜索!</button>
 		                    </span>
+
                     </div>
 
 
                 </div>
+                <div class="col-md-1">
 
+                    <button type="submit" class="btn btn-default"><a href="{{ url('admin/article') }}">全部</a></button>
+                </div>
             </div>
         </form>
 
@@ -70,12 +73,14 @@
         <table id="example2" class="table table-bordered table-hover">
             <thead>
             <tr>
-                <th style="width:50px;text-align:center">ID</th>
-                <th style="width:300px;text-align:center">文章名称 (可点击查看文章内容)</th>
-                <th style="width:100px;text-align:center">分类名称</th>
-                <th style="width:100px;text-align:center">文章作者</th>
-                <th style="width:150px;text-align:center">添加时间</th>
-                <th style="width:200px;text-align:center">操作</th>
+                <th style="width:50px">ID</th>
+                <th style="width:300px">文章名称</th>
+                <th style="width:100px">分类名称</th>
+                <th style="width:100px">文章作者</th>
+                <th style="width:50px">看次</th>
+                <th style="width:150px">添加时间</th>
+                <th style="width:70px">状态</th>
+                <th style="width:200px">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -87,17 +92,26 @@
                     <td><a href="{{url('admin/article/cont')}}/{{ $item->article_id }}">{{ $item->article_name }}</a></td>
                     <td>{{ $item->cate_name }}</td>
                     <td>{{ $item->article_author }}</td>
+                    <td>{{ $item->article_view }}</td>
                     <td>{{ $item->article_at }}</td>
+                    <td>
+                        @if( $item->article_status == 1)
+                        未发布
+                        @elseif( $item->article_status == 2)
+                        已发布
+                        @endif
 
+                    </td>
                     <td style="text-align:center">
                         <a href="javascript:;" onclick="show({{ $item->article_id }})">
                             @if( $item->article_status == 1)
-                                隐藏删除(已显示,跪求删除)
+
+                                <button type="submit" class="btn btn-default" style="color:mediumvioletred">等待发布</button>
+                                <button type="submit" class="btn btn-default" disabled="disabled">取消发布</button>
                             @elseif( $item->article_status == 2)
-                                显示(已被删除,跪求显示)
+                                <button type="submit" class="btn btn-default" disabled="disabled" style="color:mediumvioletred">等待发布</button>
+                                <button type="submit" class="btn btn-default">取消发布</button>
                             @endif
-
-
                         </a>
                     </td>
                 </tr>
@@ -135,16 +149,8 @@
                     }else{
                         location.href = location.href;
                         layer.msg(data.msg,{icon:6});
-
-
                     }
-
                 })
-
-
-
-
-
         }
 
 

@@ -52,6 +52,18 @@
                                 <label for="exampleInputEmail1">用户名</label>
                                 <input type="text" name="nickname" class="form-control" id="exampleInputEmail1" placeholder="" value="{{$admin->nickname}}">
                             </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">状态</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="status" id="optionsRadios1" @if($admin->status == '超级管理员') checked="checked" @endif value="超级管理员"  >超级管理员
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="status" id="optionsRadios2"  @if($admin->status == '普通管理员') checked="checked" @endif value="普通管理员"   >普通管理员
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.box-body -->
 

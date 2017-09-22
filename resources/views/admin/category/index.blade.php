@@ -1,6 +1,4 @@
 @extends('layouts/admin')
-
-
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -19,21 +17,20 @@
 
         <!-- Main content -->
 
-        @if(session('info'))
-            <div id="alertError" class="alert alert-danger alert-dismissible">
-                <h4><i class="icon fa fa-ban">错误!</i></h4>
-                {{ session('info') }}
 
-            </div>
-
-        @endif
 
         @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul style="color:cyan">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
+            <div id="alertError" class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-ban"></i> 提示!!!</h4>
+                <ul>
+                    @if(is_object($errors))
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    @else
+                        <li>{{ $errors }}</li>
+                    @endif
                 </ul>
             </div>
         @endif
@@ -46,7 +43,6 @@
                 <th>ID</th>
                 <th>分类名称</th>
                 <th>分类标题</th>
-                <th>查看次数</th>
                 <th>图片</th>
                 <th>操作</th>
             </tr>
@@ -61,10 +57,16 @@
                     <td>{{ $item->cate_id }}</td>
                     <td class="name">{{ $item->cate_names }}</td>
                     <td>{{ $item->cate_title }}</td>
-                    <td>{{ $item->cate_view }}</td>
-                    <td><img src="/uploads/{{ $item->cate_pic }}" width="30px"></td>
+                    <td><img src="/uploads/category/{{ $item->cate_pic }}" width="30px"></td>
 
-                    <td><a href="{{ url('/admin/category') }}/{{ $item->cate_id }}/edit">编辑</a> <a href="javascript:;" onclick="delCate({{ $item->cate_id }})">删除</a></td>
+                    <td>
+
+                        <a class="btn btn-default" style="color:#ffaf0f" href="{{ url('/admin/category') }}/{{ $item->cate_id }}/edit">编辑</a>
+
+
+
+                        <a class="btn btn-default" style="color:#ff0000" href="javascript:;" onclick="delCate({{ $item->cate_id }})">删除</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

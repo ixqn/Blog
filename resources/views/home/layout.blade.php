@@ -10,8 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
 
-    <meta name="description"  content="简书是一个优质的创作社区，在这里，你可以任性地创作，一篇短文、一张照片、一首诗、一幅画……我们相信，每个人都是生活中的艺术家，有着无穷的创造力。">
-    <meta name="keywords"  content="简书,简书官网,图文编辑软件,简书下载,图文创作,创作软件,原创社区,小说,散文,写作,阅读">
+    <meta name="description"  content="竹文是一个优质的创作社区，在这里，你可以任性地创作，一篇短文、一张照片、一首诗、一幅画……我们相信，每个人都是生活中的艺术家，有着无穷的创造力。">
+    <meta name="keywords"  content="竹文,竹文官网,图文编辑软件,简书下载,图文创作,创作软件,原创社区,小说,散文,写作,阅读">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }} - {{ $title }}</title>
@@ -22,6 +22,10 @@
     <link rel="stylesheet" media="all" href="{{ asset('home/css/web-e7e403d2843dd1edd8db.css') }}" />
     <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-7642b94e17df29096c13.css') }}" />
     <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-0a03cade4dfc10c5a79b.css') }}" />
+    <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-d9c558a309bc9df579a8.css') }}" />
+    <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-53f9778aedd460fed5ab.css') }}" />
+
+
     <style>
         .layui-carousel {
             left: 15px;
@@ -42,8 +46,8 @@
         <a class="btn write-btn" target="_blank" href="{{url('/writer/')}}">
             <i class="iconfont ic-write"></i>写文章
         </a>
-        <a class="btn sign-up" href="/sign_up">注册</a>
-        <a class="btn log-in" href="/sign_in">登录</a>
+        <a class="btn sign-up" href="{{ url('/sign_up') }}">注册</a>
+        <a class="btn log-in" href="{{ url('/sign_in') }}">登录</a>
         @else
         <!-- 登录显示写文章 -->
         <a class="btn write-btn" target="_blank" href="{{url('/writer/')}}">
@@ -54,11 +58,11 @@
         <!--js移入事件 class加 open-->
         <div class="user" id="yonghu">
             <div data-hover="dropdown">
-                <a class="avatar" href="/u/d6fc8a033b98"><img src="{{asset('home/images/picture/72f15e83-7f50-45ab-af3a-d031fb4e8934.jpg')}}" alt="120" /></a>
+                <a class="avatar" href="{{url('u')}}/{{session('user')['user_id']}}"><img src="{{asset(session('user')['pic'])}}" alt="120" /></a>
             </div>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="/u/d6fc8a033b98">
+                    <a href="{{url('u')}}/{{session('user')['user_id']}}">
                         <i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
                     </a>
                 </li>
@@ -79,7 +83,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/settings">
+                    <a href="{{url('/settings/profile')}}">
                         <i class="iconfont ic-navigation-settings"></i><span>设置</span>
                     </a>
                 </li>
@@ -209,6 +213,9 @@
         </div>
     </div>
 </footer>
+
+<a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a>
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#uuid=64f909b1-b434-44cb-b271-a5073d4eac7a&amp;style=3&amp;fs=4&amp;textcolor=#fff&amp;bgcolor=#F60&amp;text=分享到"></script>
 
 <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('layui/layui.all.js') }}"></script>

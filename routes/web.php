@@ -43,12 +43,6 @@ Route::post('/resetPasswordByEmail', 'Home\resetPasswordController@resetPassword
 // 点击邮件链接修改密码的页码
 Route::get('/password/{key}/{value}','Home\resetPasswordController@doRestpasswordByEmailView');
 Route::post('/doRestpasswordByEmail','Home\resetPasswordController@doRestpasswordByEmail');
-// 测试
-Route::get('/test','Home\resetPasswordController@test');
-
-
-// 测试
-// Route::get('/doSignUp', 'Home\signController@doSignUp');
 // 获取图片验证码
 Route::get('/code', 'Home\verifyController@code');
 // 注册,发送手机验证码
@@ -56,20 +50,39 @@ Route::post('/sendRegCode', 'Home\verifyController@sendRegCode');
 // 重置密码,发送手机验证码
 Route::post('/sendResetPasswordCode', 'Home\verifyController@sendResetPasswordCode');
 // 验证手机是否已经注册过
-// Route::get('/is_telReg', 'Home\verifyController@is_telReg');
-// Route::get('/test', 'Home\verifyController@test');
 Route::post('/is_telReg', 'Home\verifyController@is_telReg');
 // 查询验证码(图片和手机验证码)是否正确
 Route::post('/is_codeRight', 'Home\verifyController@is_codeRight');
-// signController的测试路由
-// Route::get('/test', 'Home\signController@test');
 // 验证邮箱是否存在或激活
+
+
+// Route::get('/is_emailActive', 'Home\verifyController@is_emailActive');
+Route::post('/is_emailActive', 'Home\verifyController@is_emailActive');
+
+// 个人资料页面
+//中间件
+Route::group(['middleware'=>'HomeLogin'],function(){
+    Route::get('/settings/profile', 'Home\userSettingController@index');
+    // 保存个人资料
+    Route::post('/save/profile', 'Home\userSettingController@save');
+    // Route::get('/settings/test', 'Home\userSettingController@test');
+});
+
+
+// 发送激活邮箱的邮件
+Route::post('/active/email', 'Home\activeEmailController@activeEmail');
+// 测试
+// Route::get('/active/email', 'Home\activeEmailController@activeEmail');
+// 激活邮箱
+Route::get('/active_email/{user_id}/{email}/{rand}/{value}', 'Home\activeEmailController@doActiveEmail');
+Route::get('/test', 'Home\activeEmailController@test');
+
 
 // Route::get('/is_emailActive', 'home\verifyController@is_emailActive');
 Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
 
-
-
+// Route::get('/is_emailActive', 'home\verifyController@is_emailActive');
+Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
 
 
 // zhangyu
@@ -95,6 +108,11 @@ Route::post('admin/inf/dis/{id}','Admin\InfController@dis');
 Route::get('admin/inf/comment','Admin\InfController@show');
 Route::post('admin/inf/discom/{id}','Admin\InfController@discom');
 
+
+Route::get('home/collect' , 'Home\CollectController@collect');
+Route::get('home/collect/insert/{id}' , 'Home\CollectController@insert');
+Route::get('home/collect/delete/{id}' , 'Home\CollectController@delete');
+//Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
 
 
 
@@ -138,13 +156,14 @@ Route::get('logout','IndexController@logout');
 Route::resource('admin','AdminController');
 Route::resource('users','UsersController');
 
-    //zhangyu
+// zhangyu
+//文章列表
     Route::get('article','ArticleController@index');
 //文章内容单页
     Route::get('article/cont/{id}','ArticleController@cont');
-//状态显示文章(删除)
+//显示文章
     Route::post('article/show/{id}','ArticleController@show');
-
+//删除文章
 
 //分类管理模块
     Route::resource('category','CategoryController');
@@ -159,6 +178,8 @@ Route::resource('users','UsersController');
 //举报评论
     Route::get('inf/comment','InfController@show');
     Route::post('inf/discom/{id}','InfController@discom');
+
+
 
 });
 
@@ -191,5 +212,15 @@ Route::post('/home/article/noprint/{id}', 'Home\ArticleController@noprint');
 Route::get('/p/{id}', 'Home\ArtlistController@index');
 
 
-
-
+// 评论功能.
+Route::post('/comment/new/{id}', 'Home\CommentController@new');
+// 评论回复.
+Route::post('/comment/hf/{id}', 'Home\CommentController@hf');
+// 删除回复.
+Route::post('/comment/dl/{id}', 'Home\CommentController@dl');
+// 举报文章.
+Route::post('/article/report', 'Home\ReportController@add');
+// 更多分类.
+Route::get('/category','Home\CategoryController@index');
+//分类详情
+Route::get('/c/{id}','Home\CategoryController@cateils');

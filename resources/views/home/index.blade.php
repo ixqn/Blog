@@ -20,29 +20,14 @@
             <div class="col-xs-16 main">
                 <!--分类-->
                 <div class="recommend-collection">
-                    <a class="collection" target="_blank" href="/c/b3734232a706?utm_medium=index-collections&amp;utm_source=desktop">
-                        <img src="{{ asset('home/images/picture/1.png') }}" alt="64" />
-                        <div class="name">微小说</div>
-                    </a>            <a class="collection" target="_blank" href="/c/GQ5FAs?utm_medium=index-collections&amp;utm_source=desktop">
-                        <img src="{{ asset('home/images/picture/66ba9fdegw1e61syw6tk6j20bj0go0wo.jpg') }}" alt="64" />
-                        <div class="name">谈谈情，说说爱</div>
-                    </a>            <a class="collection" target="_blank" href="/c/074e475b2f45?utm_medium=index-collections&amp;utm_source=desktop">
-                        <img src="{{ asset('home/images/picture/vcg41678819337.jpg') }}" alt="64" />
-                        <div class="name">成长励志</div>
-                    </a>            <a class="collection" target="_blank" href="/c/f6b4ca4bb891?utm_medium=index-collections&amp;utm_source=desktop">
-                        <img src="{{ asset('home/images/picture/enhanced-buzz-wide-16461-1372163238-8.jpg') }}" alt="64" />
-                        <div class="name">生活家</div>
-                    </a>            <a class="collection" target="_blank" href="/c/Df7njb?utm_medium=index-collections&amp;utm_source=desktop">
-                        <img src="{{ asset('home/images/picture/2005503_162125081_2.jpg') }}" alt="64" />
-                        <div class="name">谈写作</div>
-                    </a>            <a class="collection" target="_blank" href="/c/bc2986022c08?utm_medium=index-collections&amp;utm_source=desktop">
-                        <img src="{{ asset('home/images/picture/0714.jpg') }}" alt="64" />
-                        <div class="name">时差党</div>
-                    </a>            <a class="collection" target="_blank" href="/c/8c92f845cd4d?utm_medium=index-collections&amp;utm_source=desktop">
-                        <img src="{{ asset('home/images/picture/漫画专题.jpg') }}" alt="64" />
-                        <div class="name">漫画·手绘</div>
+
+                    @foreach($cates as $item)
+                    <a class="collection" target="_blank" href="{{url('c')}}/{{$item->cate_id}}">
+                        <img src="{{ url('/uploads/category').'/'.$item->cate_pic  }}" alt="64" />
+                        <div class="name">{{ $item->cate_name }}</div>
                     </a>
-                    <a class="more-hot-collection" target="_blank" href="/recommendations/collections?utm_medium=index-collections&amp;utm_source=desktop">
+                    @endforeach
+                    <a class="more-hot-collection" target="_blank" href="{{ url('category') }}">
                         更多热门专题 <i class="iconfont ic-link"></i>
                     </a>
                 </div>
@@ -74,7 +59,7 @@
                                     <a target="_blank" href="{{url('p')}}/{{$v->article_id}}">
                                         <i class="iconfont ic-list-read"></i> {{$v->article_view}}
                                     </a>        <a target="_blank" href="{{url('p')}}/{{$v->article_id}}#comments">
-                                        <i class="iconfont ic-list-comments"></i> 21
+                                        <i class="iconfont ic-list-comments"></i> {{$v->comm}}
                                     </a>
                                 </div>
                             </div>

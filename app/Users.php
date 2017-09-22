@@ -8,12 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Users extends Authenticatable
 {
     protected $table = 'users_info';
-    public $primaryKey = 'id';
+    public $primaryKey = 'user_id';
     protected $fillable = [
         'nickname','sex','picture','birthday','email','update_time','reg_time',
     ];
     protected $hidden = [
-         'remember_token',
+      'remember_token',
     ];
     public $timestamps = false;
 

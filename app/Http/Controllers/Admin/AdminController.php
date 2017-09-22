@@ -18,7 +18,7 @@ class AdminController extends Controller
     {
         $input = $request->input('keywords')?$request->input('keywords'):'';
         $admin = Admin::orderBy('admin_id','asc')->where('nickname','like','%'.$input.'%')->paginate(5);
-        return view('admin/admin/details',compact('admin','input') );
+        return view('admin/admin/details',['title'=>'管理员列表'],compact('admin','input') );
 
     }
 
@@ -30,7 +30,7 @@ class AdminController extends Controller
     public function create()
     {
             //添加管理员
-            return view('admin/admin/create');
+            return view('admin/admin/create',['title'=>'添加管理员']);
 
     }
 
@@ -106,7 +106,10 @@ class AdminController extends Controller
     {
         //
         $admin = Admin::find($id);
+
+//        dd($admin);
         return view('admin/admin/edit',compact('admin'));
+
     }
 
     /**
@@ -118,7 +121,9 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $input = $request->except('_token','_method');
+
         $rule = [
             'nickname' => 'required|min:5|max:18',
         ];
@@ -137,7 +142,11 @@ class AdminController extends Controller
         }
 
         $admin = Admin::find($id);
+
         $admin->nickname = $input['nickname'];
+        $admin->status = $input['status'];
+
+
         $re = $admin->save();
         if($re){
             return redirect('admin/admin')->with('errors','修改成功');

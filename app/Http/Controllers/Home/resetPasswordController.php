@@ -104,7 +104,7 @@ class resetPasswordController extends Controller
                          ->withInput();
         }
         // dd($input);
-        // 判断邮箱地址是否存在
+        // 判断邮箱地址是否存在,并且是激活的
         $email = Users_info::where(['email'=>$input['email'], 'email_active'=>'1'])->first();
 
         if(!$email)
