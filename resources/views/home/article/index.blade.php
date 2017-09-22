@@ -39,7 +39,7 @@
                 {{--是否是自己的文章--}}
 {{--                @if($article['user_id'] != session('user')['user_id'])--}}
                     <div class="modal-wrap" data-report-note="">
-                        <a id="report-modal" onclick="report({{$article['user_id']}})">举报文章</a>
+                        <a id="report-modal" onclick="report({{$article['article_id']}})">举报文章</a>
                     </div>
                 {{--@endif--}}
                 </div>
@@ -548,18 +548,18 @@
             layer.open({
                 type: 1,
                 title: false,
-                closeBtn: 0,
+                closeBtn: 1,
                 shadeClose: true,
                 skin: 'yourclass',
                 area: ['420px', '155px'],
                 content: '<div class="modal-content" style="height: 155px;">\n' +
                 '            <div class="modal-body">\n' +
                 '                <form style="margin:0px;">\n' +
-                '                    <input type="radio" name="report" value="ad">\n' +
+                '                    <input type="radio" name="report" value="1">\n' +
                 '                    <span>广告及垃圾信息</span>\n' +
-                '                    <input type="radio" name="report" value="plagiarism">\n' +
+                '                    <input type="radio" name="report" value="2">\n' +
                 '                    <span>抄袭或未授权转载</span>\n' +
-                '                    <input type="radio" name="report" value="other">\n' +
+                '                    <input type="radio" name="report" value="3">\n' +
                 '                    <span>其它</span>\n' +
                 '                    <textarea placeholder="写下举报的详情情况（选填）" style="height: 80px;" class="form-control"></textarea>\n' +
                 '                </form>\n' +
@@ -575,11 +575,55 @@
         // 去举报.
         window.goreport = function(id)
         {
-            console.log(id);
-            $('.layui-layer-shade').remove();
-            $('.layui-layer-page').remove();
+            var article_id = id;
+            var inf_cause = $('input:radio:checked').val();
+            var inf_content = $('.form-control').val();
+            if(inf_cause == null){
+                layer.open({
+                    title: '提示',
+                    icon: 5,
+                    content: '请选择原因.',
+                });
+                return false;
+            }
+            if(inf_content.length > 255){
+                layer.open({
+                    title: '提示',
+                    icon: 5,
+                    content: '举报内容不能大于255个字符.',
+                });
+                return false;
+            }
+            $.ajax({
+                url:'{{url('/article/report')}}',
+                type:'POST',
+                data:{
+                    article_id:article_id,
+                    inf_cause:inf_cause,
+                    inf_content:inf_content
+                },
+                success:function(data)
+                {
+                    if(data.status == 0){
+                        layer.open({
+                            title: '提示',
+                            icon: 5,
+                            content: data.msg
+                        });
+                        // 清除页面元素.
+                        $('.layui-layer-shade').remove();
+                        $('.layui-layer-page').remove();
+                    } else {
+                        layer.open({
+                            title: '提示',
+                            icon: 6,
+                            content: data.msg
+                        });
+                    }
+                },
+                dataType:'JSON'
+            });
         }
-
 
     });
 </script>

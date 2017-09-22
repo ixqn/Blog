@@ -184,6 +184,9 @@ Route::post('/comment/hf/{id}', 'Home\CommentController@hf');
 // 删除回复.
 Route::post('/comment/dl/{id}', 'Home\CommentController@dl');
 
+// 举报文章.
+Route::post('/article/report', 'Home\ReportController@add');
+
 
 
 
