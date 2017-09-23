@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Article;
 use App\Http\Model\Comment;
+use App\Http\Model\Users_info;
 
 class IndexController extends Controller
 {
@@ -43,6 +44,8 @@ class IndexController extends Controller
         //分类专题
         $cates = Cate::limit(7)->where('cate_order','1')->get();
 
+        // 最新注册用户.
+        $users = Users_info::orderby('created_at','desc')->limit(10)->get();
 
         // 文章列表,判断是否发布.
         $articles = Article::orderby('article_at', 'desc')->where('article_status', '2')->paginate(5);
@@ -71,7 +74,7 @@ class IndexController extends Controller
             $articles[$k]['comm'] = Comment::where('article_id',$v['article_id'])->count();
         }
         $title = '简单你的创作';
-        return view('home.index',compact('title', 'articles','cates'));
+        return view('home.index',compact('title', 'articles', 'cates', 'users'));
     }
 
 

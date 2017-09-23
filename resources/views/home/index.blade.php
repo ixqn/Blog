@@ -7,13 +7,9 @@
 
             <div class="layui-carousel" id="Carousel">
                 <div carousel-item="">
-                    <div><a target="_blank" href=""><img src="//res.layui.com/images/layui/demo/1.png"></a></div>
-                    <div><a target="_blank" href=""><img src="//res.layui.com/images/layui/demo/2.png"></a></div>
-                    <div><a target="_blank" href=""><img src="//res.layui.com/images/layui/demo/3.png"></a></div>
-                    <div><a target="_blank" href=""><img src="//res.layui.com/images/layui/demo/4.png"></a></div>
-                    <div><a target="_blank" href=""><img src="//res.layui.com/images/layui/demo/5.png"></a></div>
-                    <div><a target="_blank" href=""><img src="//res.layui.com/images/layui/demo/6.png"></a></div>
-                    <div><a target="_blank" href=""><img src="//res.layui.com/images/layui/demo/7.png"></a></div>
+                    @foreach($articles as $k=>$v)
+                        <div><a title="{{ $v->article_name }}" target="_blank" href="{{url('p')}}/{{$v->article_id}}"><img style="width: 100%;height: 100%;" src="{{ asset($v->article_img) }}"></a></div>
+                    @endforeach
                 </div>
             </div>
 
@@ -73,66 +69,25 @@
                 </div>
             </div>
             <div class="col-xs-7 col-xs-offset-1 aside">
-                <div class="board">
-                    <a target="_blank" href="/recommendations/notes?category_id=56&amp;utm_medium=index-banner-s&amp;utm_source=desktop">
-                        <img src="{{ asset('home/images/picture/banner-s-1-b8ff9ec59f72ea88ecc8c42956f41f78.png') }}" alt="Banner s 1" />
-                    </a>        <a target="_blank" href="/trending/weekly?utm_medium=index-banner-s&amp;utm_source=desktop"><img src="{{ asset('home/images/picture/banner-s-3-7123fd94750759acf7eca05b871e9d17.png') }}" alt="Banner s 3" /></a>
-                    <a target="_blank" href="/trending/monthly?utm_medium=index-banner-s&amp;utm_source=desktop"><img src="{{ asset('home/images/picture/banner-s-4-b70da70d679593510ac93a172dfbaeaa.png') }}" alt="Banner s 4" /></a>
-                    <a utm_medium="index-banner-s" target="_blank" href="/publications"><img src="{{ asset('home/images/picture/banner-s-5-291e00e9156f30791fe24e3de9c39171.png') }}" alt="Banner s 5" /></a>
-                    <a target="_blank" href="/c/e048f1a72e3d?utm_medium=index-banner-s&amp;utm_source=desktop"><img src="{{ asset('home/images/picture/banner-s-6-c4d6335bfd688f2ca1115b42b04c28a7.png') }}" alt="Banner s 6" /></a>
-                </div>
-
                 <!-- 推荐作者 -->
                 <div class="recommended-authors">
-                    <div class="title"><span>推荐作者</span>
-                        <a class="page-change"><i class="iconfont ic-search-change" style="transform: rotate(0deg);"></i>
-                            换一批
-                        </a>
+                    <div class="title"><span>新用户Top10</span>
                     </div>
                     <ul class="list">
+                        @foreach($users as $k=>$v)
                         <li>
-                            <a href="/u/78f970537a5e?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="avatar">
-                                <img src="//upload.jianshu.io/users/upload_avatars/7663825/7c28763e-002b-4e89-8dea-5b8da210ef2c.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96">
+                            <a href="{{ url($v['user_id']) }}" target="_blank" class="avatar">
+                                <img src="{{ asset($v['pic']) }}">
                             </a>
                             <a class="follow" state="0"><i class="iconfont ic-follow"></i>关注</a>
-                            <a href="/u/78f970537a5e?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="name">名贵的考拉熊</a>
-                            <p>写了44.2k字 · 2.1k喜欢</p>
+                            <a href="{{ url($v['user_id']) }}" target="_blank" class="name">{{ $v['nickname'] }}</a>
+                            <p>注册时间: {{$v['created_at']}}</p>
+                            <b>个人描述: {{$v['desc']}}</b>
                         </li>
-                        <li>
-                            <a href="/u/3aa040bf0610?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="avatar">
-                                <img src="//upload.jianshu.io/users/upload_avatars/1835826/fcfb7cdd47bd.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96">
-                            </a>
-                            <a class="follow" state="0"><i class="iconfont ic-follow"></i>关注</a>
-                            <a href="/u/3aa040bf0610?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="name">简书播客</a>
-                            <p>写了73.1k字 · 4.6k喜欢</p>
-                        </li>
-                        <li>
-                            <a href="/u/c5580cc1c3f4?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="avatar">
-                                <img src="//upload.jianshu.io/users/upload_avatars/3627484/eb973bb9-37ba-4d07-acec-850c0a66d1bb.png?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96">
-                            </a>
-                            <a class="follow" state="0"><i class="iconfont ic-follow"></i>关注</a>
-                            <a href="/u/c5580cc1c3f4?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="name">简书大学堂</a>
-                            <p>写了49.6k字 · 2.7k喜欢</p>
-                        </li>
-                        <li>
-                            <a href="/u/5SqsuF?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="avatar">
-                                <img src="//upload.jianshu.io/users/upload_avatars/6287/06c537002583.png?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96"
-                            </a>
-                            <a class="follow" state="0"><i class="iconfont ic-follow"></i>关注</a>
-                            <a href="/u/5SqsuF?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="name">刘淼</a>
-                            <p>写了323.8k字 · 19.5k喜欢</p>
-                        </li>
-                        <li>
-                            <a href="/u/8f5b45499715?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="avatar">
-                                <img src="//upload.jianshu.io/users/upload_avatars/52841/b76eb3e77507.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96">
-                            </a>
-                            <a class="follow" state="0"><i class="iconfont ic-follow"></i>关注</a>
-                            <a href="/u/8f5b45499715?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="name">闫泽华</a>
-                            <p>写了123.2k字 · 1k喜欢</p>
-                        </li>
+                            <br>
+                        @endforeach
                     </ul>
-                    <a href="/recommendations/users?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="find-more">
-                        查看全部<i class="iconfont ic-link"></i></a></div>
+                </div>
             </div>
         </div>
     </div>
