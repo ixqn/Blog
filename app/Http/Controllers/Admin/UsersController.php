@@ -76,16 +76,15 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
+
         //
         $users = Users::find($id);
-        return view('admin/users/edit',['title'=>'修改用户'],compact('admin'));
-=======
+      
 
         $users = Users_login::find($id);
 //       dd($users);
         return view('admin/users/edit',compact('users'));
->>>>>>> b9e831faaf4046343212d2194dd0f90d7a8f2a91
+
     }
 
     /**
