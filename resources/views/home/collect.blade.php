@@ -83,5 +83,3 @@
     </script>
 @stop
 
-</body>
-</html>

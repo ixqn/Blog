@@ -170,7 +170,6 @@
     layui.use(['layer'], function(){
         var layer = layui.layer,
             $ = layui.jquery;
-
         // 导航栏鼠标移入移出事件.
         // 用户.
         $('#yonghu').mouseover(function(){

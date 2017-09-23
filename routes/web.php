@@ -105,10 +105,6 @@ Route::get('admin/inf/article','Admin\InfController@index');
 Route::post('admin/inf/dis/{id}','Admin\InfController@dis');
 
 
-Route::get('home/collect' , 'Home\CollectController@collect');
-Route::get('home/collect/insert/{id}' , 'Home\CollectController@insert');
-Route::get('home/collect/delete/{id}' , 'Home\CollectController@delete');
-//Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
 
 
 
