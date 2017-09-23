@@ -24,6 +24,8 @@
     <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-0a03cade4dfc10c5a79b.css') }}" />
     <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-d9c558a309bc9df579a8.css') }}" />
     <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-53f9778aedd460fed5ab.css') }}" />
+    <link rel="stylesheet" media="all" href="{{ asset('home/css/web-e7e403d2843dd1edd8db.css') }}" />
+    <link rel="stylesheet" media="all" href="{{ asset('home/css/entry-266e0d4b3ebe57d6dd80.css') }}" />
 
 
     <style>
@@ -68,20 +70,11 @@
                 </li>
                 <li>
                     <!-- TODO bookmarks_path -->
-                    <a href="/bookmarks">
+                    <a href="{{ url('/home/collect') }}">
                         <i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
                     </a>
                 </li>
-                <li>
-                    <a href="/users/d6fc8a033b98/liked_notes">
-                        <i class="iconfont ic-navigation-like"></i><span>喜欢的文章</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/wallet">
-                        <i class="iconfont ic-navigation-wallet"></i><span>我的钱包</span>
-                    </a>
-                </li>
+
                 <li>
                     <a href="{{url('/settings/profile')}}">
                         <i class="iconfont ic-navigation-settings"></i><span>设置</span>
@@ -110,14 +103,14 @@
             </div>
             <div class="collapse navbar-collapse" id="menu" aria-expanded="false" style="230px">
                 <ul class="nav navbar-nav">
-                    {{--@if(!session('user'))--}}
-                    {{--<!--未登录显示 首页 -->--}}
-                    {{--<li class="active">--}}
-                        {{--<a href="/">--}}
-                            {{--<span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
-                    {{--@else--}}
+                    @if(!session('user'))
+                    <!--未登录显示 首页 -->
+                    <li class="active">
+                        <a href="/">
+                            <span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+                        </a>
+                    </li>
+                    @else
                     <!--登录显示 发现 关注 消息-->
                     <li class="active">
                         <a href="/">
@@ -130,56 +123,13 @@
                         </a>
                     </li>
                     <li class="notification" id="xiaoxi">
-                        <a data-hover="dropdown" href="/notifications" class="notification-btn">
-                            <span class="menu-text">消息</span>
+                        <a data-hover="dropdown" href="{{ url('/home/messages') }}">
+                            <span class="menu-text">竹信</span>
                             <i class="iconfont ic-navigation-notification menu-icon"></i>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="/notifications#/comments">
-                                    <i class="iconfont ic-comments"></i>
-                                    <span>评论</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/home/messages') }}">
-                                    <i class="iconfont ic-chats"></i>
-                                    <span>简信</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/notifications#/requests">
-                                    <i class="iconfont ic-requests"></i>
-                                    <span>投稿请求</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/notifications#/likes">
-                                    <i class="iconfont ic-likes"></i>
-                                    <span>喜欢和赞</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/notifications#/follows">
-                                    <i class="iconfont ic-follows"></i>
-                                    <span>关注</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/notifications#/money">
-                                    <i class="iconfont ic-money"></i>
-                                    <span>赞赏</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/notifications#/others">
-                                    <i class="iconfont ic-others"></i>
-                                    <span>其他消息</span>
-                                </a>
-                            </li>
-                        </ul>
+
                     </li>
-                    {{--@endif--}}
+                    @endif
                     <li class="search">
                         <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
                             <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索" class="search-input" />
@@ -226,13 +176,7 @@
             $ = layui.jquery;
 
         // 导航栏鼠标移入移除事件.
-        // 消息.
-        $('#xiaoxi').mouseover(function(){
-            $('#xiaoxi').attr('class','notification open');
-        });
-        $('#xiaoxi').mouseout(function(){
-            $('#xiaoxi').attr('class','notification');
-        });
+
         // 用户.
         $('#yonghu').mouseover(function(){
             $('#yonghu').attr('class','user open');

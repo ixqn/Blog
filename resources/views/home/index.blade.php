@@ -94,7 +94,7 @@
                             <a href="/u/78f970537a5e?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="avatar">
                                 <img src="//upload.jianshu.io/users/upload_avatars/7663825/7c28763e-002b-4e89-8dea-5b8da210ef2c.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96">
                             </a>
-                            <a class="follow" state="0"><i class="iconfont ic-follow"></i>关注</a>
+                            <a class="follow" state="0" href="javascript:;" onclick="insert({{ $article['user_id'] }})"><i class="iconfont ic-follow"></i>关注</a>
                             <a href="/u/78f970537a5e?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="name">名贵的考拉熊</a>
                             <p>写了44.2k字 · 2.1k喜欢</p>
                         </li>
@@ -102,7 +102,7 @@
                             <a href="/u/3aa040bf0610?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="avatar">
                                 <img src="//upload.jianshu.io/users/upload_avatars/1835826/fcfb7cdd47bd.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96">
                             </a>
-                            <a class="follow" state="0"><i class="iconfont ic-follow"></i>关注</a>
+                            <a class="follow" state="0" href="javascript:;" onclick="insert({{ $article['user_id'] }})"><i class="iconfont ic-follow"></i>关注</a>
                             <a href="/u/3aa040bf0610?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="name">简书播客</a>
                             <p>写了73.1k字 · 4.6k喜欢</p>
                         </li>
@@ -110,7 +110,7 @@
                             <a href="/u/c5580cc1c3f4?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="avatar">
                                 <img src="//upload.jianshu.io/users/upload_avatars/3627484/eb973bb9-37ba-4d07-acec-850c0a66d1bb.png?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96">
                             </a>
-                            <a class="follow" state="0"><i class="iconfont ic-follow"></i>关注</a>
+                            <a class="follow" state="0" href="javascript:;" onclick="insert({{ $article['user_id'] }})"><i class="iconfont ic-follow"></i>关注</a>
                             <a href="/u/c5580cc1c3f4?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="name">简书大学堂</a>
                             <p>写了49.6k字 · 2.7k喜欢</p>
                         </li>
@@ -118,7 +118,7 @@
                             <a href="/u/5SqsuF?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="avatar">
                                 <img src="//upload.jianshu.io/users/upload_avatars/6287/06c537002583.png?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96"
                             </a>
-                            <a class="follow" state="0"><i class="iconfont ic-follow"></i>关注</a>
+                            <a class="follow" state="0" href="javascript:;" onclick="insert({{ $article['user_id'] }})"><i class="iconfont ic-follow"></i>关注</a>
                             <a href="/u/5SqsuF?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="name">刘淼</a>
                             <p>写了323.8k字 · 19.5k喜欢</p>
                         </li>
@@ -126,7 +126,7 @@
                             <a href="/u/8f5b45499715?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="avatar">
                                 <img src="//upload.jianshu.io/users/upload_avatars/52841/b76eb3e77507.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96">
                             </a>
-                            <a class="follow" state="0"><i class="iconfont ic-follow"></i>关注</a>
+                            <a class="follow" state="0" href="javascript:;" onclick="insert({{ $article['user_id'] }})"><i class="iconfont ic-follow"></i>关注</a>
                             <a href="/u/8f5b45499715?utm_source=desktop&amp;utm_medium=index-users" target="_blank" class="name">闫泽华</a>
                             <p>写了123.2k字 · 1k喜欢</p>
                         </li>
@@ -167,7 +167,26 @@
                 }
             }
         });
+        //添加关注
+        window.insert = function(user_id)
+        {
+            layer.confirm('是否确定添加关注?', {
+                btn: ['对对', '不行']
+            }, function () {
+                $.post('{{url('/home/attention/insert/')}}/' + user_id, {
+                    '_token': '{{csrf_token()}}'
+                }, function (data) {
+                    if (data.state == 0) {
+                        layer.msg(data.msg, {icon: 6});
+                    } else if(data.state == 2){
+                        layer.msg(data.msg, {icon: 0});
+                    } else{
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
+            });
 
+        }
     });
 </script>
 

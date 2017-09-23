@@ -109,15 +109,15 @@
                         }, function () {});
 
                     }
+
+                    // 取消导航选中状态.
+                    var active = $('.nav .active');
+                    active.next().attr('class', 'active');
+                    active.attr('class', '');
                 });
             </script>
 
 @stop
-
-
-<!---->
-</body>
-</html>
 
 
 
