@@ -104,15 +104,12 @@ Route::get('admin/inf/article','Admin\InfController@index');
 //举报文章处理
 Route::post('admin/inf/dis/{id}','Admin\InfController@dis');
 
-//举报评论
-Route::get('admin/inf/comment','Admin\InfController@show');
-Route::post('admin/inf/discom/{id}','Admin\InfController@discom');
-
 
 Route::get('home/collect' , 'Home\CollectController@collect');
 Route::get('home/collect/insert/{id}' , 'Home\CollectController@insert');
 Route::get('home/collect/delete/{id}' , 'Home\CollectController@delete');
 //Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
+
 
 
 

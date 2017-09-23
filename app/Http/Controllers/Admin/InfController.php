@@ -34,24 +34,6 @@ class InfController extends Controller
 
 
 
-
-
-
-    //举报评论页
-    public function show()
-    {
-        $datas = \DB::table('inf_comment')->join('article_users_comment','inf_comment.comm_id','=','article_users_comment.comm_id')->orderBy('id','desc')->paginate(10);
-
-
-        return view('admin.inform.infcomment',['title'=>'举报评论','datas'=>$datas]);
-
-    }
-
-    //举报评论处理
-    public function discom($id)
-    {
-        $data = \DB::table('inf_comment')->where('id',$id)->update(['status'=> 1 ]);
-
-    }
+    
 
 }

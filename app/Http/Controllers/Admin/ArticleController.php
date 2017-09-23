@@ -29,7 +29,23 @@ class ArticleController extends Controller
     {
 
         $datas = \DB::table('article_users')->where('article_id',$id)->get();
-//        dd($datas);
+
+         $ptn = "/.*<img[^>]*src[=\s\"\']+([^\"\']*)[\"\'].*/";
+        foreach($datas as $k => $v) {
+            $cont = $v->article_cont;
+            foreach($v as $m => $n){
+                if(strstr($cont, 'uploads/articles')){
+                    $v->article_img = preg_replace ( $ptn, "$1", $cont );
+                }else{
+                    $v->article_img = 'images/home/nopic.png';
+                }
+            }
+            
+            // 去除html标签.
+            $v->article_cont = strip_tags($v->article_cont);
+           
+        }
+       // dd($datas);
         return view('admin.article.cont',['datas'=>$datas]);
     }
 
