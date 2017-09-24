@@ -140,13 +140,13 @@ Route::get('admin/captcha','Admin\LoginController@captcha');
 Route::post('admin/dologin','Admin\LoginController@doLogin');
 //中间件
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'Login'],function(){
-Route::get('index','IndexController@index');
-Route::get('amend','IndexController@amend');
-Route::post('doamend','IndexController@doAmend');
-Route::get('logout','IndexController@logout');
-//资源
-Route::resource('admin','AdminController');
-Route::resource('users','UsersController');
+    Route::get('index','IndexController@index');
+    Route::get('amend','IndexController@amend');
+    Route::post('doamend','IndexController@doAmend');
+    Route::get('logout','IndexController@logout');
+    //资源
+    Route::resource('admin','AdminController');
+    Route::resource('users','UsersController');
 
 // zhangyu
 //文章列表
