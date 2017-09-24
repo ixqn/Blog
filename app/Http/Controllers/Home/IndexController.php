@@ -44,7 +44,7 @@ class IndexController extends Controller
         // 文章列表,判断是否发布.
         $articles = Article::orderby('article_at', 'desc')->where('article_status', '2')->paginate(5);
         // 获取第一张图片作为封面.
-        $ptn = "/.*<img[^>]*src[=\s\"\']+([^\"\']*)[\"\'].*/";
+        $ptn = "/.*<img[^>]*src[=\s\"\']+([^\"\']*)[\"\'].*$/";
         foreach($articles as $k => $v) {
                 $cont = $v['article_cont'];
             foreach($v as $m => $n){

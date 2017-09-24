@@ -68,7 +68,7 @@
                 </li>
                 <li>
                     <!-- TODO bookmarks_path -->
-                    <a href="{{url('/home/collect')}}}">
+                    <a href="{{url('/home/collect')}}">
                         <i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
                     </a>
                 </li>

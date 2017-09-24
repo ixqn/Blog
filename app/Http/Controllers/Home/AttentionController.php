@@ -62,6 +62,18 @@ class AttentionController extends Controller
             $data = \DB::table('users_attention')->where('user_id' , session('user')['user_id'])->get();
 
             $wz = \DB::table('article_users')->get();
+             $ptn = "/.*<img[^>]*src[=\s\"\']+([^\"\']*)[\"\'].*$/";
+                foreach($wz as $k => $v) {
+                        $cont = $v->article_cont;
+                         foreach($v as $m => $n){
+                        if(strstr($cont, 'uploads/articles')){
+                            $v->article_img = preg_replace ( $ptn, "$1", $cont );
+                        }else{
+                            $v->article_img = 'images/home/nopic.png';
+                        }
+                    }
+                }
+      
             return view('home.attention' , ['data'=>$data , 'wz'=>$wz  , 'title'=>'关注文章']);
         }
 

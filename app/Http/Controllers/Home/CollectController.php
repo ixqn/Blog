@@ -77,8 +77,20 @@ class collectController extends Controller
         public function collect(Request $request)
         {
             $str = \DB::table('article_collect')->where('user_id' , session('user')['user_id'])->get();
-
-
+           
+            // 获取第一张图片作为封面.
+            $ptn = "/.*<img[^>]*src[=\s\"\']+([^\"\']*)[\"\'].*$/";
+            foreach($str as $k => $v) {
+                $cont = $v->article_cont;
+                 foreach($v as $m => $n){
+                    if(strstr($cont, 'uploads/articles')){
+                        $v->article_img = preg_replace ( $ptn, "$1", $cont );
+                    }else{
+                        $v->article_img = 'images/home/nopic.png';
+                    }
+                }
+            }
+           
             return view('home.collect', ['str' => $str , 'title'=>'文章收藏']);
         }
 

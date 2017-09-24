@@ -1,6 +1,6 @@
 
 
-@extends('Home.layout')
+@extends('home.layout')
 
 @section('content')
 
@@ -39,7 +39,7 @@
                     <li id="note-17016757" data-note-id="17016757" class="have-img">
 
                         <a class="wrap-img" href="http://www.jianshu.com/p/e5ba1fe312dc" target="_blank">
-                            <img class="img-blur-done" src="{{ asset('./uploads/users/3.jpg') }}" alt="120">
+                            <img class="img-blur-done" src="{{$v->article_img}}" alt="120">
                         </a>
 
 
