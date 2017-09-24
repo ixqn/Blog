@@ -179,5 +179,12 @@ class AdminController extends Controller
         }
         return $data;
     }
+
+    public function test()
+    {
+        echo encrypt('111111');
+
+        // echo 'hello';
+    }
 }
 

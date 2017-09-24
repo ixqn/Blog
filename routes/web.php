@@ -18,8 +18,7 @@
 //     return view('welcome');
 // });
 
-
-
+// Route::get('/test','Admin\AdminController@test');
 
 // xqn
 // 注册页面
@@ -75,7 +74,7 @@ Route::post('/active/email', 'Home\activeEmailController@activeEmail');
 // Route::get('/active/email', 'Home\activeEmailController@activeEmail');
 // 激活邮箱
 Route::get('/active_email/{user_id}/{email}/{rand}/{value}', 'Home\activeEmailController@doActiveEmail');
-Route::get('/test', 'Home\activeEmailController@test');
+// Route::get('/test', 'Home\activeEmailController@test');
 
 
 // Route::get('/is_emailActive', 'home\verifyController@is_emailActive');

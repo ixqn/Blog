@@ -239,8 +239,8 @@ $('#code').on({
         code_flag = false;
     },
 
-    keyup:function(){ code_func(); },
-    change:function(){ code_func(); },
+    // keyup:function(){ code_func(); },
+    // change:function(){ code_func(); },
     blur:function(){
         code_cur = false;
         code_func();

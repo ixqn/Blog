@@ -319,8 +319,8 @@ $('#code').on({
         code_flag = false;
     },
 
-    keyup:function(){ code_func();},
-    change:function(){ code_func();},
+    // keyup:function(){ code_func();},
+    // change:function(){ code_func();},
     blur:function(){
         code_cur = false;
         code_func();
@@ -357,8 +357,8 @@ $('#password').on({
 
     },
 
-    keyup:function(){ password_func(); },
-    change:function(){ password_func(); },
+    // keyup:function(){ password_func(); },
+    // change:function(){ password_func(); },
     blur:function(){
         password_cur = false;
         password_func();
@@ -391,8 +391,8 @@ $('#password_r').on({
 
     },
 
-    keyup:function(){ password_r_func(); },
-    change:function(){ password_r_func(); },
+    // keyup:function(){ password_r_func(); },
+    // change:function(){ password_r_func(); },
     blur:function(){
         password_r_cur = false;
         password_r_func();
