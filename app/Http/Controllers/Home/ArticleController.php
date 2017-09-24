@@ -13,7 +13,7 @@ class ArticleController extends Controller
         // 获取分类数据.
         $cates = (new Cate)->tree();
         // 获取文章.
-        $data = Article::orderby('article_at', 'desc')->paginate(5);
+        $data = Article::orderby('article_at', 'desc')->where('user_id',session('user')['user_id'])->paginate(5);
 
 
         foreach($data as $k => $v){

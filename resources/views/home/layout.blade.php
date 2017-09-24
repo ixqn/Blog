@@ -38,7 +38,7 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="width-limit">
         <!-- 左上方 Logo -->
-        <a class="logo" href="/"><img src="{{ asset('images/home/logo_home.png') }}" alt="Logo" /></a>
+        <a class="logo" href="/"><img src="{{ asset('/images/home/logo_home.png') }}" alt="Logo" /></a>
 
         @if(!session('user'))
         <!-- 右上角 -->
