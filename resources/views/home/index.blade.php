@@ -76,11 +76,11 @@
                     <ul class="list">
                         @foreach($users as $k=>$v)
                         <li>
-                            <a href="{{ url($v['user_id']) }}" target="_blank" class="avatar">
+                            <a href="{{ url('u') }}/{{$v['user_id']}}" target="_blank" class="avatar">
                                 <img src="{{ asset($v['pic']) }}">
                             </a>
                             <a class="follow" state="0"><i class="iconfont ic-follow"></i>关注</a>
-                            <a href="{{ url($v['user_id']) }}" target="_blank" class="name">{{ $v['nickname'] }}</a>
+                            <a href="{{ url('u') }}/{{$v['user_id']}}" target="_blank" class="name">{{ $v['nickname'] }}</a>
                             <p>注册时间: {{$v['created_at']}}</p>
                             <b>个人描述: {{$v['desc']}}</b>
                         </li>
