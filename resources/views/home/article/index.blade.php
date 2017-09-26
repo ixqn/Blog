@@ -105,7 +105,7 @@
                             </div>
                         </form>
                     </div>
-                    @endif
+                    
                     <div id="normal-comment-list" class="normal-comment-list">
                         <div>
                             <div>
@@ -182,6 +182,7 @@
 
                     </div>
                 </div>
+                @endif
             </div>
             </div>
         </div>

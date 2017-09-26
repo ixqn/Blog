@@ -35,7 +35,7 @@ class collectController extends Controller
             $conl['category_id'] = $category_id;
             $conl['article_status'] = $article_status;
             $conl['collect_user_id'] = $user_id;
-            $conl['user_id'] = 1;
+            $conl['user_id'] = session('user')['user_id'];
             $conl['user_pic'] = $user_pic;
         }else{
             $conl['article_id'] = $articles_id;
@@ -48,13 +48,15 @@ class collectController extends Controller
             $conl['user_id'] = session('user')['user_id'];
             $conl['user_pic'] = 'uploads/users/4.jpg';
         }
+        
+        
 
         $str = \DB::table('article_collect')->where('article_id', $conl['article_id'])->first();
-        $db  = \Db::table('article_collect')->where('user_id' , session('user')['user_id'])->first();
+        $db  = \DB::table('article_collect')->where('user_id' , session('user')['user_id'])->first();
         if ($str && $db) {
             $data = [
                 'state' => 2,
-                'msg' => '你应经收藏过这篇文章了'
+                'msg' => '你已经收藏过这篇文章了'
             ];
         } else {
             $res = \DB::table('article_collect')->insert($conl);
@@ -76,7 +78,8 @@ class collectController extends Controller
         //collect显示在页面
         public function collect(Request $request)
         {
-            $str = \DB::table('article_collect')->where('user_id' , session('user')['user_id'])->get();
+        $str = \DB::table('article_collect')->where('user_id' , session('user')['user_id'])->get();
+      
            
             // 获取第一张图片作为封面.
             $ptn = "/.*<img[^>]*src[=\s\"\']+([^\"\']*)[\"\'].*$/";

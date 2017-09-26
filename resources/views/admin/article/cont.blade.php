@@ -61,7 +61,8 @@
 
                 </p>
                 <div class="box1">
-                    <img src="{{ asset($item->article_img) }}" />
+                    <img src="{{ asset($item->article_img) }}" style="width:300px;
+            height:250px;" />
                 </div>
                
                 @endforeach
