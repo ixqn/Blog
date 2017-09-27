@@ -9,14 +9,14 @@
         <div class="col-xs-24 col-sm-16 main">
             <!-- 专题头部模块 -->
             <div class="main-top">
-                <a class="avatar-collection" href="/c/8fQvXW">
+                <a class="avatar-collection" href="{{url('c')}}/{{$cate->cate_id}}">
                     <img src="{{ url('/uploads/category').'/'.$cate->cate_pic }}" alt="240" />
                 </a>
                 <div class="follow-button" props-data-following="false" props-data-collection-id="53">
 
                 </div>
                 <div class="title">
-                    <a class="name" href="/c/8fQvXW">{{ $cate->cate_name }}</a>
+                    <a class="name" href="{{url('c')}}/{{$cate->cate_id}}">{{ $cate->cate_name }}</a>
                 </div>
                 <div class="info">
                     收录了27389篇文章
@@ -32,30 +32,30 @@
             </ul>
             <div id="list-container">
                 <!-- 文章列表模块 -->
-                <ul class="note-list" infinite-scroll-url="/c/8fQvXW?order_by=added_at">
+                <ul class="note-list" infinite-scroll-url="{{url('c')}}/{{$cate->cate_id}}">
 
                     @foreach($datas as $item)
                         <li id="note-17328135" data-note-id="17328135" class="have-img">
-                            <a class="wrap-img" href="/p/7ac5f5b8e473" target="_blank">
-                                <img data-echo="//upload-images.jianshu.io/upload_images/7929531-17d16ee03ecaab0b.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" class="img-blur" src="{{ asset( $item->article_img ) }}" alt="120" />
+                            <a class="wrap-img" href="{{url('p')}}/{{$item->article_id}}" target="_blank">
+                                <img class="img-blur-done" src="{{ asset( $item->article_img ) }}" alt="120" />
                             </a>
                             <div class="content">
                                 <div class="author">
-                                    <a class="avatar" target="_blank" href="/u/6d171f5a123b">
+                                    <a class="avatar" target="_blank" href="{{url('u')}}/{{$item->user_id}}">
                                         <img src="{{ asset($item->pic) }}" alt="64" />
                                     </a>      <div class="name">
-                                        <a class="blue-link" target="_blank" href="/u/6d171f5a123b">{{ $item->article_author }}</a>
+                                        <a class="blue-link" target="_blank" href="{{url('u')}}/{{$item->user_id}}">{{ $item->article_author }}</a>
                                         <span class="time" data-shared-at="2017-09-20T20:02:36+08:00">{{ $item->date }}</span>
                                     </div>
                                 </div>
-                                <a class="title" target="_blank" href="/p/7ac5f5b8e473">{{ $item->article_name }}</a>
+                                <a class="title" target="_blank" href="{{url('p')}}/{{$item->article_id}}">{{ $item->article_name }}</a>
                                 <p class="abstract">
                                     {{ $item->article_str }}
                                 </p>
                                 <div class="meta">
-                                    <a target="_blank" href="/p/7ac5f5b8e473">
+                                    <a target="_blank" href="{{url('p')}}/{{$item->article_id}}">
                                         <i class="iconfont ic-list-read"></i> 44
-                                    </a>        <a target="_blank" href="/p/7ac5f5b8e473#comments">
+                                    </a>        <a target="_blank" href="{{url('p')}}/{{$item->article_id}}">
                                         <i class="iconfont ic-list-comments"></i> 1
                                     </a>      <span><i class="iconfont ic-list-like"></i> 2</span>
                                 </div>
