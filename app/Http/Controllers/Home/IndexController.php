@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Home;
-
 use App\Http\Model\Cate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -37,7 +35,6 @@ class IndexController extends Controller
         }
         return $str;
     }
-
     // 显示主页
     public function index()
     {
@@ -50,7 +47,7 @@ class IndexController extends Controller
         // 文章列表,判断是否发布.
         $articles = Article::orderby('article_at', 'desc')->where('article_status', '2')->paginate(5);
         // 获取第一张图片作为封面.
-        $ptn = "/.*<img[^>]*src[=\s\"\']+([^\"\']*)[\"\'].*/";
+        $ptn = "/.*<img[^>]*src[=\s\"\']+([^\"\']*)[\"\'].*$/";
         foreach($articles as $k => $v) {
                 $cont = $v['article_cont'];
             foreach($v as $m => $n){
@@ -76,7 +73,5 @@ class IndexController extends Controller
         $title = '简单你的创作';
         return view('home.index',compact('title', 'articles', 'cates', 'users'));
     }
-
-
 //
 }

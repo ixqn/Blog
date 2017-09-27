@@ -13,14 +13,6 @@
 
 
 
-// 主页.
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
-
-
 // xqn
 // 注册页面
 Route::get('/sign_in', 'Home\signController@signIn');
@@ -54,86 +46,111 @@ Route::post('/is_telReg', 'Home\verifyController@is_telReg');
 // 查询验证码(图片和手机验证码)是否正确
 Route::post('/is_codeRight', 'Home\verifyController@is_codeRight');
 // 验证邮箱是否存在或激活
+Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
+// 发送激活邮箱的邮件
+Route::post('/active/email', 'Home\activeEmailController@activeEmail');
+// 激活邮箱
+Route::get('/active_email/{user_id}/{email}/{rand}/{value}', 'Home\activeEmailController@doActiveEmail');
 
 
-// Route::get('/is_emailActive', 'Home\verifyController@is_emailActive');
-Route::post('/is_emailActive', 'Home\verifyController@is_emailActive');
 
-// 个人资料页面
+
+
+
 //中间件
 Route::group(['middleware'=>'HomeLogin'],function(){
+    // 个人资料页面
     Route::get('/settings/profile', 'Home\userSettingController@index');
     // 保存个人资料
     Route::post('/save/profile', 'Home\userSettingController@save');
-    // Route::get('/settings/test', 'Home\userSettingController@test');
+
+    // 评论功能.
+    Route::post('/comment/new/{id}', 'Home\CommentController@new');
+    // 评论回复.
+    Route::post('/comment/hf/{id}', 'Home\CommentController@hf');
+    // 删除回复.
+    Route::post('/comment/dl/{id}', 'Home\CommentController@dl');
+    // 举报文章.
+    Route::post('/article/report', 'Home\ReportController@add');
+
+    // 文章添加.
+    Route::get('/writer', 'Home\ArticleController@writer');
+    // 文件上传.
+    Route::post('/home/upload', 'Home\UploadController@upload');
+    // 执行添加.
+    Route::post('/home/article/dowriter', 'Home\ArticleController@dowriter');
+    // 文章删除.
+    Route::post('/home/article/delete/{id}', 'Home\ArticleController@delete');
+    // 编辑更新.
+    Route::post('/home/article/doedit/{id}', 'Home\ArticleController@doedit');
+    // 文章发布.
+    Route::post('/home/article/print/{id}', 'Home\ArticleController@print');
+    // 取消发布.
+    Route::post('/home/article/noprint/{id}', 'Home\ArticleController@noprint');
+
+
+    //文章收藏
+    //文章收藏页面
+    Route::get('home/collect' , 'Home\collectController@collect');
+    //将收藏的文章插入数据库
+    Route::post('home/collect/insert/{id}' , 'Home\collectController@insert');
+    //取消文章收藏
+    Route::post('home/collect/delete/{id}' , 'Home\collectController@delete');
+    //关注
+    //显示关注页面
+    Route::get('home/attention' , 'Home\AttentionController@attention');
+    //将关注的用户插入数据库
+    Route::post('home/attention/insert/{id}' , 'Home\AttentionController@insert');
+    //取消关注用户
+    Route::post('home/attention/delete/{id}' , 'Home\AttentionController@delete');
+    //查看被关注用户的主页
+    Route::get('/u/{id}' , 'Home\UserarticleController@userarticle');
+    //显示简信页面
+    Route::get('home/messages' , 'Home\MessagesController@messages');
+    //Route::get('Home/messages', 'Home\MessagesController@delete');
+
+
+
+    // zhangyu
+    //文章列表
+    Route::get('admin/article','Admin\ArticleController@index');
+    //文章内容单页
+    Route::get('admin/article/cont/{id}','Admin\ArticleController@cont');
+    //显示文章
+    Route::post('admin/article/show/{id}','Admin\ArticleController@show');
+    //删除文章
+
+    //分类管理模块
+    Route::resource('admin/category','Admin\CategoryController');
+    //分类排序字段
+    Route::post('admin/category/changeorder','Admin\CategoryController@changeOrder');
+
+    //举报文章
+    Route::get('admin/inf/article','Admin\InfController@index');
+    //举报文章处理
+    Route::post('admin/inf/dis/{id}','Admin\InfController@dis');
+
+
 });
 
 
-// 发送激活邮箱的邮件
-Route::post('/active/email', 'Home\activeEmailController@activeEmail');
-// 测试
-// Route::get('/active/email', 'Home\activeEmailController@activeEmail');
-// 激活邮箱
-Route::get('/active_email/{user_id}/{email}/{rand}/{value}', 'Home\activeEmailController@doActiveEmail');
-Route::get('/test', 'Home\activeEmailController@test');
 
 
-// Route::get('/is_emailActive', 'home\verifyController@is_emailActive');
-Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
-
-// Route::get('/is_emailActive', 'home\verifyController@is_emailActive');
-Route::post('/is_emailActive', 'home\verifyController@is_emailActive');
 
 
-// zhangyu
-//文章列表
-Route::get('admin/article','Admin\ArticleController@index');
-//文章内容单页
-Route::get('admin/article/cont/{id}','Admin\ArticleController@cont');
-//显示文章
-Route::post('admin/article/show/{id}','Admin\ArticleController@show');
-//删除文章
-
-//分类管理模块
-Route::resource('admin/category','Admin\CategoryController');
-//分类排序字段
-Route::post('admin/category/changeorder','Admin\CategoryController@changeOrder');
-
-//举报文章
-Route::get('admin/inf/article','Admin\InfController@index');
-//举报文章处理
-Route::post('admin/inf/dis/{id}','Admin\InfController@dis');
-
-//举报评论
-Route::get('admin/inf/comment','Admin\InfController@show');
-Route::post('admin/inf/discom/{id}','Admin\InfController@discom');
 
 
-Route::get('home/collect' , 'Home\CollectController@collect');
-Route::get('home/collect/insert/{id}' , 'Home\CollectController@insert');
-Route::get('home/collect/delete/{id}' , 'Home\CollectController@delete');
-//Route::get('home/userarticle/{id}' , 'Home\UserarticleController@userarticle');
 
 
-//文章收藏
-//文章收藏页面
-Route::get('home/collect' , 'Home\collectController@collect');
-//将收藏的文章插入数据库
-Route::post('home/collect/insert/{id}' , 'Home\collectController@insert');
-//取消文章收藏
-Route::post('home/collect/delete/{id}' , 'Home\collectController@delete');
-//关注
-//显示关注页面
-Route::get('home/attention' , 'Home\AttentionController@attention');
-//将关注的用户插入数据库
-Route::post('home/attention/insert/{id}' , 'Home\AttentionController@insert');
-//取消关注用户
-Route::post('home/attention/delete/{id}' , 'Home\AttentionController@delete');
-//查看被关注用户的主页
-Route::get('/u/{id}' , 'Home\UserarticleController@userarticle');
-//显示简信页面
-Route::get('home/messages' , 'Home\MessagesController@messages');
-//Route::get('Home/messages', 'Home\MessagesController@delete');
+// hyt
+ Route::get('/', 'Home\IndexController@index');
+// 前台文章模块.
+// 文章详情.
+Route::get('/p/{id}', 'Home\ArtlistController@index');
+// 更多分类.
+Route::get('/category','Home\CategoryController@index');
+//分类详情
+Route::get('/c/{id}','Home\CategoryController@cateils');
 
 
 
@@ -147,13 +164,13 @@ Route::get('admin/captcha','Admin\LoginController@captcha');
 Route::post('admin/dologin','Admin\LoginController@doLogin');
 //中间件
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'Login'],function(){
-Route::get('index','IndexController@index');
-Route::get('amend','IndexController@amend');
-Route::post('doamend','IndexController@doAmend');
-Route::get('logout','IndexController@logout');
-//资源
-Route::resource('admin','AdminController');
-Route::resource('users','UsersController');
+    Route::get('index','IndexController@index');
+    Route::get('amend','IndexController@amend');
+    Route::post('doamend','IndexController@doAmend');
+    Route::get('logout','IndexController@logout');
+    //资源
+    Route::resource('admin','AdminController');
+    Route::resource('users','UsersController');
 
 // zhangyu
 //文章列表
@@ -178,8 +195,6 @@ Route::resource('users','UsersController');
     Route::get('inf/comment','InfController@show');
     Route::post('inf/discom/{id}','InfController@discom');
 
-
-
 });
 
 
@@ -187,39 +202,3 @@ Route::resource('users','UsersController');
 
 
 
-
-// hyt
- Route::get('/', 'Home\IndexController@index');
-
-// 前台文章模块.
-// 文章添加.
-Route::get('/writer', 'Home\ArticleController@writer');
-// 文件上传.
-Route::post('/home/upload', 'Home\UploadController@upload');
-// 执行添加.
-Route::post('/home/article/dowriter', 'Home\ArticleController@dowriter');
-// 文章删除.
-Route::post('/home/article/delete/{id}', 'Home\ArticleController@delete');
-// 编辑更新.
-Route::post('/home/article/doedit/{id}', 'Home\ArticleController@doedit');
-// 文章发布.
-Route::post('/home/article/print/{id}', 'Home\ArticleController@print');
-// 取消发布.
-Route::post('/home/article/noprint/{id}', 'Home\ArticleController@noprint');
-
-// 文章详情.
-Route::get('/p/{id}', 'Home\ArtlistController@index');
-
-
-// 评论功能.
-Route::post('/comment/new/{id}', 'Home\CommentController@new');
-// 评论回复.
-Route::post('/comment/hf/{id}', 'Home\CommentController@hf');
-// 删除回复.
-Route::post('/comment/dl/{id}', 'Home\CommentController@dl');
-// 举报文章.
-Route::post('/article/report', 'Home\ReportController@add');
-// 更多分类.
-Route::get('/category','Home\CategoryController@index');
-//分类详情
-Route::get('/c/{id}','Home\CategoryController@cateils');

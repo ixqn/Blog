@@ -79,7 +79,7 @@
                             <a href="{{ url('u') }}/{{$v['user_id']}}" target="_blank" class="avatar">
                                 <img src="{{ asset($v['pic']) }}">
                             </a>
-                            <a class="follow" state="0"><i class="iconfont ic-follow"></i>关注</a>
+                            <a class="follow" state="0" onclick="insert({{ $v['user_id'] }})"><i class="iconfont ic-follow"></i>关注</a>
                             <a href="{{ url('u') }}/{{$v['user_id']}}" target="_blank" class="name">{{ $v['nickname'] }}</a>
                             <p>注册时间: {{$v['created_at']}}</p>
                             <b>个人描述: {{$v['desc']}}</b>
@@ -102,14 +102,12 @@
         var carousel = layui.carousel,
             util = layui.util,
             $ = layui.jquery;
-
         //图片轮播
         carousel.render({
             elem: '#Carousel'
             ,width: '99%'
             ,interval: 5000
         });
-
         //固定块
         util.fixbar({
             css: {right: 50, bottom: 100}
@@ -123,6 +121,26 @@
             }
         });
 
+        //添加关注
+        window.insert = function(user_id)
+        {
+            layer.confirm('是否确定添加关注?', {
+                btn: ['对对', '不行']
+            }, function () {
+                $.post('{{url('/home/attention/insert/')}}/' + user_id, {
+                    '_token': '{{csrf_token()}}'
+                }, function (data) {
+                    if (data.state == 0) {
+                        layer.msg(data.msg, {icon: 6});
+                    } else if(data.state == 2){
+                        layer.msg(data.msg, {icon: 0});
+                    } else{
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
+            });
+
+        }
     });
 </script>
 

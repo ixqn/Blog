@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 
 // require_once dirname(__DIR__) . '/api_sdk/vendor/autoload.php';
-require_once app_path() .'/SDK/aliyunsms'. '/api_sdk/vendor/autoload.php';
+require_once app_path() .'/SDK/Aliyunsms'. '/api_sdk/vendor/autoload.php';
 
 use Aliyun\Core\Config;
 use Aliyun\Core\Profile\DefaultProfile;

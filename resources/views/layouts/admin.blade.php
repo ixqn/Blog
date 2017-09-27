@@ -201,7 +201,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{ url('admin/inf/article') }}"><i class="fa fa-anchor"></i>举报文章</a></li>
-                        <li><a href="{{ url('admin/inf/comment') }}"><i class="fa fa-asterisk"></i>举报评论</a></li>
+            
                         {{--<li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>--}}
                     </ul>
                 </li>

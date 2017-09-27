@@ -1,4 +1,4 @@
-@extends('Home.layout')
+@extends('home.layout')
 
 @section('content')
 
@@ -14,7 +14,7 @@
 
                     <li id="note-16956517" data-note-id="16956517" class="have-img">
                         <a class="wrap-img" href="/p/af4ff46a94c6" target="_blank">
-                            <img data-echo="//upload-images.jianshu.io/upload_images/6264704-0d3d471b1c86eb78.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" class="img-blur" src="{{ asset('./home/images/picture/6249340_194140034135_2.jpg') }}" alt="120" />
+                            <img data-echo="" class="img-blur" src="{{$v->article_img}}" alt="120" />
                         </a>
                         <div class="content">
                             <div class="author">
@@ -31,7 +31,7 @@
                                 {{ $v->article_name }}
                             </a>
                             <p class="abstract">
-                                {{ mb_substr($v->article_cont, 0, 50, 'utf-8').'......' }}
+                                {{ strip_tags(mb_substr($v->article_cont, 0, 50, 'utf-8').'......') }}
                             </p>
                             <div class="meta">
                                 <a class="cancel" href="javascript:;" onclick="del({{ $v->article_id }})">取消收藏</a>
@@ -83,5 +83,3 @@
     </script>
 @stop
 
-</body>
-</html>

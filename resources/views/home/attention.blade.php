@@ -1,4 +1,4 @@
-@extends('Home.layout')
+@extends('home.layout')
 
 @section('content')
 
@@ -49,7 +49,7 @@
     @foreach($wz as $k=>$v)
         <li id="note-17196189" data-note-id="17196189" class="have-img">
             <a class="wrap-img" href="{{url('p')}}/{{$v->article_id}}" target="_blank">
-            <img class="img-blur-done" src="{{ asset('./uploads/users/3.jpg') }}" alt="120">
+            <img class="img-blur-done" src="{{$v->article_img}}" alt="120">
             </a>
             <div class="content">
                 <div class="author">
@@ -63,7 +63,7 @@
                 </div>
                 <a class="title" target="_blank" href="{{ url('/p') }}/{{ $v->article_id }}"> {{ $v->article_name }}</a>
                 <p class="abstract">
-                    {{ mb_substr($v->article_cont, 0, 50, 'utf-8').'......' }}
+                    {{ strip_tags(mb_substr($v->article_cont, 0, 50, 'utf-8').'......') }}
                 </p>
                 <div class="meta">
                     <a class="collection-tag" target="_blank" href="/c/20f7f4031550">社会热点</a>
@@ -109,15 +109,15 @@
                         }, function () {});
 
                     }
+
+                    // 取消导航选中状态.
+                    var active = $('.nav .active');
+                    active.next().attr('class', 'active');
+                    active.attr('class', '');
                 });
             </script>
 
 @stop
-
-
-<!---->
-</body>
-</html>
 
 
 

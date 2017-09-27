@@ -11,7 +11,7 @@ class collectController extends Controller
     //插入  inset数据
     public function insert(Request $request,$article_id)
     {
-        dd($request);
+
         //从数据库提取数据；
 
         $data = \DB::table('article_users')->where('article_id', $article_id)->first();
@@ -35,7 +35,7 @@ class collectController extends Controller
             $conl['category_id'] = $category_id;
             $conl['article_status'] = $article_status;
             $conl['collect_user_id'] = $user_id;
-            $conl['user_id'] = 1;
+            $conl['user_id'] = session('user')['user_id'];
             $conl['user_pic'] = $user_pic;
         }else{
             $conl['article_id'] = $articles_id;
@@ -45,14 +45,18 @@ class collectController extends Controller
             $conl['category_id'] = $category_id;
             $conl['article_status'] = $article_status;
             $conl['collect_user_id'] = $user_id;
-            $conl['user_id'] = 1;
+            $conl['user_id'] = session('user')['user_id'];
             $conl['user_pic'] = 'uploads/users/4.jpg';
         }
+        
+        
+
         $str = \DB::table('article_collect')->where('article_id', $conl['article_id'])->first();
-        if ($str) {
+        $db  = \DB::table('article_collect')->where('user_id' , session('user')['user_id'])->first();
+        if ($str && $db) {
             $data = [
                 'state' => 2,
-                'msg' => '你应经收藏过这篇文章了'
+                'msg' => '你已经收藏过这篇文章了'
             ];
         } else {
             $res = \DB::table('article_collect')->insert($conl);
@@ -67,27 +71,30 @@ class collectController extends Controller
                     'msg' => '添加收藏失败'
                 ];
             }
-            return $data;
         }
+        return $data;
     }
 
         //collect显示在页面
         public function collect(Request $request)
         {
-            $str = \DB::table('article_collect')->where('user_id' , 1)->get();
-
-//            $ptn = "/.*<img[^>]*src[=\s\"\']+([^\"\']*)[\"\'].*/";
-//            foreach($str as $k => $v) {
-//                $cont = $v->article_cont;
-//                foreach ($v as $m => $n) {
-//                    if (strstr($cont, 'uploads/articles')) {
-//                        $str->article_img = preg_replace($ptn, "$1", $cont);
-//                    } else {
-//                        $str->article_img = 'images/home/nopic.png';
-//                    }
-//                }
-//            }
-               return view('home.collect', ['str' => $str , 'title'=>'文章收藏']);
+        $str = \DB::table('article_collect')->where('user_id' , session('user')['user_id'])->get();
+      
+           
+            // 获取第一张图片作为封面.
+            $ptn = "/.*<img[^>]*src[=\s\"\']+([^\"\']*)[\"\'].*$/";
+            foreach($str as $k => $v) {
+                $cont = $v->article_cont;
+                 foreach($v as $m => $n){
+                    if(strstr($cont, 'uploads/articles')){
+                        $v->article_img = preg_replace ( $ptn, "$1", $cont );
+                    }else{
+                        $v->article_img = 'images/home/nopic.png';
+                    }
+                }
+            }
+           
+            return view('home.collect', ['str' => $str , 'title'=>'文章收藏']);
         }
 
 

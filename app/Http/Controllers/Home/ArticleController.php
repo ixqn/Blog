@@ -15,7 +15,6 @@ class ArticleController extends Controller
         // 获取文章.
         $data = Article::orderby('article_at', 'desc')->where('user_id', session('user')['user_id'])->paginate(5);
 
-
         foreach($data as $k => $v){
             // 计算字数.
             $cont = strip_tags($v['article_cont']);

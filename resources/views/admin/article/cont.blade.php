@@ -26,6 +26,14 @@
             left:300px;
 
         }
+        .box1{
+            width:300px;
+            height:250px;
+            border:1px solid transparency;
+            position:absolute;
+            left:500px;
+            top:400px;
+        }
         .box2{
             width:100px;
             height:100px;
@@ -52,7 +60,11 @@
                     {!! $item->article_cont !!}
 
                 </p>
-
+                <div class="box1">
+                    <img src="{{ asset($item->article_img) }}" style="width:300px;
+            height:250px;" />
+                </div>
+               
                 @endforeach
 
             </div>

@@ -17,6 +17,17 @@ class UserarticleController extends Controller
         $data = \DB::table('users_info')->where('user_id' , $user_id)->get();
 
         $res = \DB::table('article_users')->where('user_id' , $user_id)->get();
+               $ptn = "/.*<img[^>]*src[=\s\"\']+([^\"\']*)[\"\'].*$/";
+                foreach($res as $k => $v) {
+                        $cont = $v->article_cont;
+                        foreach($v as $m => $n){
+                        if(strstr($cont, 'uploads/articles')){
+                            $v->article_img = preg_replace ( $ptn, "$1", $cont );
+                        }else{
+                            $v->article_img = 'images/home/nopic.png';
+                        }
+                    }
+                }
 
         return view ('home.userarticle' , ['data' => $data , 'res'=>$res , 'title'=>'用户主页']);
 

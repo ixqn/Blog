@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
 
-    <meta name="description"  content="竹文是一个优质的创作社区，在这里，你可以任性地创作，一篇短文、一张照片、一首诗、一幅画……我们相信，每个人都是生活中的艺术家，有着无穷的创造力。">
+    <meta name="description"  content="竹文是一个优质的创作博客，在这里，你可以任性地创作，一篇短文、一张照片、一首诗、一幅画……我们相信，每个人都是生活中的艺术家，有着无穷的创造力。">
     <meta name="keywords"  content="竹文,竹文官网,图文编辑软件,简书下载,图文创作,创作软件,原创社区,小说,散文,写作,阅读">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -38,7 +38,7 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="width-limit">
         <!-- 左上方 Logo -->
-        <a class="logo" href="/"><img src="{{ asset('images/home/logo_home.png') }}" alt="Logo" /></a>
+        <a class="logo" href="/"><img src="{{ asset('/images/home/logo_home.png') }}" alt="Logo" /></a>
 
         @if(!session('user'))
         <!-- 右上角 -->
@@ -68,7 +68,7 @@
                 </li>
                 <li>
                     <!-- TODO bookmarks_path -->
-                    <a href="{{url('/home/collect')}}}">
+                    <a href="{{url('/home/collect')}}">
                         <i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
                     </a>
                 </li>
@@ -146,15 +146,10 @@
 <footer class="container">
     <div class="row">
         <div class="col-xs-17 main">
-            <a target="_blank" href="http://www.jianshu.com/c/jppzD2">关于简书</a><em> · </em><a target="_blank" href="http://www.jianshu.com/contact">联系我们</a><em> · </em><a target="_blank" href="http://www.jianshu.com/c/bfeec2e13990">加入我们</a><em> · </em><a target="_blank" href="http://www.jianshu.com/p/fc1c113e5b6b">简书出版</a><em> · </em><a target="_blank" href="http://www.jianshu.com/press">品牌与徽标</a><em> · </em><a target="_blank" href="http://www.jianshu.com/faqs">帮助中心</a><em> · </em><a target="_blank" href="http://www.jianshu.com/p/cabc8fa39830">合作伙伴</a>      <div class="icp">
-                ©2012-2017 上海佰集信息科技有限公司 / Tel:021-61995350 / 简书 / 沪ICP备11018329号-5 /  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402002252">沪公网安备31010402002252号 / </a>
-                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402002252">
-                    <img src="{{ asset('home/images/picture/smrz-14723344f0991457bfc9f5172c219a5f.png') }}" alt="Smrz" />
-                </a>
-                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402002252">沪公网安备31010402002252号 / </a>
-                <a target="_blank" href="http://www.shjbzx.cn/">
-                    <img src="{{ asset('home/images/picture/wxb-a216456895eb66c17497dbd3da443cf8.png') }}" alt="Wxb" />
-                </a>        举报电话：021-34770013
+            <a target="_blank" href="">关于竹文</a><em> · </em><a target="_blank" href="">联系我们</a><em> · </em><a target="_blank" href="">加入我们</a><em> · </em><a target="_blank" href="">竹文出版</a><em> · </em><a target="_blank" href="">品牌与徽标</a><em> · </em><a target="_blank" href="">帮助中心</a><em> · </em><a target="_blank" href="http://www.jianshu.com/p/cabc8fa39830">合作伙伴</a>      <div class="icp">
+                ©2012-2017 / 竹文开发小组 / Tel:15816346090 /  <a target="_blank" href="http://www.miitbeian.gov.cn">粤ICP备15116080号-1 </a>
+
+
             </div>
         </div>
     </div>
@@ -170,7 +165,6 @@
     layui.use(['layer'], function(){
         var layer = layui.layer,
             $ = layui.jquery;
-
         // 导航栏鼠标移入移出事件.
         // 用户.
         $('#yonghu').mouseover(function(){

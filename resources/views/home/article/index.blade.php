@@ -50,7 +50,8 @@
                 <div class="info">
                     <a class="avatar" href="{{url('u')}}/{{$article['user_id']}}">
                         <img src="{{ asset($article['user']['pic']) }}" alt="96">
-                    </a>          <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
+                    </a>
+                    <a class="btn btn-success follow"   href="javascript:;" onclick="insert({{ $article['user_id'] }})"><i class="iconfont ic-follow"></i><span>关注</span></a>
                     <a class="title" href="{{url('u')}}/{{$article['user_id']}}">{{ $article['article_author'] }}</a>
                     <i class="iconfont @if ($article['user']['sex'] == 'm') ic-man @elseif($article['user']['sex'] == 'w') ic-woman @else @endif "></i>
                     <p>写了 {{ $article['number'] }} 篇文章，被 42301 人关注</p></div>
@@ -262,14 +263,21 @@
         //固定块
         util.fixbar({
             bar1: '&#xe600;'
-            ,bar2: '&#xe641;'
             ,css: {right: 50, bottom: 100}
             ,bgcolor: '#393D49'
             ,click: function(type){
                 if(type === 'bar1'){
-                    layer.msg('icon是可以随便换的')
-                } else if(type === 'bar2') {
-                    layer.msg('两个bar都可以设定是否开启')
+                    $.post('{{url('/home/collect/insert/')}}/'+{{ $article['article_id'] }}, {
+                        '_token': '{{csrf_token()}}'
+                    },function(data){
+                        if (data.state == 0) {
+                            layer.msg(data.msg, {icon: 6});
+                        } else if(data.state == 2){
+                            layer.msg(data.msg, {icon: 0});
+                        } else{
+                            layer.msg(data.msg, {icon: 5});
+                        }
+                    });
                 }
             }
         });
@@ -620,6 +628,26 @@
                 },
                 dataType:'JSON'
             });
+        }
+        //添加关注
+        window.insert = function(user_id)
+        {
+            layer.confirm('是否确定添加关注?', {
+                btn: ['对对', '不行']
+            }, function () {
+                $.post('{{url('/home/attention/insert/')}}/' + user_id, {
+                    '_token': '{{csrf_token()}}'
+                }, function (data) {
+                    if (data.state == 0) {
+                        layer.msg(data.msg, {icon: 6});
+                    } else if(data.state == 2){
+                        layer.msg(data.msg, {icon: 0});
+                    } else{
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
+            });
+
         }
     });
 </script>
